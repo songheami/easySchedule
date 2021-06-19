@@ -2,5 +2,8 @@
 .gradle
 .idea
 
+application-oauth.properties
+application-real-db-oauth.properties
+
 build
 out
