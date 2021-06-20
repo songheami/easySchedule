@@ -1,6 +1,6 @@
 #!/bin/bash
 
-REPOSITORY=/home/ec2-user/app/deploy
+REPOSITORY=/home/ec2-user/app/step
 PROJECT_NAME=easy-schedule-webservice
 
 echo "> Build 파일 복사"
