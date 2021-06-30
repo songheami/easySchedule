@@ -12,6 +12,10 @@ var main = {
         $('#btn-delete').on('click', function () {
             _this.delete();
         });
+
+        $('#btn-rest').on('click', function () {
+            _this.rest();
+        });
     },
     save : function () {
         var data = {
@@ -19,7 +23,6 @@ var main = {
             author: $('#author').val(),
             content: $('#content').val()
         };
-
         $.ajax({
             type: 'POST',
             url: '/api/v1/posts',
@@ -38,9 +41,7 @@ var main = {
             title: $('#title').val(),
             content: $('#content').val()
         };
-
         var id = $('#id').val();
-
         $.ajax({
             type: 'PUT',
             url: '/api/v1/posts/'+id,
@@ -68,8 +69,19 @@ var main = {
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
+    },
+    rest : function() {
+        $.ajax({
+            type: 'GET',
+            url: '/rest/api/v1',
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8'
+        }).done(function(response) {
+            alert(response);
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
     }
-
 };
 
 main.init();
