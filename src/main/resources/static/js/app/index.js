@@ -12,10 +12,6 @@ var main = {
         $('#btn-delete').on('click', function () {
             _this.delete();
         });
-
-        $('#btn-rest').on('click', function () {
-            _this.rest();
-        });
     },
     save : function () {
         var data = {
@@ -66,18 +62,6 @@ var main = {
         }).done(function() {
             alert('글이 삭제되었습니다.');
             window.location.href = '/';
-        }).fail(function (error) {
-            alert(JSON.stringify(error));
-        });
-    },
-    rest : function() {
-        $.ajax({
-            type: 'GET',
-            url: '/rest/api/v1',
-            dataType: 'json',
-            contentType:'application/json; charset=utf-8'
-        }).done(function(response) {
-            alert(response);
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
