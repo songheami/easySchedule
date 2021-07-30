@@ -28,7 +28,8 @@ public class GroupOpertimeService {
     }
 
     @Transactional
-    public Long save(Long userId, GroupOpertimeRequestDto requestDto) {
-        return groupOpertimeRepository.save(requestDto.toEntity()).getGroupId();
+    public Long save(Long groupId, GroupOpertimeRequestDto requestDto) {
+        GroupOpertime groupOpertime = requestDto.toEntity().builder().groupId(groupId).useYn("Y").build();
+        return groupOpertimeRepository.save(groupOpertime).getGroupId();
     }
 }

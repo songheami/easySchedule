@@ -17,6 +17,6 @@ public class GroupOpertimeApiController {
 
     @PostMapping("/api/v1/schedule")
     public Long makeGroupSchdule(@LoginUser SessionUser user, @RequestBody GroupOpertimeRequestDto requestDto) {
-        return groupOpertimeService.save(user.getUserId(), requestDto);
+        return groupOpertimeService.save(user.getUserGroup().getGroupId(), requestDto);
     }
 }

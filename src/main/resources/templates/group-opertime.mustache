@@ -5,15 +5,15 @@
 
     <form class="form-opertime">
         <div class="form-group">
-            {{#groupOpertimes}}
+            {{#groupOpertimeList}}
             <div class='input-group input-group-sm'>
                 <div class='input-group-prepend'>
                     <span class='input-group-text'>
                         일요일
                     </span>
                 </div>
-                <input type='text' class='form-control' name='sunStartTime' value={{sunStartTime}}>
-                <input type='text' class='form-control' name='sunEndTime' value={{sunEndTime}}>
+                <input type='text' class='form-control' name='sunStartTime' value='{{#sunStartTime}}{{sunStartTime}}{{/sunStartTime}}'>
+                <input type='text' class='form-control' name='sunEndTime' value='{{#sunStartTime}}{{sunStartTime}}{{/sunStartTime}}'>
             </div>
             <div class='input-group input-group-sm'>
                 <div class='input-group-prepend'>
@@ -21,8 +21,8 @@
                         월요일
                     </span>
                 </div>
-                <input type='text' class='form-control' name='monStartTime' value={{monStartTime}}>
-                <input type='text' class='form-control' name='monEndTime' value={{monEndTime}}>
+                <input type='text' class='form-control' name='monStartTime' value='{{#monStartTime}}{{monStartTime}}{{/monStartTime}}'>
+                <input type='text' class='form-control' name='monEndTime' value='{{#monEndTime}}{{monEndTime}}{{/monEndTime}}'>
             </div>
             <div class='input-group input-group-sm'>
                 <div class='input-group-prepend'>
@@ -30,8 +30,8 @@
                         화요일
                     </span>
                 </div>
-                <input type='text' class='form-control' name='tueStartTime' value={{tueStartTime}}>
-                <input type='text' class='form-control' name='tueEndTime' value={{tueEndTime}}>
+                <input type='text' class='form-control' name='tueStartTime' value='{{#tueStartTime}}{{tueStartTime}}{{/tueStartTime}}'>
+                <input type='text' class='form-control' name='tueEndTime' value='{{#tueEndTime}}{{tueEndTime}}{{/tueEndTime}}'>
             </div>
             <div class='input-group input-group-sm'>
                 <div class='input-group-prepend'>
@@ -39,8 +39,8 @@
                         수요일
                     </span>
                 </div>
-                <input type='text' class='form-control' name='wedStartTime' value={{wedStartTime}}>
-                <input type='text' class='form-control' name='wedEndTime' value={{wedEndTime}}>
+                <input type='text' class='form-control' name='wedStartTime' value='{{#wedStartTime}}{{wedStartTime}}{{/wedStartTime}}'>
+                <input type='text' class='form-control' name='wedEndTime' value='{{#wedEndTime}}{{wedEndTime}}{{/wedEndTime}}'>
             </div>
             <div class='input-group input-group-sm'>
                 <div class='input-group-prepend'>
@@ -48,8 +48,8 @@
                         목요일
                     </span>
                 </div>
-                <input type='text' class='form-control' name='thuStartTime' value={{thuStartTime}}>
-                <input type='text' class='form-control' name='thuEndTime' value={{thuEndTime}}>
+                <input type='text' class='form-control' name='thuStartTime' value='{{#thuStartTime}}{{thuStartTime}}{{/thuStartTime}}'>
+                <input type='text' class='form-control' name='thuEndTime' value='{{#thuEndTime}}{{thuEndTime}}{{/thuEndTime}}'>
             </div>
             <div class='input-group input-group-sm'>
                 <div class='input-group-prepend'>
@@ -57,8 +57,8 @@
                         금요일
                     </span>
                 </div>
-                <input type='text' class='form-control' name='friStartTime' value={{friStartTime}}>
-                <input type='text' class='form-control' name='friEndTime' value={{friEndTime}}>
+                <input type='text' class='form-control' name='friStartTime' value='{{#friStartTime}}{{friStartTime}}{{/friStartTime}}'>
+                <input type='text' class='form-control' name='friEndTime' value='{{#friEndTime}}{{friEndTime}}{{/friEndTime}}'>
             </div>
             <div class='input-group input-group-sm'>
                 <div class='input-group-prepend'>
@@ -66,10 +66,10 @@
                         토요일
                     </span>
                 </div>
-                <input type='text' class='form-control' name='satStartTime' value={{satStartTime}}>
-                <input type='text' class='form-control' name='satEndTime' value={{satEndTime}}>
+                <input type='text' class='form-control' name='satStartTime' value='{{#satStartTime}}{{satStartTime}}{{/satStartTime}}'>
+                <input type='text' class='form-control' name='satEndTime' value='{{#satEndTime}}{{satEndTime}}{{/satEndTime}}'>
             </div>
-            {{/groupOpertimes}}
+            {{/groupOpertimeList}}
         </div>
     </form>
 

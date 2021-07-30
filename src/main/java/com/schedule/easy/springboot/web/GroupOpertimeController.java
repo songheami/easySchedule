@@ -17,11 +17,10 @@ public class GroupOpertimeController {
 
     @GetMapping("/group/opertime")
     public String groupOpertime(@LoginUser SessionUser user, Model model) {
-        UserGroup userGroup = user.getUserGroup();
         // 그룹 운영 시간 설정 가능한 권한인지 확인
         if (user.getUserGroup().getRoleId().equals(1L)) {
             // 그룹 시간 조회
-            model.addAttribute("groupOpertimes", groupOpertimeService.findListByGroupId(user.getUserGroup().getGroupId()));
+            model.addAttribute("groupOpertimeList", groupOpertimeService.findListByGroupId(user.getUserGroup().getGroupId()));
         }
         return "group-opertime";
     }

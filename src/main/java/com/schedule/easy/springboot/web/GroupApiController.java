@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 public class GroupApiController {
 
     private final GroupService groupService;
-    private final GroupOpertimeService groupOpertimeService;
 
     @PostMapping("/api/v1/group")
     public UserGroupResponseDto makeGroup(@LoginUser SessionUser user, @RequestBody GroupSaveRequestDto requestDto) {
