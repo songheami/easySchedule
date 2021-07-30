@@ -1,0 +1,16 @@
+{{>layout/header}}
+
+<div class="container">
+    <div class="row">
+        {{#groups}}
+            <div class="col-sm" style="background-color: blue">
+                <a href="/group/login?groupId={{groupId}}&roleId={{roleId}}">{{groups.name}}</a>
+            </div>
+        {{/groups}}
+        <div class="col-sm">
+            <a href="/group/join">+</a>
+        </div>
+    </div>
+</div>
+
+{{>layout/footer}}

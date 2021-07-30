@@ -1,0 +1,33 @@
+{{>layout/header}}
+
+<div class="accordion-box">
+    <ul class="list">
+        <li>
+            <p class="title">그룹개설</p>
+            <div class="con">
+                <form id="form-insert-group">
+                    <div class="form-group">
+                        <label for="name">그룹명</label>
+                        <input type="text" class="form-control" id="name" placeholder="그룹명을 입력하세요.">
+                        <button type="button" class="btn btn-primary" id="btn-insert-group">등록</button>
+                    </div>
+                </form>
+            </div>
+        </li>
+        <li>
+            <p class="title">그룹가입</p>
+            <div class="con">
+                <form id="form-join-group">
+                    <div class="form-group">
+                        <label for="name">그룹명</label>
+                        <input type="text" class="form-control" id="name" placeholder="그룹명을 입력하세요.">
+                        <button type="button" class="btn btn-primary" id="btn-search-group">조회</button>
+                        <button type="button" class="btn btn-primary" id="btn-join-group">가입</button>
+                    </div>
+                </form>
+            </div>
+        </li>
+    </ul>
+</div>
+
+{{>layout/footer}}

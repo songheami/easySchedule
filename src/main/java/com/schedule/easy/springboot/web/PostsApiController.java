@@ -43,7 +43,7 @@ public class PostsApiController {
         return postsService.findById(id);
     }
 
-    @GetMapping("/api/v1/posts/list")
+    @GetMapping("")
     public List<PostsListResponseDto> findAll() {
         return postsService.findAllDesc();
     }

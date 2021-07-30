@@ -1,0 +1,28 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+ul {
+	list-style: none;
+}
+
+.accordion-box {
+	width: 100%;
+	max-width: 600px;
+	margin: 0 auto;
+}
+
+p.title {
+	width: 100%;
+	line-height: 60px;
+	background: #000;
+	color: #fff;
+	box-sizing: border-box;
+	padding: 0 10px;
+}
+
+.con {
+	padding: 20px;
+	display:none;
+}

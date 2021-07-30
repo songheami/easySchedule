@@ -1,6 +1,6 @@
 {{>layout/header}}
 
-<h1>임시 게시판</h1>
+<h1>임시 게시판 ver6</h1>
     <div class="col-md-12">
         <div class="row">
             <div class="col-md-6">
@@ -8,6 +8,7 @@
                 {{#userName}}
                     Logged in as: <span id="user">{{userName}}</span>
                     <a href="/logout" class="btn btn-info active" role="button">Logout</a>
+                    <a href="/home" class="btn btn-info active" role="button">홈버튼</a>
                 {{/userName}}
                 {{^userName}}
                     <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">Google Login</a>
