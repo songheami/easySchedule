@@ -69,6 +69,28 @@ public class GroupOpertimeRequestDto {
                 .friEndTime(friEndTime)
                 .satStartTime(satStartTime)
                 .satEndTime(satEndTime)
+                .useYn(useYn)
+                .build();
+    }
+    public GroupOpertime toEntity(Long groupId) {
+        return GroupOpertime.builder()
+                .opertimeId(opertimeId)
+                .groupId(groupId)
+                .sunStartTime(sunStartTime)
+                .sunEndTime(sunEndTime)
+                .monStartTime(monStartTime)
+                .monEndTime(monEndTime)
+                .tueStartTime(tueStartTime)
+                .tueEndTime(tueEndTime)
+                .wedStartTime(wedStartTime)
+                .wedEndTime(wedEndTime)
+                .thuStartTime(thuStartTime)
+                .thuEndTime(thuEndTime)
+                .friStartTime(friStartTime)
+                .friEndTime(friEndTime)
+                .satStartTime(satStartTime)
+                .satEndTime(satEndTime)
+                .useYn("Y")
                 .build();
     }
 }

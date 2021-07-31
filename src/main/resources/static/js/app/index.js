@@ -135,8 +135,8 @@ var main = {
             dataType: 'json',
             contentType:'application/json;',
             data: JSON.stringify(param)
-        }).done(function(result) {
-            alert('그룹이 등록되었습니다.');
+        }).done(function() {
+            alert('시간이 등록되었습니다.');
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });

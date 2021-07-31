@@ -4,11 +4,8 @@ import com.schedule.easy.springboot.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.type.OffsetTimeType;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 @Getter
 @NoArgsConstructor

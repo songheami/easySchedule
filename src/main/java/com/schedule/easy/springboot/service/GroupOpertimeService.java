@@ -2,10 +2,8 @@ package com.schedule.easy.springboot.service;
 
 import com.schedule.easy.springboot.domain.groupOpertime.GroupOpertime;
 import com.schedule.easy.springboot.domain.groupOpertime.GroupOpertimeRepository;
-import com.schedule.easy.springboot.domain.userGroup.UserGroup;
 import com.schedule.easy.springboot.web.dto.GroupOpertimeRequestDto;
 import com.schedule.easy.springboot.web.dto.GroupOpertimeResponseDto;
-import com.schedule.easy.springboot.web.dto.UserGroupResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,7 +27,6 @@ public class GroupOpertimeService {
 
     @Transactional
     public Long save(Long groupId, GroupOpertimeRequestDto requestDto) {
-        GroupOpertime groupOpertime = requestDto.toEntity().builder().groupId(groupId).useYn("Y").build();
-        return groupOpertimeRepository.save(groupOpertime).getGroupId();
+        return groupOpertimeRepository.save(requestDto.toEntity(groupId)).getOpertimeId();
     }
 }
