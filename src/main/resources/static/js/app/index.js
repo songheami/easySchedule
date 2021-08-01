@@ -18,7 +18,7 @@ var main = {
             _this.insertGroup();
         });
 
-        $('#btn-insert-schedule-ui').on('click', function () {
+        $('#btn-insert-opertime-ui').on('click', function () {
             let $formOpertime = $(".form-opertime");
             let weekdayList = {"sun":"일요일",
                                "mon":"월요일",
@@ -44,8 +44,50 @@ var main = {
             $formOpertime.append(html);
         });
 
-        $('#btn-insert-schedule').on('click', function () {
-            _this.insertSchedule();
+        $('#btn-insert-opertime').on('click', function () {
+            _this.insertOpertime();
+        });
+
+        $('#btn-insert-holiday-ui').on('click', function () {
+            let $formHoliday = $(".form-holiday");
+            let holidayList = {"holiday":"휴일자",
+                               "name":"휴일명",
+                               "alldayYn":"종일여부",
+                               "startTime":"시작시간",
+                               "endTime":"종료시간"};
+            $formHoliday.empty();
+            let html = "<div class='form-group'>";
+            for (let key in holidayList) {
+                if (key == 'alldayYn') {
+                    html += "<div class='form-check'>"
+                          + "<input class='form-check-input' type='checkbox' name='"+key+"' id='"+key+"'>"
+                          + "<label class='form-check-label' for='"+key+"'>"
+                          + holidayList[key]
+                          + "</label>"
+                          + "</div>";
+                } else {
+                    html += "<div class='input-group input-group-sm'>"
+                          + "<div class='input-group-prepend'>"
+                          + "<span class='input-group-text'>"
+                          + holidayList[key]
+                          + "</span>"
+                          + "</div>"
+                          + "<input type='text' class='form-control' name='"+key+"'>"
+                          + "</div>";
+                }
+            }
+            $formHoliday.append(html);
+            $('#alldayYn').on('click', function() {
+                if ($('#alldayYn').is(":checked")) {
+                    $('#alldayYn').val('Y');
+                } else {
+                    $('#alldayYn').val(null);
+                }
+            });
+        });
+
+        $('#btn-insert-holiday').on('click', function () {
+            _this.insertHoliday();
         });
 
 		$(".accordion-box .title").on('click',function(){
@@ -123,7 +165,7 @@ var main = {
             alert(JSON.stringify(error));
         });
     },
-    insertSchedule : function () {
+    insertOpertime : function () {
         let array = $(".form-opertime").serializeArray();
         let param = {};
         for (key in array) {
@@ -131,12 +173,30 @@ var main = {
         }
         $.ajax({
             type: 'POST',
-            url: '/api/v1/schedule',
+            url: '/api/v1/opertime',
             dataType: 'json',
             contentType:'application/json;',
             data: JSON.stringify(param)
         }).done(function() {
             alert('시간이 등록되었습니다.');
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
+    insertHoliday : function () {
+        let array = $(".form-holiday").serializeArray();
+        let param = {};
+        for (key in array) {
+            param[array[key].name]=array[key].value;
+        }
+        $.ajax({
+            type: 'POST',
+            url: '/api/v1/holiday',
+            dataType: 'json',
+            contentType:'application/json;',
+            data: JSON.stringify(param)
+        }).done(function() {
+            alert('휴일이 등록되었습니다.');
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });

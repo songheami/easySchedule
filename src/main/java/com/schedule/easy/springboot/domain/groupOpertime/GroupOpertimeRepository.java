@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface GroupOpertimeRepository extends JpaRepository<GroupOpertime, Long> {
 
-    @Query("select go from GroupOpertime go where go.groupId = groupId")
+    @Query("select go from GroupOpertime go where go.groupId = :groupId")
     List<GroupOpertime> findListByGroupId(@Param("groupId") Long groupId);
 }

@@ -1,0 +1,51 @@
+{{>layout/header}}
+
+<button type="button" class="btn btn-primary" id="btn-insert-holiday-ui">휴일 추가</button>
+<button type="button" class="btn btn-primary" id="btn-insert-holiday">스케줄 저장</button>
+
+    <form class="form-holiday">
+        <div class="form-group">
+            {{#groupHolidayList}}
+                <div class='input-group input-group-sm'>
+                    <div class='input-group-prepend'>
+                    <span class='input-group-text'>
+                        휴일자
+                    </span>
+                    </div>
+                    <input type='text' class='form-control' name='holiday' value='{{#holiday}}{{holiday}}{{/holiday}}'>
+                </div>
+                <div class='input-group input-group-sm'>
+                    <div class='input-group-prepend'>
+                    <span class='input-group-text'>
+                        휴일명
+                    </span>
+                    </div>
+                    <input type='text' class='form-control' name='name' value='{{#name}}{{name}}{{/name}}'>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="alldayYn" value="{{#alldayYn}}{{alldayYn}}{{/alldayYn}}" id="alldayYn" {{#alldayYn}}checked{{/alldayYn}}>
+                    <label class="form-check-label" for="alldayYn">
+                        종일여부
+                    </label>
+                </div>
+                <div class='input-group input-group-sm'>
+                    <div class='input-group-prepend'>
+                    <span class='input-group-text'>
+                        시작시간
+                    </span>
+                    </div>
+                    <input type='text' class='form-control' name='startTime' value='{{#startTime}}{{startTime}}{{/startTime}}'>
+                </div>
+                <div class='input-group input-group-sm'>
+                    <div class='input-group-prepend'>
+                    <span class='input-group-text'>
+                        종료시간
+                    </span>
+                    </div>
+                    <input type='text' class='form-control' name='endTime' value='{{#endTime}}{{endTime}}{{/endTime}}'>
+                </div>
+            {{/groupHolidayList}}
+        </div>
+    </form>
+
+{{>layout/footer}}
