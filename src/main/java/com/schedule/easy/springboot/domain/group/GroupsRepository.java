@@ -10,4 +10,7 @@ public interface GroupsRepository extends JpaRepository<Groups, Long> {
 
     @Query("select g from Groups g where g.groupId in (select ug.groupId from UserGroup ug where ug.userId = :userId)")
     List<Groups> findListByUserId(@Param("userId") Long userId);
+
+    @Query("select g from Groups g where g.name like concat('%',:name,'%')")
+    List<Groups> findListByName(@Param("name") String name);
 }

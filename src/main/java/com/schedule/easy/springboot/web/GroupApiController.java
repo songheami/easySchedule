@@ -4,12 +4,11 @@ import com.schedule.easy.springboot.config.auth.LoginUser;
 import com.schedule.easy.springboot.config.auth.dto.SessionUser;
 import com.schedule.easy.springboot.service.GroupOpertimeService;
 import com.schedule.easy.springboot.service.GroupService;
-import com.schedule.easy.springboot.web.dto.GroupOpertimeRequestDto;
-import com.schedule.easy.springboot.web.dto.GroupOpertimeResponseDto;
-import com.schedule.easy.springboot.web.dto.GroupSaveRequestDto;
-import com.schedule.easy.springboot.web.dto.UserGroupResponseDto;
+import com.schedule.easy.springboot.web.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -18,7 +17,12 @@ public class GroupApiController {
     private final GroupService groupService;
 
     @PostMapping("/api/v1/group")
-    public UserGroupResponseDto makeGroup(@LoginUser SessionUser user, @RequestBody GroupSaveRequestDto requestDto) {
+    public UserGroupResponseDto insertGroup(@LoginUser SessionUser user, @RequestBody GroupSaveRequestDto requestDto) {
         return groupService.save(user.getUserId(), requestDto);
+    }
+
+    @GetMapping("/api/v1/group")
+    public List<GroupsResponseDto> searchGroup(@RequestParam(value="name") String name) {
+        return groupService.findListByName(name);
     }
 }

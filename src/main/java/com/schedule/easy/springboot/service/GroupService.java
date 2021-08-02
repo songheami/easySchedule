@@ -23,10 +23,10 @@ public class GroupService {
     private final UserGroupRepository userGroupRepository;
 
     @Transactional(readOnly = true)
-    public List<GroupsResponseDto> findGroupsByUserId(Long userId) {
+    public List<GroupsResponseDto> findListByUserId(Long userId) {
         List<Groups> groupsList = groupRepository.findListByUserId(userId);
         List<GroupsResponseDto> groupsResponseDtoList = new ArrayList<GroupsResponseDto>();
-        for(Groups groups: groupsList) { groupsResponseDtoList.add(new GroupsResponseDto(groups)); }
+        for(Groups group : groupsList) { groupsResponseDtoList.add(new GroupsResponseDto(group)); }
         return groupsResponseDtoList;
     }
 
@@ -36,6 +36,14 @@ public class GroupService {
         UserGroup userGroup = new UserGroup(userId, groupId, 1L, "Y");
         userGroupRepository.save(userGroup);
         return new UserGroupResponseDto(userGroup);
+    }
+
+    @Transactional
+    public List<GroupsResponseDto> findListByName(String name) {
+        List<Groups> groupsList = groupRepository.findListByName(name);
+        List<GroupsResponseDto> groupsResponseDtoList = new ArrayList<GroupsResponseDto>();
+        for(Groups group : groupsList) { groupsResponseDtoList.add(new GroupsResponseDto(group)); }
+        return groupsResponseDtoList;
     }
 
 }

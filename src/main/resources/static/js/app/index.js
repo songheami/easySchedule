@@ -90,6 +90,10 @@ var main = {
             _this.insertHoliday();
         });
 
+        $('#btn-search-group').on('click', function () {
+            _this.searchGroup();
+        });
+
 		$(".accordion-box .title").on('click',function(){
 		  $(this).next(".accordion-box .con").slideToggle(100);
 		});
@@ -197,6 +201,27 @@ var main = {
             data: JSON.stringify(param)
         }).done(function() {
             alert('휴일이 등록되었습니다.');
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
+    searchGroup : function () {
+        $.ajax({
+            type: 'GET',
+            url: '/api/v1/group',
+            dataType: 'json',
+            contentType:'application/json;',
+            data: {
+                name : $("#form-join-group").find("#name").val()
+            }
+        }).done(function(result) {
+            let $tbody = $("#form-join-group").find("table tbody");
+            $tbody.empty();
+            let html = "";
+            for (let key in result) {
+                html += "<tr><td>" + result[key].name + "</td></tr>";
+            }
+            $tbody.append(html);
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
