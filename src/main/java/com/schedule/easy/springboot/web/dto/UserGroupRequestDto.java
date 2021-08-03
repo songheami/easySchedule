@@ -1,17 +1,30 @@
 package com.schedule.easy.springboot.web.dto;
 
 import com.schedule.easy.springboot.domain.userGroup.UserGroup;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@Getter
+@NoArgsConstructor
 public class UserGroupRequestDto {
-    private Long user_id;
-    private Long group_id;
-    private Long role_id;
-    private String use_yn;
+    private Long userId;
+    private Long groupId;
+    private Long roleId;
+    private String useYn;
 
     public UserGroupRequestDto(UserGroup entity) {
-        this.user_id = entity.getUserId();
-        this.group_id = entity.getGroupId();
-        this.role_id = entity.getRoleId();
-        this.use_yn = entity.getUseYn();
+        this.userId = entity.getUserId();
+        this.groupId = entity.getGroupId();
+        this.roleId = entity.getRoleId();
+        this.useYn = entity.getUseYn();
+    }
+
+    public UserGroup toEntity() {
+        return UserGroup.builder()
+                .userId(userId)
+                .groupId(groupId)
+                .roleId(roleId)
+                .useYn(useYn)
+                .build();
     }
 }

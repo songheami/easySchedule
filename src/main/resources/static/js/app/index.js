@@ -94,6 +94,10 @@ var main = {
             _this.searchGroup();
         });
 
+        $('#btn-join-group').on('click', function () {
+            _this.joinGroup();
+        });
+
 		$(".accordion-box .title").on('click',function(){
 		  $(this).next(".accordion-box .con").slideToggle(100);
 		});
@@ -219,9 +223,30 @@ var main = {
             $tbody.empty();
             let html = "";
             for (let key in result) {
-                html += "<tr><td>" + result[key].name + "</td></tr>";
+                html += "<tr>"
+                      + "<td>"
+                      + "<input type='checkbox' name='_selected_' id='"
+                      + result[key].groupId
+                      + "'>"
+                      + "</td>"
+                      + "<td>"
+                      + result[key].name
+                      + "</td>"
+                      + "</tr>";
             }
             $tbody.append(html);
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
+    joinGroup : function () {
+        $.ajax({
+            type: 'POST',
+            url: '/api/v1/user-group/'+$("input:checkbox[name='_selected_']:checked").attr('id'),
+            dataType: 'json',
+            contentType:'application/json;'
+        }).done(function(result) {
+            console.log(result);
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
