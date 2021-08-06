@@ -18,32 +18,6 @@ var main = {
             _this.insertGroup();
         });
 
-        $('#btn-insert-opertime-ui').on('click', function () {
-            let $formOpertime = $(".form-opertime");
-            let weekdayList = {"sun":"일요일",
-                               "mon":"월요일",
-                               "tue":"화요일",
-                               "wed":"수요일",
-                               "thu":"목요일",
-                               "fri":"금요일",
-                               "sat":"토요일"};
-            $formOpertime.empty();
-            let html = "<div class='form-group'>";
-            for (let key in weekdayList) {
-                html += "<div class='input-group input-group-sm'>"
-                      + "<div class='input-group-prepend'>"
-                      + "<span class='input-group-text'>"
-                      + weekdayList[key]
-					  + "</span>"
-                      + "</div>"
-                      + "<input type='text' class='form-control' name='"+key+"StartTime'>"
-                      + "~"
-                      + "<input type='text' class='form-control' name='"+key+"EndTime'>"
-                      + "</div>";
-            }
-            $formOpertime.append(html);
-        });
-
         $('#btn-insert-opertime').on('click', function () {
             _this.insertOpertime();
         });
@@ -90,16 +64,23 @@ var main = {
             _this.insertHoliday();
         });
 
-        $('#btn-search-group').on('click', function () {
-            _this.searchGroup();
-        });
+		$("#groupJoin_wrapper").find("a").click(function (){
+			$("#groupJoin_wrapper").find("a").each(function () {
+				$("#"+this.attributes.getNamedItem("aria-controls").value).removeClass("show");
+			});
+		});
 
-        $('#btn-join-group').on('click', function () {
-            _this.joinGroup();
-        });
+		$("#form-insert-group").find("#name").change(function (){
+			$("#form-insert-group").find("button").attr("disabled","disabled");
+			if (this.value.length == 0) {
+				$("#form-insert-group").find("#name").removeClass().addClass("form-control");
+			} else {
+			    _this.checkGroup();
+			}
+		});
 
-		$(".accordion-box .title").on('click',function(){
-		  $(this).next(".accordion-box .con").slideToggle(100);
+		$("#form-join-group").find("#name").change(function (){
+		    _this.searchGroup();
 		});
     },
     save : function () {
@@ -209,6 +190,26 @@ var main = {
             alert(JSON.stringify(error));
         });
     },
+    checkGroup : function() {
+        $.ajax({
+            type: 'GET',
+            url: '/api/v1/group',
+            dataType: 'json',
+            contentType:'application/json;',
+            data: {
+                name : $("#form-insert-group").find("#name").val()
+            }
+        }).done(function(result) {
+            if (result.length > 0) {
+                $("#form-insert-group").find("#name").removeClass().addClass("form-control is-invalid");
+            } else {
+                $("#form-insert-group").find("#name").removeClass().addClass("form-control is-valid");
+                $("#form-insert-group").find("button").removeAttr("disabled");
+            }
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
     searchGroup : function () {
         $.ajax({
             type: 'GET',
@@ -219,34 +220,20 @@ var main = {
                 name : $("#form-join-group").find("#name").val()
             }
         }).done(function(result) {
-            let $tbody = $("#form-join-group").find("table tbody");
-            $tbody.empty();
+            let $container = $("#form-join-group").find(".container");
+            $container.empty();
             let html = "";
             for (let key in result) {
-                html += "<tr>"
-                      + "<td>"
-                      + "<input type='checkbox' name='_selected_' id='"
-                      + result[key].groupId
-                      + "'>"
-                      + "</td>"
-                      + "<td>"
+                html += "<div class='row'>"
+                      + "<div class='col-11'>"
                       + result[key].name
-                      + "</td>"
-                      + "</tr>";
+                      + "</div>"
+                      + "<button type='button' class='btn btn-primary btn-sm' onclick='joinGroup("
+                      + result[key].groupId
+                      + ")'>가입</button>"
+                      + "</div>";
             }
-            $tbody.append(html);
-        }).fail(function (error) {
-            alert(JSON.stringify(error));
-        });
-    },
-    joinGroup : function () {
-        $.ajax({
-            type: 'POST',
-            url: '/api/v1/user-group/'+$("input:checkbox[name='_selected_']:checked").attr('id'),
-            dataType: 'json',
-            contentType:'application/json;'
-        }).done(function(result) {
-            console.log(result);
+            $container.append(html);
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
@@ -254,3 +241,48 @@ var main = {
 };
 
 main.init();
+
+function joinGroup(groupId) {
+    $.ajax({
+        type: 'POST',
+        url: '/api/v1/user-group/'+groupId,
+        dataType: 'json',
+        contentType:'application/json;'
+    }).done(function(result) {
+        console.log(result);
+    }).fail(function (error) {
+        alert(JSON.stringify(error));
+    });
+}
+
+function addOpertime() {
+     if ($(".form-opertime.empty").length > 0) return;
+     let $addOpertime = $(".add-opertime");
+     let weekdayList = {"sun":"일요일",
+                        "mon":"월요일",
+                        "tue":"화요일",
+                        "wed":"수요일",
+                        "thu":"목요일",
+                        "fri":"금요일",
+                        "sat":"토요일"};
+     let html = "<div class='form-group'>";
+     for (let key in weekdayList) {
+         html += "<div>"
+               + "<form class='form-opertime empty'>"
+               + "<div class='form-group'>"
+               + "<div class='input-group input-group-sm'>"
+               + "<div class='input-group-prepend input-group-sm'>"
+               + "<span class='input-group-text'>"
+               + weekdayList[key]
+               + "</span>"
+               + "<input type='text' class='form-control' name='"
+               + key + "StartTime"
+               + "'>"
+               + "<input type='text' class='form-control' name='"
+               + key + "EndTime"
+               + "'>"
+               + "</div>"
+               + "</div>";
+     }
+     $addOpertime.before(html);
+ }

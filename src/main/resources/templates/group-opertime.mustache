@@ -1,76 +1,81 @@
 {{>layout/header}}
 
-<button type="button" class="btn btn-primary" id="btn-insert-opertime-ui">스케줄 추가</button>
-<button type="button" class="btn btn-primary" id="btn-insert-opertime">스케줄 저장</button>
-
-    <form class="form-opertime">
-        <div class="form-group">
-            {{#groupOpertimeList}}
-            <div class='input-group input-group-sm'>
-                <div class='input-group-prepend'>
-                    <span class='input-group-text'>
-                        일요일
-                    </span>
+<div id="groupOpertime_wrapper">
+    {{#groupOpertimeList}}
+    <div>
+        <form class="form-opertime">
+            <div class="form-group">
+                <div class='input-group input-group-sm'>
+                    <div class='input-group-prepend'>
+                        <span class='input-group-text'>
+                            일요일
+                        </span>
+                    </div>
+                    <input type='text' class='form-control' name='sunStartTime' value='{{#sunStartTime}}{{sunStartTime}}{{/sunStartTime}}'>
+                    <input type='text' class='form-control' name='sunEndTime' value='{{#sunEndTime}}{{sunEndTime}}{{/sunEndTime}}'>
                 </div>
-                <input type='text' class='form-control' name='sunStartTime' value='{{#sunStartTime}}{{sunStartTime}}{{/sunStartTime}}'>
-                <input type='text' class='form-control' name='sunEndTime' value='{{#sunEndTime}}{{sunEndTime}}{{/sunEndTime}}'>
-            </div>
-            <div class='input-group input-group-sm'>
-                <div class='input-group-prepend'>
-                    <span class='input-group-text'>
-                        월요일
-                    </span>
+                <div class='input-group input-group-sm'>
+                    <div class='input-group-prepend input-group-sm'>
+                        <span class='input-group-text'>
+                            월요일
+                        </span>
+                    </div>
+                    <input type='text' class='form-control' name='monStartTime' value='{{#monStartTime}}{{monStartTime}}{{/monStartTime}}'>
+                    <input type='text' class='form-control' name='monEndTime' value='{{#monEndTime}}{{monEndTime}}{{/monEndTime}}'>
                 </div>
-                <input type='text' class='form-control' name='monStartTime' value='{{#monStartTime}}{{monStartTime}}{{/monStartTime}}'>
-                <input type='text' class='form-control' name='monEndTime' value='{{#monEndTime}}{{monEndTime}}{{/monEndTime}}'>
-            </div>
-            <div class='input-group input-group-sm'>
-                <div class='input-group-prepend'>
-                    <span class='input-group-text'>
-                        화요일
-                    </span>
+                <div class='input-group input-group-sm'>
+                    <div class='input-group-prepend input-group-sm'>
+                        <span class='input-group-text'>
+                            화요일
+                        </span>
+                    </div>
+                    <input type='text' class='form-control' name='tueStartTime' value='{{#tueStartTime}}{{tueStartTime}}{{/tueStartTime}}'>
+                    <input type='text' class='form-control' name='tueEndTime' value='{{#tueEndTime}}{{tueEndTime}}{{/tueEndTime}}'>
                 </div>
-                <input type='text' class='form-control' name='tueStartTime' value='{{#tueStartTime}}{{tueStartTime}}{{/tueStartTime}}'>
-                <input type='text' class='form-control' name='tueEndTime' value='{{#tueEndTime}}{{tueEndTime}}{{/tueEndTime}}'>
-            </div>
-            <div class='input-group input-group-sm'>
-                <div class='input-group-prepend'>
-                    <span class='input-group-text'>
-                        수요일
-                    </span>
+                <div class='input-group input-group-sm'>
+                    <div class='input-group-prepend input-group-sm'>
+                        <span class='input-group-text'>
+                            수요일
+                        </span>
+                    </div>
+                    <input type='text' class='form-control' name='wedStartTime' value='{{#wedStartTime}}{{wedStartTime}}{{/wedStartTime}}'>
+                    <input type='text' class='form-control' name='wedEndTime' value='{{#wedEndTime}}{{wedEndTime}}{{/wedEndTime}}'>
                 </div>
-                <input type='text' class='form-control' name='wedStartTime' value='{{#wedStartTime}}{{wedStartTime}}{{/wedStartTime}}'>
-                <input type='text' class='form-control' name='wedEndTime' value='{{#wedEndTime}}{{wedEndTime}}{{/wedEndTime}}'>
-            </div>
-            <div class='input-group input-group-sm'>
-                <div class='input-group-prepend'>
-                    <span class='input-group-text'>
-                        목요일
-                    </span>
+                <div class='input-group input-group-sm'>
+                    <div class='input-group-prepend input-group-sm'>
+                        <span class='input-group-text'>
+                            목요일
+                        </span>
+                    </div>
+                    <input type='text' class='form-control' name='thuStartTime' value='{{#thuStartTime}}{{thuStartTime}}{{/thuStartTime}}'>
+                    <input type='text' class='form-control' name='thuEndTime' value='{{#thuEndTime}}{{thuEndTime}}{{/thuEndTime}}'>
                 </div>
-                <input type='text' class='form-control' name='thuStartTime' value='{{#thuStartTime}}{{thuStartTime}}{{/thuStartTime}}'>
-                <input type='text' class='form-control' name='thuEndTime' value='{{#thuEndTime}}{{thuEndTime}}{{/thuEndTime}}'>
-            </div>
-            <div class='input-group input-group-sm'>
-                <div class='input-group-prepend'>
-                    <span class='input-group-text'>
-                        금요일
-                    </span>
+                <div class='input-group input-group-sm'>
+                    <div class='input-group-prepend input-group-sm'>
+                        <span class='input-group-text'>
+                            금요일
+                        </span>
+                    </div>
+                    <input type='text' class='form-control' name='friStartTime' value='{{#friStartTime}}{{friStartTime}}{{/friStartTime}}'>
+                    <input type='text' class='form-control' name='friEndTime' value='{{#friEndTime}}{{friEndTime}}{{/friEndTime}}'>
                 </div>
-                <input type='text' class='form-control' name='friStartTime' value='{{#friStartTime}}{{friStartTime}}{{/friStartTime}}'>
-                <input type='text' class='form-control' name='friEndTime' value='{{#friEndTime}}{{friEndTime}}{{/friEndTime}}'>
-            </div>
-            <div class='input-group input-group-sm'>
-                <div class='input-group-prepend'>
-                    <span class='input-group-text'>
-                        토요일
-                    </span>
+                <div class='input-group input-group-sm'>
+                    <div class='input-group-prepend input-group-sm'>
+                        <span class='input-group-text'>
+                            토요일
+                        </span>
+                    </div>
+                    <input type='text' class='form-control' name='satStartTime' value='{{#satStartTime}}{{satStartTime}}{{/satStartTime}}'>
+                    <input type='text' class='form-control' name='satEndTime' value='{{#satEndTime}}{{satEndTime}}{{/satEndTime}}'>
                 </div>
-                <input type='text' class='form-control' name='satStartTime' value='{{#satStartTime}}{{satStartTime}}{{/satStartTime}}'>
-                <input type='text' class='form-control' name='satEndTime' value='{{#satEndTime}}{{satEndTime}}{{/satEndTime}}'>
             </div>
-            {{/groupOpertimeList}}
-        </div>
-    </form>
+        </form>
+    </div>
+    {{/groupOpertimeList}}
+    <div class="add-opertime" onclick="addOpertime()"><i class="fas fa-plus"></i></div>
+</div>
+<div style="position: absolute; right: 5px;">
+    <button type="button" class="btn btn-primary" id="btn-insert-opertime">스케줄 저장</button>
+</div>
 
 {{>layout/footer}}

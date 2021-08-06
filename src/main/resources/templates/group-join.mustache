@@ -14,9 +14,11 @@
         <form id="form-insert-group">
             <div class="form-group">
                 <label for="name">그룹명</label>
-                <input type="text" class="form-control" id="name" placeholder="그룹명을 입력하세요.">
-                <button type="button" class="btn btn-primary" id="btn-insert-group">등록</button>
+                <input type="text" class="form-control" id="name" placeholder="그룹명을 입력하세요." required>
+                <div class="valid-feedback">사용 가능합니다.</div>
+                <div class="invalid-feedback">이미 존재하는 그룹명입니다.</div>
             </div>
+            <button type="button" class="btn btn-primary" id="btn-insert-group" disabled>등록</button>
         </form>
     </div>
 </div>
@@ -27,21 +29,12 @@
             <div class="form-group">
                 <label for="name">그룹명</label>
                 <input type="text" class="form-control" id="name" placeholder="그룹명을 입력하세요.">
-                <button type="button" class="btn btn-primary" id="btn-search-group">조회</button>
-                <button type="button" class="btn btn-primary" id="btn-join-group">가입</button>
             </div>
-            <table>
-                <thead>
-                <tr>
-                    <th>선택</th>
-                    <th>Group Name</th>
-                </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
+            <div class="container">
+            </div>
         </form>
     </div>
+</div>
 </div>
 
 {{>layout/footer}}

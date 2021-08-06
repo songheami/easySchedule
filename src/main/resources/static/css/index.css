@@ -41,13 +41,43 @@ div#home_wrapper div a{
 }
 
 div#groupJoin_wrapper {
-    margin: 3vh;
-    width: 100vh;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    margin-top: 5px;
+    margin-right: 5px;
 }
 div#groupJoin_wrapper a{
-	flex: 1 1 50%;
+	flex: 1;
+	margin-left: 5px;
+}
+
+div#collapse-join-group .container{
+    max-width: 100vh;
+}
+
+div#groupOpertime_wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-flow: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+}
+div#groupOpertime_wrapper > div {
+    width: 260px;
+    height: 260px;
+    background-color: darkgrey;
+    margin-bottom: 5px;
+    text-align: center;
+    vertical-align: center;
+    line-height: 260px;
+}
+div#groupOpertime_wrapper .input-group {
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+div#groupOpertime_wrapper > div a{
+    color: #242526;
 }
