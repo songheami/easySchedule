@@ -82,6 +82,10 @@ var main = {
 		$("#form-join-group").find("#name").change(function (){
 		    _this.searchGroup();
 		});
+
+        $('#groupOpertime_wrapper input.form-control').on("propertychange change keyup paste input", function(){
+             onChangeGroupOpertimeInput(this);
+        });
     },
     save : function () {
         var data = {
@@ -257,7 +261,7 @@ function joinGroup(groupId) {
 
 function addOpertime() {
      if ($(".form-opertime.empty").length > 0) return;
-     let $addOpertime = $(".add-opertime");
+     let $addOpertime = $("#addOpertime");
      let weekdayList = {"sun":"일요일",
                         "mon":"월요일",
                         "tue":"화요일",
@@ -285,4 +289,22 @@ function addOpertime() {
                + "</div>";
      }
      $addOpertime.before(html);
+     $('#groupOpertime_wrapper input.form-control').on("propertychange change keyup paste input", function(){
+         onChangeGroupOpertimeInput(this);
+      });
  }
+
+ function onChangeGroupOpertimeInput(_this) {
+    let inputVal = $(_this).val().replace(/[^0-9]/g,'').substr(0,4);
+     if (inputVal.length == 4) {
+         let hour = parseInt(inputVal.substr(0,2));
+         let min = parseInt(inputVal.substr(2,4));
+         if (hour<0||hour>24||min<0||min>=60) {
+             $(_this).val(null);
+             alert("시간 정보가 유효하지 않습니다.");
+             return;
+         }
+         inputVal = hour+":"+min;
+     }
+     $(_this).val(inputVal);
+}

@@ -1,12 +1,13 @@
 {{>layout/header}}
 
+<div class="title">근무시간</div>
 <div id="groupOpertime_wrapper">
     {{#groupOpertimeList}}
     <div>
         <form class="form-opertime">
             <div class="form-group">
                 <div class='input-group input-group-sm'>
-                    <div class='input-group-prepend'>
+                    <div class='input-group-prepend input-group-sm'>
                         <span class='input-group-text'>
                             일요일
                         </span>
@@ -72,10 +73,10 @@
         </form>
     </div>
     {{/groupOpertimeList}}
-    <div class="add-opertime" onclick="addOpertime()"><i class="fas fa-plus"></i></div>
+    <div id="addOpertime" onclick="addOpertime()"><i class="fas fa-plus"></i></div>
 </div>
-<div style="position: absolute; right: 5px;">
-    <button type="button" class="btn btn-primary" id="btn-insert-opertime">스케줄 저장</button>
+<div class="groupOpertime_button">
+    <button type="button" class="btn btn-outline-light" id="btn-insert-opertime">저장</button>
 </div>
 
 {{>layout/footer}}

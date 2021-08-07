@@ -1,13 +1,20 @@
 body {
-    background-color: #f8f9fa;
+    background-color: #242526;
+    color: #bcbcbc;
 }
 
 div.title {
-    color: #242526;
     font-size: 1.7em;
-    font-weight: bold;
-    padding-left: 3vh;
-    padding-top: 2vh;
+    text-align: center;
+    padding-top: 10vh;
+    padding-bottom: 5vh;
+}
+div.title:after {
+    content: "";
+    display: block;
+    width: 50px;
+    border-bottom: 1px solid #bcbcbc;
+    margin: 20px auto;
 }
 
 div#index_wrapper {
@@ -19,25 +26,24 @@ div#index_wrapper {
 }
 
 div#home_wrapper {
-    margin: 3vh;
-    display: grid;
-    grid-template-rows: 50fr 50fr;
-    grid-template-columns: 50fr 50fr;
-    grid-row-gap: 5px;
-    grid-column-gap: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
 }
-div#home_wrapper div {
-    color: #242526;
-    background-color: darkgrey;
+div#home_wrapper > div {
     font-weight: bold;
     font-size: 1em;
     text-align: center;
-    vertical-align: middle;
-    height: 300px;
-    line-height: 300px;
+    border: 1px solid #bcbcbc;
+    border-radius: 10px;
+    width: 150px;
+    height: 150px;
+    line-height: 150px;
+    margin: 5px;
 }
 div#home_wrapper div a{
-    color: #242526;
+    color: #bcbcbc;
 }
 
 div#groupJoin_wrapper {
@@ -59,25 +65,31 @@ div#collapse-join-group .container{
 
 div#groupOpertime_wrapper {
     display: flex;
-    flex-direction: row;
-    flex-flow: wrap;
+    flex-wrap: wrap;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
 }
 div#groupOpertime_wrapper > div {
+    border: 1px solid #bcbcbc;
+    border-radius: 10px;
     width: 260px;
     height: 260px;
-    background-color: darkgrey;
-    margin-bottom: 5px;
-    text-align: center;
-    vertical-align: center;
     line-height: 260px;
+    margin: 5px;
+    text-align: center;
+    vertical-align: middle;
 }
-div#groupOpertime_wrapper .input-group {
+div#groupOpertime_wrapper > div .input-group {
     padding-top: 5px;
     padding-left: 5px;
     padding-right: 5px;
 }
-div#groupOpertime_wrapper > div a{
-    color: #242526;
+div#groupOpertime_wrapper > div .input-group-text,.form-control {
+    background-color: transparent;
+    border: none;
+    border: 1px solid #6c757d;
+}
+.groupOpertime_button {
+    float: right;
+    margin: 10vh 5vh;
 }
