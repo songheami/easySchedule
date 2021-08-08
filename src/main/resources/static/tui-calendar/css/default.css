@@ -3,21 +3,24 @@
 body {
   font-family: 'Noto Sans', sans-serif;
   font-size: 12px;
+  background-color: #343a40;
 }
 
 /**  custom bootstrap - start */
 .btn {
+  color: #bbb
   border-radius: 25px;
-  border-color: #ddd;
+  border-color: #bbb;
 }
 
 .btn:hover {
+  background-color: transparent;
+  color: #bbb
   border: solid 1px #bbb;
-  background-color: #fff;
 }
 
 .btn:active {
-  background-color: #f9f9f9;
+  background-color: transparent;
   border: solid 1px #bbb;
   outline: none;
 }
@@ -78,7 +81,7 @@ body {
   bottom: 0;
   border-right: 1px solid #d5d5d5;
   padding: 12px 10px;
-  background: #fafafa;
+  background: #343a40;
 }
 
 #right {
@@ -241,4 +244,11 @@ body {
   font-size: 12px;
   text-align: center;
   color: #000;
+}
+
+.tui-full-calendar-week-container {
+  background-color: #343a40;
+}
+.tui-full-calendar-timegrid-hour {
+  background-color: #343a40;
 }

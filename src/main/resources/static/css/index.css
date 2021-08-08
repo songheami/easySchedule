@@ -89,6 +89,16 @@ div#groupOpertime_wrapper > div .input-group-text,.form-control {
     border: none;
     border: 1px solid #6c757d;
 }
+div#groupOpertime_wrapper > div .input-group-text,.form-control:focus {
+    background-color: transparent;
+    border: none;
+    border: 1px solid #6c757d;
+}
+div#groupOpertime_wrapper > div .input-group-text,.form-control:-internal-autofill-selected {
+    background-color: transparent;
+    border: none;
+    border: 1px solid #6c757d;
+}
 .groupOpertime_button {
     float: right;
     margin: 10vh 5vh;

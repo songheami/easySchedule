@@ -70,7 +70,8 @@ var main = {
 			});
 		});
 
-		$("#form-insert-group").find("#name").change(function (){
+
+        $("#form-insert-group").find("#name").on("propertychange change keyup paste input", function(){
 			$("#form-insert-group").find("button").attr("disabled","disabled");
 			if (this.value.length == 0) {
 				$("#form-insert-group").find("#name").removeClass().addClass("form-control");
@@ -291,7 +292,7 @@ function addOpertime() {
      $addOpertime.before(html);
      $('#groupOpertime_wrapper input.form-control').on("propertychange change keyup paste input", function(){
          onChangeGroupOpertimeInput(this);
-      });
+     });
  }
 
  function onChangeGroupOpertimeInput(_this) {
@@ -304,7 +305,7 @@ function addOpertime() {
              alert("시간 정보가 유효하지 않습니다.");
              return;
          }
-         inputVal = hour+":"+min;
+         inputVal = (hour<10?"0"+hour:hour)+":"+(min<10?"0"+min:min);
      }
      $(_this).val(inputVal);
 }
