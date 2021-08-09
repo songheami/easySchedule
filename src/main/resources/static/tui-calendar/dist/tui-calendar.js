@@ -18777,7 +18777,7 @@ module.exports = ScheduleViewModel;
  */
 var theme = {
     'common.border': '1px solid #e5e5e5',
-    'common.backgroundColor': 'white',
+    'common.backgroundColor': '#343a40',
     'common.holiday.color': '#ff4040',
     'common.saturday.color': '#bbb',
     'common.dayname.color': '#bbb',
@@ -18792,7 +18792,7 @@ var theme = {
     'month.dayname.borderLeft': 'none',
     'month.dayname.paddingLeft': '10px',
     'month.dayname.paddingRight': '0',
-    'month.dayname.backgroundColor': 'inherit',
+    'month.dayname.backgroundColor': '#343a40',
     'month.dayname.fontSize': '12px',
     'month.dayname.fontWeight': 'normal',
     'month.dayname.textAlign': 'left',
@@ -18813,7 +18813,7 @@ var theme = {
     // month more view
     'month.moreView.border': '1px solid #d5d5d5',
     'month.moreView.boxShadow': '0 2px 6px 0 rgba(0, 0, 0, 0.1)',
-    'month.moreView.backgroundColor': 'white',
+    'month.moreView.backgroundColor': '#343a40',
     'month.moreView.paddingBottom': '17px',
     'month.moreViewTitle.height': '44px',
     'month.moreViewTitle.marginBottom': '12px',
@@ -18827,7 +18827,7 @@ var theme = {
     'week.dayname.borderBottom': '1px solid #e5e5e5',
     'week.dayname.borderLeft': 'none',
     'week.dayname.paddingLeft': '0',
-    'week.dayname.backgroundColor': 'inherit',
+    'week.dayname.backgroundColor': '#343a40',
     'week.dayname.textAlign': 'left',
     'week.today.color': 'inherit',
     'week.pastDay.color': '#333',
@@ -18838,10 +18838,10 @@ var theme = {
 
     // week daygrid 'daygrid'
     'week.daygrid.borderRight': '1px solid #e5e5e5',
-    'week.daygrid.backgroundColor': 'inherit',
+    'week.daygrid.backgroundColor': '#343a40',
 
     'week.daygridLeft.width': '72px',
-    'week.daygridLeft.backgroundColor': 'inherit',
+    'week.daygridLeft.backgroundColor': '#343a40',
     'week.daygridLeft.paddingRight': '8px',
     'week.daygridLeft.borderRight': '1px solid #e5e5e5',
 
@@ -18850,7 +18850,7 @@ var theme = {
 
     // week timegrid 'timegrid'
     'week.timegridLeft.width': '72px',
-    'week.timegridLeft.backgroundColor': 'inherit',
+    'week.timegridLeft.backgroundColor': '#343a40',
     'week.timegridLeft.borderRight': '1px solid #e5e5e5',
     'week.timegridLeft.fontSize': '11px',
 
@@ -22178,7 +22178,7 @@ module.exports = (Handlebars['default'] || Handlebars).template({"1":function(co
     + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? lookupProperty(depth0,"model") : depth0)) != null ? lookupProperty(stack1,"color") : stack1), depth0))
     + "\n";
 },"15":function(container,depth0,helpers,partials,data) {
-    return "                                color:#333;\n                            ";
+    return "                                color:#bbb;\n                            ";
 },"17":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.hooks.helperMissing, alias3=container.escapeExpression, alias4=container.lambda, alias5="function", lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
@@ -22753,7 +22753,7 @@ module.exports = (Handlebars['default'] || Handlebars).template({"1":function(co
     + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? lookupProperty(depth0,"model") : depth0)) != null ? lookupProperty(stack1,"color") : stack1), depth0))
     + "\n";
 },"31":function(container,depth0,helpers,partials,data) {
-    return "                                color:#333;\n";
+    return "                                color:#bbb;\n";
 },"33":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {}), alias4=container.hooks.helperMissing, alias5="function", lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {

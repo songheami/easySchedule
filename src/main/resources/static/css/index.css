@@ -1,6 +1,6 @@
 body {
-    background-color: #242526;
-    color: #bcbcbc;
+    background-color: #343a40;
+    color: #bbb;
 }
 
 div.title {
@@ -13,7 +13,7 @@ div.title:after {
     content: "";
     display: block;
     width: 50px;
-    border-bottom: 1px solid #bcbcbc;
+    border-bottom: 1px solid #bbb;
     margin: 20px auto;
 }
 
@@ -35,7 +35,7 @@ div#home_wrapper > div {
     font-weight: bold;
     font-size: 1em;
     text-align: center;
-    border: 1px solid #bcbcbc;
+    border: 1px solid #bbb;
     border-radius: 10px;
     width: 150px;
     height: 150px;
@@ -43,7 +43,7 @@ div#home_wrapper > div {
     margin: 5px;
 }
 div#home_wrapper div a{
-    color: #bcbcbc;
+    color: #bbb;
 }
 
 div#groupJoin_wrapper {
@@ -70,7 +70,7 @@ div#groupOpertime_wrapper {
     justify-content: center;
 }
 div#groupOpertime_wrapper > div {
-    border: 1px solid #bcbcbc;
+    border: 1px solid #bbb;
     border-radius: 10px;
     width: 260px;
     height: 260px;

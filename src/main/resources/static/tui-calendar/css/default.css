@@ -35,11 +35,17 @@ body {
   outline: none;
 }
 
+.btn-outline-light:hover {
+  color: #bbb;
+}
+
 .open > .dropdown-toggle.btn-default {
   background-color: #fff;
 }
 
 .dropdown-menu {
+  background-color: #343a40;
+  color: #bbb;
   top: 25px;
   padding: 3px 0;
   border-radius: 2px;
@@ -168,6 +174,8 @@ body {
 }
 
 #dropdownMenu-calendarType {
+  background-color: #343a40;
+  color: #bbb;
   padding: 0 8px 0 11px;
 }
 
@@ -246,9 +254,6 @@ body {
   color: #000;
 }
 
-.tui-full-calendar-week-container {
-  background-color: #343a40;
-}
-.tui-full-calendar-timegrid-hour {
-  background-color: #343a40;
+.tui-full-calendar-dayname-date {
+  font-size: 1.5rem;
 }
