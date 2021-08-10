@@ -198,14 +198,11 @@ var main = {
     checkGroup : function() {
         $.ajax({
             type: 'GET',
-            url: '/api/v1/group',
+            url: '/api/v1/group/'+$("#form-insert-group").find("#name").val(),
             dataType: 'json',
-            contentType:'application/json;',
-            data: {
-                name : $("#form-insert-group").find("#name").val()
-            }
+            contentType:'application/json;'
         }).done(function(result) {
-            if (result.length > 0) {
+            if (result>0) {
                 $("#form-insert-group").find("#name").removeClass().addClass("form-control is-invalid");
             } else {
                 $("#form-insert-group").find("#name").removeClass().addClass("form-control is-valid");
@@ -233,7 +230,7 @@ var main = {
                       + "<div class='col-11'>"
                       + result[key].name
                       + "</div>"
-                      + "<button type='button' class='btn btn-primary btn-sm' onclick='joinGroup("
+                      + "<button type='button' class='btn btn-outline-light btn-sm' onclick='joinGroup("
                       + result[key].groupId
                       + ")'>가입</button>"
                       + "</div>";

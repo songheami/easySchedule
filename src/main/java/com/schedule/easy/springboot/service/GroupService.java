@@ -39,11 +39,15 @@ public class GroupService {
     }
 
     @Transactional
+    public int existsByName(String name) {
+        return groupRepository.existsByName(name);
+    }
+
+    @Transactional
     public List<GroupsResponseDto> findListByName(String name) {
         List<Groups> groupsList = groupRepository.findListByName(name);
         List<GroupsResponseDto> groupsResponseDtoList = new ArrayList<GroupsResponseDto>();
         for(Groups group : groupsList) { groupsResponseDtoList.add(new GroupsResponseDto(group)); }
         return groupsResponseDtoList;
     }
-
 }

@@ -17,12 +17,17 @@ public class GroupApiController {
     private final GroupService groupService;
 
     @PostMapping("/api/v1/group")
-    public UserGroupResponseDto insertGroup(@LoginUser SessionUser user, @RequestBody GroupSaveRequestDto requestDto) {
+    public UserGroupResponseDto save(@LoginUser SessionUser user, @RequestBody GroupSaveRequestDto requestDto) {
         return groupService.save(user.getUserId(), requestDto);
     }
 
+    @GetMapping("/api/v1/group/{name}")
+    public int existsByName(@PathVariable String name) {
+        return groupService.existsByName(name);
+    }
+
     @GetMapping("/api/v1/group")
-    public List<GroupsResponseDto> searchGroup(@RequestParam(value="name") String name) {
+    public List<GroupsResponseDto> findListByName(@RequestParam(value="name") String name) {
         return groupService.findListByName(name);
     }
 }

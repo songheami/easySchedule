@@ -1,9 +1,20 @@
-{{>layout/header}}
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>스프링부트 웹서비스</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+</head>
+<body>
+    <div class="title">로그인</div>
+    <div id="index_wrapper">
+        <a href="/oauth2/authorization/google" class="btn btn-outline-danger active btn-block" role="button">Google Login</a>
+        <a href="/oauth2/authorization/naver" class="btn btn-outline-success active btn-block" role="button">Naver Login</a>
+    </div>
 
-<div class="title">로그인</div>
-<div id="index_wrapper">
-    <a href="/oauth2/authorization/google" class="btn btn-outline-danger active btn-block" role="button">Google Login</a>
-    <a href="/oauth2/authorization/naver" class="btn btn-outline-success active btn-block" role="button">Naver Login</a>
-</div>
-
-{{>layout/footer}}
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="/js/app/index.js"></script>
+</body>
