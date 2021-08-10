@@ -80,7 +80,7 @@ var main = {
 			}
 		});
 
-		$("#form-join-group").find("#name").change(function (){
+		$("#form-join-group").find("#name").on("propertychange change keyup paste input", function(){
 		    _this.searchGroup();
 		});
 
