@@ -18830,7 +18830,7 @@ var theme = {
     'week.dayname.backgroundColor': '#343a40',
     'week.dayname.textAlign': 'left',
     'week.today.color': 'inherit',
-    'week.pastDay.color': '#333',
+    'week.pastDay.color': '#bbb',
 
     // week vertical panel 'vpanel'
     'week.vpanelSplitter.border': '1px solid #e5e5e5',
@@ -19146,9 +19146,9 @@ var themeConfig = {
     'common.border': '1px solid #e5e5e5',
     'common.backgroundColor': 'white',
     'common.holiday.color': '#ff4040',
-    'common.saturday.color': '#333',
-    'common.dayname.color': '#333',
-    'common.today.color': '#333',
+    'common.saturday.color': '#bbb',
+    'common.dayname.color': '#bbb',
+    'common.today.color': '#bbb',
 
     // creation guide style
     'common.creationGuide.backgroundColor': 'rgba(81, 92, 230, 0.05)',
@@ -19198,7 +19198,7 @@ var themeConfig = {
     'week.dayname.backgroundColor': 'inherit',
     'week.dayname.textAlign': 'left',
     'week.today.color': '#bbb',
-    'week.pastDay.color': '#333',
+    'week.pastDay.color': '#bbb',
 
     // week vertical panel 'vpanel'
     'week.vpanelSplitter.border': '1px solid #e5e5e5',
@@ -19241,7 +19241,7 @@ var themeConfig = {
     'week.pastTime.color': '#bbb',
     'week.pastTime.fontWeight': 'normal',
 
-    'week.futureTime.color': '#333',
+    'week.futureTime.color': '#bbb',
     'week.futureTime.fontWeight': 'normal',
 
     'week.currentTimeLinePast.border': '1px dashed #515ce6',
