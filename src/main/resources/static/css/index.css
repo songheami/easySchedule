@@ -52,24 +52,15 @@ div#home_wrapper div a{
 
 div#groupJoin_wrapper {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     margin-top: 5px;
     margin-right: 5px;
 }
-div#groupJoin_wrapper a{
-	flex: 1;
-	margin-left: 5px;
-}
-
 div#groupJoin_wrapper .btn{
     border: solid 1px #bbb;
     color: #bbb;
-}
-
-div#collapse-join-group .container{
-    max-width: none;
 }
 
 div#groupOpertime_wrapper {

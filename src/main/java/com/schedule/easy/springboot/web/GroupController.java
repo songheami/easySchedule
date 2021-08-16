@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
@@ -20,13 +21,28 @@ public class GroupController {
 
     private final UserGroupService userGroupService;
 
+    @GetMapping("/group")
+    public String group() {
+        return "group";
+    }
+
+    @GetMapping("/group/create")
+    public String createGroup() {
+        return "group-create";
+    }
+
     @GetMapping("/group/join")
-    public String groupJoin() {
+    public String joinGroup() {
         return "group-join";
     }
 
+    @GetMapping("/group/join/{role}")
+    public String roleJoinGroup(@PathVariable String role) {
+        return role.equals("staff")?"group-join-staff":"group-join-member";
+    }
+
     @GetMapping("/group/login")
-    public String groupLogin(@LoginUser SessionUser user,
+    public String loginGroup(@LoginUser SessionUser user,
                              @RequestParam(value="groupId") Long groupId,
                              @RequestParam(value="roleId") Long roleId,
                              Model model) {

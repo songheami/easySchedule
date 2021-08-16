@@ -20,8 +20,9 @@ public class UserGroupApiController {
 
     private final UserGroupService userGroupService;
 
-    @PostMapping("/api/v1/user-group/{groupId}")
-    public UserGroupResponseDto insertUserGroup(@LoginUser SessionUser user, @PathVariable Long groupId) {
+    @PostMapping("/api/v1/userGroup/{groupId}")
+    public UserGroupResponseDto insertUserGroup(@LoginUser SessionUser user,
+                                                @PathVariable Long groupId) {
         return userGroupService.save(user.getUserId(), groupId);
     }
 }

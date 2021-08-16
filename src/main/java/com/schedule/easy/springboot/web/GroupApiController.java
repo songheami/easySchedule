@@ -16,7 +16,7 @@ public class GroupApiController {
 
     private final GroupService groupService;
 
-    @PostMapping("/api/v1/group")
+    @PostMapping("")
     public UserGroupResponseDto save(@LoginUser SessionUser user, @RequestBody GroupSaveRequestDto requestDto) {
         return groupService.save(user.getUserId(), requestDto);
     }
@@ -27,7 +27,9 @@ public class GroupApiController {
     }
 
     @GetMapping("/api/v1/group")
-    public List<GroupsResponseDto> findListByName(@RequestParam(value="name") String name) {
-        return groupService.findListByName(name);
+    public List<GroupsResponseDto> findListByName(@LoginUser SessionUser user,
+                                                  @RequestParam(value="role") String role,
+                                                  @RequestParam(value="name") String name) {
+        return groupService.findListByName(name, role.equals("staff")?2L:3L, user.getUserId());
     }
 }

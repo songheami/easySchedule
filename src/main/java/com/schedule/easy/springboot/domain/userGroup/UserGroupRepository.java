@@ -8,7 +8,9 @@ import java.util.List;
 
 public interface UserGroupRepository extends JpaRepository<UserGroup, Long> {
 
-    @Query("SELECT ug, g FROM UserGroup ug INNER JOIN Groups g ON ug.groupId = g.groupId WHERE ug.userId = :userId")
+    @Query("SELECT ug, g, r FROM UserGroup ug " +
+            "INNER JOIN Groups g ON ug.groupId = g.groupId " +
+            "INNER JOIN Role r ON ug.roleId = r.roleId WHERE ug.userId = :userId")
     public List<UserGroup> findListByUserId(@Param("userId") Long userId);
 
     @Query("SELECT ug, g FROM UserGroup ug INNER JOIN Groups g ON ug.groupId = g.groupId " +

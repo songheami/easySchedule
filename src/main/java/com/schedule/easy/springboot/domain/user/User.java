@@ -19,7 +19,7 @@ import javax.persistence.Id;
 public class User extends BaseTimeEntity {
 
     @Id
-    @Column(name = "userId")
+    @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 

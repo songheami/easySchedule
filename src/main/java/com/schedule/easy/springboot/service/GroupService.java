@@ -44,8 +44,8 @@ public class GroupService {
     }
 
     @Transactional
-    public List<GroupsResponseDto> findListByName(String name) {
-        List<Groups> groupsList = groupRepository.findListByName(name);
+    public List<GroupsResponseDto> findListByName(String name, Long roleId, Long userId) {
+        List<Groups> groupsList = groupRepository.findListByName(name, roleId, userId);
         List<GroupsResponseDto> groupsResponseDtoList = new ArrayList<GroupsResponseDto>();
         for(Groups group : groupsList) { groupsResponseDtoList.add(new GroupsResponseDto(group)); }
         return groupsResponseDtoList;

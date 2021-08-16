@@ -2,6 +2,7 @@ package com.schedule.easy.springboot.domain.userGroup;
 
 import com.schedule.easy.springboot.domain.BaseTimeEntity;
 import com.schedule.easy.springboot.domain.group.Groups;
+import com.schedule.easy.springboot.domain.role.Role;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +16,8 @@ import java.io.Serializable;
 @Table(name = "user_group")
 @IdClass(UserGroupPK.class)
 public class UserGroup extends BaseTimeEntity implements Serializable {
+
+    private static final long serialVersionUID = 2551178015035045050L;
 
     @Id
     @Column(name = "user_id")
@@ -34,6 +37,10 @@ public class UserGroup extends BaseTimeEntity implements Serializable {
     @ManyToOne
     @JoinColumn(name = "group_id", columnDefinition="LONG", insertable=false, updatable=false)
     private Groups groups;
+
+    @ManyToOne
+    @JoinColumn(name = "role_id", columnDefinition="LONG", insertable=false, updatable=false)
+    private Role role;
 
     @Builder
     public UserGroup (Long userId, Long groupId, Long roleId, String useYn) {

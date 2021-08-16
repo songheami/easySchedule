@@ -1,0 +1,13 @@
+{{>layout/header}}
+
+<form id="form-create-group">
+    <div class="form-group">
+        <label for="name">그룹명</label>
+        <input type="text" class="form-control" id="name" placeholder="그룹명을 입력하세요." required>
+        <div class="valid-feedback">사용 가능합니다.</div>
+        <div class="invalid-feedback">이미 존재하는 그룹명입니다.</div>
+    </div>
+    <button type="button" class="btn btn-outline-light" id="btn-create-group" disabled>등록</button>
+</form>
+
+{{>layout/footer}}

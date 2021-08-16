@@ -14,8 +14,8 @@ var main = {
             _this.delete();
         });
 
-        $('#btn-insert-group').on('click', function () {
-            _this.insertGroup();
+        $('#btn-create-group').on('click', function () {
+            _this.createGroup();
         });
 
         $('#btn-insert-opertime').on('click', function () {
@@ -71,17 +71,20 @@ var main = {
 		});
 
 
-        $("#form-insert-group").find("#name").on("propertychange change keyup paste input", function(){
-			$("#form-insert-group").find("button").attr("disabled","disabled");
+        $("#form-create-group").find("#name").on("propertychange change keyup paste input", function(){
+			$("#form-create-group").find("button").attr("disabled","disabled");
 			if (this.value.length == 0) {
-				$("#form-insert-group").find("#name").removeClass().addClass("form-control");
+				$("#form-create-group").find("#name").removeClass().addClass("form-control");
 			} else {
 			    _this.checkGroup();
 			}
 		});
 
-		$("#form-join-group").find("#name").on("propertychange change keyup paste input", function(){
-		    _this.searchGroup();
+		$("#form-join-staff-group").find("#name").on("propertychange change keyup paste input", function(){
+		    _this.searchStaffGroup();
+		});
+		$("#form-join-member-group").find("#name").on("propertychange change keyup paste input", function(){
+		    _this.searchMemberGroup();
 		});
 
         $('#groupOpertime_wrapper input.form-control').on("propertychange change keyup paste input", function(){
@@ -140,9 +143,9 @@ var main = {
             alert(JSON.stringify(error));
         });
     },
-    insertGroup : function () {
+    createGroup : function () {
         var param = {
-            name: $("#form-insert-group").find("#name").val(),
+            name: $("#form-create-group").find("#name").val(),
             useYn: "Y"
         };
         $.ajax({
@@ -198,31 +201,32 @@ var main = {
     checkGroup : function() {
         $.ajax({
             type: 'GET',
-            url: '/api/v1/group/'+$("#form-insert-group").find("#name").val(),
+            url: '/api/v1/group/'+$("#form-create-group").find("#name").val(),
             dataType: 'json',
             contentType:'application/json;'
         }).done(function(result) {
             if (result>0) {
-                $("#form-insert-group").find("#name").removeClass().addClass("form-control is-invalid");
+                $("#form-create-group").find("#name").removeClass().addClass("form-control is-invalid");
             } else {
-                $("#form-insert-group").find("#name").removeClass().addClass("form-control is-valid");
-                $("#form-insert-group").find("button").removeAttr("disabled");
+                $("#form-create-group").find("#name").removeClass().addClass("form-control is-valid");
+                $("#form-create-group").find("button").removeAttr("disabled");
             }
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
     },
-    searchGroup : function () {
+    searchStaffGroup : function () {
         $.ajax({
             type: 'GET',
             url: '/api/v1/group',
             dataType: 'json',
             contentType:'application/json;',
             data: {
-                name : $("#form-join-group").find("#name").val()
+                role: 'staff',
+                name : $("#form-join-staff-group").find("#name").val()
             }
         }).done(function(result) {
-            let $container = $("#form-join-group").find(".container");
+            let $container = $("#form-join-staff-group").find(".container");
             $container.empty();
             let html = "";
             for (let key in result) {
@@ -231,6 +235,37 @@ var main = {
                       + result[key].name
                       + "</div>"
                       + "<button type='button' class='btn btn-outline-light btn-sm' onclick='joinGroup("
+                      + "staff, "
+                      + result[key].groupId
+                      + ")'>가입</button>"
+                      + "</div>";
+            }
+            $container.append(html);
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
+    searchMemberGroup : function () {
+        $.ajax({
+            type: 'GET',
+            url: '/api/v1/group',
+            dataType: 'json',
+            contentType:'application/json;',
+            data: {
+                role: 'member',
+                name : $("#form-join-member-group").find("#name").val()
+            }
+        }).done(function(result) {
+            let $container = $("#form-join-member-group").find(".container");
+            $container.empty();
+            let html = "";
+            for (let key in result) {
+                html += "<div class='row'>"
+                      + "<div class='col-11'>"
+                      + result[key].name
+                      + "</div>"
+                      + "<button type='button' class='btn btn-outline-light btn-sm' onclick='joinGroup("
+                      + "member, "
                       + result[key].groupId
                       + ")'>가입</button>"
                       + "</div>";
@@ -244,12 +279,16 @@ var main = {
 
 main.init();
 
-function joinGroup(groupId) {
+function joinGroup(role, groupId) {
     $.ajax({
         type: 'POST',
-        url: '/api/v1/user-group/'+groupId,
+        url: '/api/v1/userGroup',
         dataType: 'json',
-        contentType:'application/json;'
+        contentType:'application/json;',
+        data: {
+            role: role,
+            groupId: groupId
+        }
     }).done(function(result) {
         console.log(result);
     }).fail(function (error) {
