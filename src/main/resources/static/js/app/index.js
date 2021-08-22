@@ -18,8 +18,12 @@ var main = {
             _this.createGroup();
         });
 
-        $('#btn-insert-opertime').on('click', function () {
-            _this.insertOpertime();
+        $('.groupOpertime_button #btn-insert-opertime').on('click', function () {
+            _this.insertGroupOpertime();
+        });
+
+        $('.userGroupOpertime_button #btn-insert-opertime').on('click', function () {
+            _this.insertUserGroupOpertime();
         });
 
         $('#btn-insert-holiday-ui').on('click', function () {
@@ -89,6 +93,18 @@ var main = {
 
         $('#groupOpertime_wrapper input.form-control').on("propertychange change keyup paste input", function(){
              onChangeGroupOpertimeInput(this);
+        });
+
+        $('#userGroupOpertime_wrapper input.form-control').on("propertychange change keyup paste input", function(){
+             onChangeUserGroupOpertimeInput(this);
+        });
+
+        $('#groupOpertime_wrapper #addOpertime').on("click", function(){
+             _this.addGroupOpertime();
+        });
+
+        $('#userGroupOpertime_wrapper #addOpertime').on("click", function(){
+             _this.addUserGroupOpertime();
         });
     },
     save : function () {
@@ -162,8 +178,8 @@ var main = {
             alert(JSON.stringify(error));
         });
     },
-    insertOpertime : function () {
-        let array = $(".form-opertime").serializeArray();
+    insertGroupOpertime : function () {
+        let array = $("#groupOpertime_wrapper .form-opertime").serializeArray();
         let param = {};
         for (key in array) {
             param[array[key].name]=array[key].value;
@@ -171,6 +187,24 @@ var main = {
         $.ajax({
             type: 'POST',
             url: '/api/v1/opertime',
+            dataType: 'json',
+            contentType:'application/json;',
+            data: JSON.stringify(param)
+        }).done(function() {
+            alert('시간이 등록되었습니다.');
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
+    insertUserGroupOpertime : function () {
+        let array = $("#userGroupOpertime_wrapper .form-opertime").serializeArray();
+        let param = {};
+        for (key in array) {
+            param[array[key].name]=array[key].value;
+        }
+        $.ajax({
+            type: 'POST',
+            url: '/api/v1/userGroup/opertime',
             dataType: 'json',
             contentType:'application/json;',
             data: JSON.stringify(param)
@@ -274,6 +308,74 @@ var main = {
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
+    },
+    addGroupOpertime : function () {
+         if ($("#groupOpertime_wrapper .form-opertime.empty").length > 0) return;
+         let $addOpertime = $("#groupOpertime_wrapper #addOpertime");
+         let weekdayList = {"sun":"일요일",
+                            "mon":"월요일",
+                            "tue":"화요일",
+                            "wed":"수요일",
+                            "thu":"목요일",
+                            "fri":"금요일",
+                            "sat":"토요일"};
+         let html = "<div class='form-group'>";
+         for (let key in weekdayList) {
+             html += "<div>"
+                   + "<form class='form-opertime empty'>"
+                   + "<div class='form-group'>"
+                   + "<div class='input-group input-group-sm'>"
+                   + "<div class='input-group-prepend input-group-sm'>"
+                   + "<span class='input-group-text'>"
+                   + weekdayList[key]
+                   + "</span>"
+                   + "<input type='text' class='form-control' name='"
+                   + key + "StartTime"
+                   + "'>"
+                   + "<input type='text' class='form-control' name='"
+                   + key + "EndTime"
+                   + "'>"
+                   + "</div>"
+                   + "</div>";
+         }
+         $addOpertime.before(html);
+         $('#groupOpertime_wrapper input.form-control').on("propertychange change keyup paste input", function(){
+             onChangeGroupOpertimeInput(this);
+         });
+    },
+    addUserGroupOpertime : function () {
+         if ($("#userGroupOpertime_wrapper .form-opertime.empty").length > 0) return;
+         let $addOpertime = $("#userGroupOpertime_wrapper #addOpertime");
+         let weekdayList = {"sun":"일요일",
+                            "mon":"월요일",
+                            "tue":"화요일",
+                            "wed":"수요일",
+                            "thu":"목요일",
+                            "fri":"금요일",
+                            "sat":"토요일"};
+         let html = "<div class='form-group'>";
+         for (let key in weekdayList) {
+             html += "<div>"
+                   + "<form class='form-opertime empty'>"
+                   + "<div class='form-group'>"
+                   + "<div class='input-group input-group-sm'>"
+                   + "<div class='input-group-prepend input-group-sm'>"
+                   + "<span class='input-group-text'>"
+                   + weekdayList[key]
+                   + "</span>"
+                   + "<input type='text' class='form-control' name='"
+                   + key + "StartTime"
+                   + "'>"
+                   + "<input type='text' class='form-control' name='"
+                   + key + "EndTime"
+                   + "'>"
+                   + "</div>"
+                   + "</div>";
+         }
+         $addOpertime.before(html);
+         $('#userGroupOpertime_wrapper input.form-control').on("propertychange change keyup paste input", function(){
+             onChangeUserGroupOpertimeInput(this);
+         });
     }
 };
 
@@ -296,42 +398,22 @@ function joinGroup(role, groupId) {
     });
 }
 
-function addOpertime() {
-     if ($(".form-opertime.empty").length > 0) return;
-     let $addOpertime = $("#addOpertime");
-     let weekdayList = {"sun":"일요일",
-                        "mon":"월요일",
-                        "tue":"화요일",
-                        "wed":"수요일",
-                        "thu":"목요일",
-                        "fri":"금요일",
-                        "sat":"토요일"};
-     let html = "<div class='form-group'>";
-     for (let key in weekdayList) {
-         html += "<div>"
-               + "<form class='form-opertime empty'>"
-               + "<div class='form-group'>"
-               + "<div class='input-group input-group-sm'>"
-               + "<div class='input-group-prepend input-group-sm'>"
-               + "<span class='input-group-text'>"
-               + weekdayList[key]
-               + "</span>"
-               + "<input type='text' class='form-control' name='"
-               + key + "StartTime"
-               + "'>"
-               + "<input type='text' class='form-control' name='"
-               + key + "EndTime"
-               + "'>"
-               + "</div>"
-               + "</div>";
-     }
-     $addOpertime.before(html);
-     $('#groupOpertime_wrapper input.form-control').on("propertychange change keyup paste input", function(){
-         onChangeGroupOpertimeInput(this);
-     });
- }
-
  function onChangeGroupOpertimeInput(_this) {
+    let inputVal = $(_this).val().replace(/[^0-9]/g,'').substr(0,4);
+     if (inputVal.length == 4) {
+         let hour = parseInt(inputVal.substr(0,2));
+         let min = parseInt(inputVal.substr(2,4));
+         if (hour<0||hour>24||min<0||min>=60) {
+             $(_this).val(null);
+             alert("시간 정보가 유효하지 않습니다.");
+             return;
+         }
+         inputVal = (hour<10?"0"+hour:hour)+":"+(min<10?"0"+min:min);
+     }
+     $(_this).val(inputVal);
+}
+
+ function onChangeUserGroupOpertimeInput(_this) {
     let inputVal = $(_this).val().replace(/[^0-9]/g,'').substr(0,4);
      if (inputVal.length == 4) {
          let hour = parseInt(inputVal.substr(0,2));

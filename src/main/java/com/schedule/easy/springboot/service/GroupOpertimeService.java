@@ -26,7 +26,7 @@ public class GroupOpertimeService {
     }
 
     @Transactional
-    public Long save(Long groupId, GroupOpertimeRequestDto requestDto) {
-        return groupOpertimeRepository.save(requestDto.toEntity(groupId)).getOpertimeId();
+    public Long save(GroupOpertimeRequestDto requestDto) {
+        return groupOpertimeRepository.save(requestDto.toEntity()).getOpertimeId();
     }
 }

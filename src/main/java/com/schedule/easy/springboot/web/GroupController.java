@@ -51,8 +51,7 @@ public class GroupController {
         // 현재 사용자의 그룹 권한 변경
         user.sessionUserGroup(userGroup);
         httpSession.setAttribute("user", user);
-        
-        model.addAttribute("group", userGroup);
+        model.addAttribute("groupOwner", userGroup.getRoleId().equals(1L));
         return "group-login";
     }
 }

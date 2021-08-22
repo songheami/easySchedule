@@ -1,8 +1,8 @@
 {{>layout/header}}
 
 <div class="title">근무시간</div>
-<div id="groupOpertime_wrapper">
-    {{#groupOpertimeList}}
+<div id="userGroupOpertime_wrapper">
+    {{#userGroupOpertimeList}}
     <div>
         <form class="form-opertime">
             <div class="form-group">
@@ -13,7 +13,7 @@
                         </span>
                     </div>
                     <input type='text' class='form-control' name='sunStartTime' value='{{#sunStartTime}}{{sunStartTime}}{{/sunStartTime}}'>
-                    <input type='text' class='form-control' name='sunEndTime' value='{{#sunEndTime}}{{sunEndTime}}{{/sunEndTime}}'>
+                    <input type='text' class='form-contrfol' name='sunEndTime' value='{{#sunEndTime}}{{sunEndTime}}{{/sunEndTime}}'>
                 </div>
                 <div class='input-group input-group-sm'>
                     <div class='input-group-prepend input-group-sm'>
@@ -72,10 +72,10 @@
             </div>
         </form>
     </div>
-    {{/groupOpertimeList}}
+    {{/userGroupOpertimeList}}
     <div id="addOpertime"><i class="fas fa-plus"></i></div>
 </div>
-<div class="groupOpertime_button">
+<div class="userGroupOpertime_button">
     <button type="button" class="btn btn-outline-light" id="btn-insert-opertime">저장</button>
 </div>
 

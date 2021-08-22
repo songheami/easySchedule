@@ -26,8 +26,12 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/group/opertime">근무시간<span class="sr-only"></span></a>
-                    <a class="nav-link" href="/group/holiday">쉬는일정</a>
+                    {{#groupOwner}}
+                        <a class="nav-link" href="/group/opertime">그룹근무시간<span class="sr-only"></span></a>
+                        <a class="nav-link" href="/group/holiday">그룹쉬는일정</a>
+                    {{/groupOwner}}
+                    <a class="nav-link" href="/userGroup/opertime">근무시간<span class="sr-only"></span></a>
+                    <a class="nav-link" href="/userGroup/holiday">쉬는일정</a>
                 </li>
             </ul>
             <span class="navbar-text"><a href="/logout">로그아웃</a></span>

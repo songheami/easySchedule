@@ -1,18 +1,18 @@
 package com.schedule.easy.springboot.web.dto;
 
 import com.schedule.easy.springboot.domain.groupOpertime.GroupOpertime;
-import com.schedule.easy.springboot.domain.posts.Posts;
+import com.schedule.easy.springboot.domain.userGroupOpertime.UserGroupOpertime;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.type.OffsetTimeType;
 
 @Data
 @NoArgsConstructor
-public class GroupOpertimeRequestDto {
+public class UserGroupOpertimeRequestDto {
 
     private Long opertimeId;
+    private Long userId;
     private Long groupId;
     private String sunStartTime = null;
     private String sunEndTime = null;
@@ -31,16 +31,17 @@ public class GroupOpertimeRequestDto {
     private String useYn = null;
 
     @Builder
-    public GroupOpertimeRequestDto(Long opertimeId, Long groupId,
-                                   String sunStartTime, String sunEndTime,
-                                   String monStartTime, String monEndTime,
-                                   String tueStartTime, String tueEndTime,
-                                   String wedStartTime, String wedEndTime,
-                                   String thuStartTime, String thuEndTime,
-                                   String friStartTime, String friEndTime,
-                                   String satStartTime, String satEndTime,
-                                   String useYn) {
+    public UserGroupOpertimeRequestDto(Long opertimeId, Long groupId, Long userId,
+                                       String sunStartTime, String sunEndTime,
+                                       String monStartTime, String monEndTime,
+                                       String tueStartTime, String tueEndTime,
+                                       String wedStartTime, String wedEndTime,
+                                       String thuStartTime, String thuEndTime,
+                                       String friStartTime, String friEndTime,
+                                       String satStartTime, String satEndTime,
+                                       String useYn) {
         this.opertimeId = opertimeId;
+        this.userId = userId;
         this.groupId = groupId;
         this.sunStartTime = sunStartTime; this.sunEndTime = sunEndTime;
         this.monStartTime = monStartTime; this.monEndTime = monEndTime;
@@ -52,9 +53,10 @@ public class GroupOpertimeRequestDto {
         this.useYn = useYn;
     }
 
-    public GroupOpertime toEntity() {
-        return GroupOpertime.builder()
+    public UserGroupOpertime toEntity() {
+        return UserGroupOpertime.builder()
                 .opertimeId(opertimeId)
+                .userId(userId)
                 .groupId(groupId)
                 .sunStartTime(sunStartTime)
                 .sunEndTime(sunEndTime)

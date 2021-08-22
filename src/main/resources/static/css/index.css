@@ -106,3 +106,47 @@ div#groupOpertime_wrapper > div .form-control:-internal-autofill-selected {
     float: right;
     margin: 10vh 5vh;
 }
+
+div#userGroupOpertime_wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+div#userGroupOpertime_wrapper > div {
+    border: 1px solid #bbb;
+    border-radius: 10px;
+    width: 260px;
+    height: 260px;
+    line-height: 260px;
+    margin: 5px;
+    text-align: center;
+    vertical-align: middle;
+}
+div#userGroupOpertime_wrapper > div .input-group {
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+div#userGroupOpertime_wrapper > div .input-group-text,
+div#userGroupOpertime_wrapper > div .form-control {
+    background-color: transparent;
+    border: none;
+    border: 1px solid #6c757d;
+}
+div#userGroupOpertime_wrapper > div .input-group-text,
+div#userGroupOpertime_wrapper > div .form-control:focus {
+    background-color: transparent;
+    border: none;
+    border: 1px solid #6c757d;
+}
+div#userGroupOpertime_wrapper > div .input-group-text,
+div#userGroupOpertime_wrapper > div .form-control:-internal-autofill-selected {
+    background-color: transparent;
+    border: none;
+    border: 1px solid #6c757d;
+}
+.userGroupOpertime_button {
+    float: right;
+    margin: 10vh 5vh;
+}
