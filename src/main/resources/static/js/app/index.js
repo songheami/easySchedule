@@ -67,6 +67,9 @@ var main = {
         $('#btn-insert-holiday').on('click', function () {
             _this.insertHoliday();
         });
+        $('#btn-insert-userGroupHoliday').on('click', function () {
+            _this.insertUserGroupHoliday();
+        });
 
 		$("#groupJoin_wrapper").find("a").click(function (){
 			$("#groupJoin_wrapper").find("a").each(function () {
@@ -223,6 +226,24 @@ var main = {
         $.ajax({
             type: 'POST',
             url: '/api/v1/holiday',
+            dataType: 'json',
+            contentType:'application/json;',
+            data: JSON.stringify(param)
+        }).done(function() {
+            alert('휴일이 등록되었습니다.');
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
+    insertUserGroupHoliday : function () {
+        let array = $(".form-holiday").serializeArray();
+        let param = {};
+        for (key in array) {
+            param[array[key].name]=array[key].value;
+        }
+        $.ajax({
+            type: 'POST',
+            url: '/api/v1/userGroup/holiday',
             dataType: 'json',
             contentType:'application/json;',
             data: JSON.stringify(param)
