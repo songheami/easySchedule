@@ -175,7 +175,7 @@ var main = {
             data: JSON.stringify(param)
         }).done(function(result) {
             alert('그룹이 등록되었습니다.');
-            window.location.href = '/group/login?groupId='+result.groupId
+            window.location.href = '/schedule?groupId='+result.groupId
                                  + '&roleId='+result.roleId;
         }).fail(function (error) {
             alert(JSON.stringify(error));

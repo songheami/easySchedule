@@ -40,18 +40,4 @@ public class GroupController {
     public String roleJoinGroup(@PathVariable String role) {
         return role.equals("staff")?"group-join-staff":"group-join-member";
     }
-
-    @GetMapping("/group/login")
-    public String loginGroup(@LoginUser SessionUser user,
-                             @RequestParam(value="groupId") Long groupId,
-                             @RequestParam(value="roleId") Long roleId,
-                             Model model) {
-        UserGroup userGroup = userGroupService.findByKey(user.getUserId(), groupId, roleId);
-        if (userGroup == null) return "index";
-        // 현재 사용자의 그룹 권한 변경
-        user.sessionUserGroup(userGroup);
-        httpSession.setAttribute("user", user);
-        model.addAttribute("groupOwner", userGroup.getRoleId().equals(1L));
-        return "group-login";
-    }
 }

@@ -2,17 +2,13 @@ package com.schedule.easy.springboot.service;
 
 import com.schedule.easy.springboot.domain.group.Groups;
 import com.schedule.easy.springboot.domain.group.GroupsRepository;
-import com.schedule.easy.springboot.domain.posts.Posts;
 import com.schedule.easy.springboot.domain.userGroup.UserGroup;
 import com.schedule.easy.springboot.domain.userGroup.UserGroupRepository;
-import com.schedule.easy.springboot.web.dto.PostsUpdateRequestDto;
 import com.schedule.easy.springboot.web.dto.UserGroupRequestDto;
 import com.schedule.easy.springboot.web.dto.UserGroupResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,5 +43,15 @@ public class UserGroupService {
         UserGroup userGroup = requestDto.toEntity();
         userGroupRepository.save(userGroup);
         return new UserGroupResponseDto(userGroup);
+    }
+
+    @Transactional(readOnly = true)
+    public List<UserGroupResponseDto> findStaffListWithGroupId(Long groupId) {
+        List<UserGroup> userGroupList = userGroupRepository.findStaffListWithGroupId(groupId);
+        List<UserGroupResponseDto> userGroupResponseDtoList = new ArrayList<UserGroupResponseDto>();
+        for (UserGroup userGroup : userGroupList) {
+            userGroupResponseDtoList.add(new UserGroupResponseDto(userGroup));
+        }
+        return userGroupResponseDtoList;
     }
 }
