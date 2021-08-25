@@ -450,5 +450,5 @@
             '</label></div>'
         );
     });
-    calendarList.innerHTML = html.join('\n');
+    //calendarList.innerHTML = html.join('\n');
 })();

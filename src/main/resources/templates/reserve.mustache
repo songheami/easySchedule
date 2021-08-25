@@ -54,6 +54,15 @@
                 </div>
             </div>
             <div id="calendarList" class="lnb-calendars-d1">
+                {{#staffList}}
+                    <div class="lnb-calendars-item" id="{{userId}}">
+                        <label>
+                            <input type="checkbox" class="tui-full-calendar-checkbox-round" value="{{userId}}" checked>
+                            <span></span>
+                            <span>{{user.name}}</span>
+                        </label>
+                    </div>
+                {{/staffList}}
             </div>
         </div>
     </div>

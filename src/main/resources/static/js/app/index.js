@@ -77,7 +77,6 @@ var main = {
 			});
 		});
 
-
         $("#form-create-group").find("#name").on("propertychange change keyup paste input", function(){
 			$("#form-create-group").find("button").attr("disabled","disabled");
 			if (this.value.length == 0) {

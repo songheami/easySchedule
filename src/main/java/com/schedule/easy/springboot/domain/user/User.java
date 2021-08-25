@@ -12,11 +12,14 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 @Getter
 @NoArgsConstructor
 @Entity
-public class User extends BaseTimeEntity {
+public class User extends BaseTimeEntity implements Serializable  {
+
+    private static final long serialVersionUID = 3639462513677548064L;
 
     @Id
     @Column(name = "user_id")

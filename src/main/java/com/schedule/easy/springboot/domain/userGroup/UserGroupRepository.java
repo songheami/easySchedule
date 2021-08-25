@@ -10,7 +10,7 @@ public interface UserGroupRepository extends JpaRepository<UserGroup, Long> {
 
     @Query("SELECT ug, u FROM UserGroup ug " +
             "INNER JOIN User u ON ug.userId = u.userId " +
-            "WHERE ug.role = 2 AND ug.groupId = :groupId")
+            "WHERE ug.role in (1,2) AND ug.groupId = :groupId")
     public List<UserGroup> findStaffListWithGroupId(@Param("groupId") Long groupId);
 
     @Query("SELECT ug, g, r FROM UserGroup ug " +
