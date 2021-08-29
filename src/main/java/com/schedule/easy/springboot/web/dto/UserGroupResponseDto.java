@@ -5,7 +5,6 @@ import com.schedule.easy.springboot.domain.role.Role;
 import com.schedule.easy.springboot.domain.userGroup.UserGroup;
 import lombok.Getter;
 
-@Getter
 public class UserGroupResponseDto {
 
     private Long userId;

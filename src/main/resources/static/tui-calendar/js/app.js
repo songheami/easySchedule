@@ -7,8 +7,8 @@
 
 (function(window, Calendar) {
     var cal, resizeThrottled;
-    var useCreationPopup = true;
-    var useDetailPopup = true;
+    var useCreationPopup = false;
+    var useDetailPopup = false;
     var datePicker, selectedCalendar;
 
     cal = new Calendar('#calendar', {
@@ -42,7 +42,8 @@
         },
         'beforeCreateSchedule': function(e) {
             console.log('beforeCreateSchedule', e);
-            saveNewSchedule(e);
+            //saveNewSchedule(e);
+            showNewSchedulePopUp(e);
         },
         'beforeUpdateSchedule': function(e) {
             var schedule = e.schedule;
@@ -266,7 +267,7 @@
         }
     }
     function saveNewSchedule(scheduleData) {
-        var calendar = scheduleData.calendar || findCalendar(scheduleData.calendarId);
+            var calendar = scheduleData.calendar || findCalendar(scheduleData.calendarId);
         var schedule = {
             id: String(chance.guid()),
             title: scheduleData.title,
@@ -295,6 +296,25 @@
         cal.createSchedules([schedule]);
 
         refreshScheduleVisibility();
+    }
+
+    function showNewSchedulePopUp(e) {
+        if (e) {
+            $("#newScheduleModal #startTime").val(dateToString(e.start.toDate()));
+            $("#newScheduleModal #endTime").val(dateToString(e.end.toDate()));
+        }
+        $('#newScheduleModal').modal('show');
+    }
+
+    function dateToString(date) {
+        let year = date.getFullYear();
+        let month = date.getMonth();
+        let day = date.getDate();
+        let hour = date.getHours();
+        let min = date.getMinutes();
+
+        return year+"-"+(month<10?"0"+month:month)+"-"+(day<10?"0"+day:day)
+            +" "+(hour<10?"0"+hour:hour)+":"+(min<10?"0"+min:min);
     }
 
     function onChangeCalendars(e) {
@@ -403,10 +423,30 @@
 
     function setSchedules() {
         cal.clear();
-        generateSchedule(cal.getViewName(), cal.getDateRangeStart(), cal.getDateRangeEnd());
+        //generateSchedule(cal.getViewName(), cal.getDateRangeStart(), cal.getDateRangeEnd());
+        searchScheduleList(dateToString(cal.getDateRangeStart().toDate()), dateToString(cal.getDateRangeEnd().toDate()));
         cal.createSchedules(ScheduleList);
 
         refreshScheduleVisibility();
+    }
+
+    function onSaveSchedule() {
+        var data = {
+            staffId: CalendarList[0].id,
+            startTime: $("#newScheduleModal #startTime").val(),
+            endTime: $("#newScheduleModal #endTime").val()
+        };
+        $.ajax({
+            type: 'POST',
+            url: '/api/v1/schedule',
+            dataType: 'json',
+            contentType:'application/json;',
+            data: JSON.stringify(data)
+        }).done(function(result) {
+            console.log(result);
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
     }
 
     function setEventListener() {
@@ -418,6 +458,8 @@
         $('#btn-new-schedule').on('click', createNewSchedule);
 
         $('#dropdownMenu-calendars-list').on('click', onChangeNewScheduleCalendar);
+
+        $("#btn-insert-schedule").on('click', onSaveSchedule);
 
         window.addEventListener('resize', resizeThrottled);
     }

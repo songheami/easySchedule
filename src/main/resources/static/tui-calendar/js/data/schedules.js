@@ -163,3 +163,37 @@ function generateSchedule(viewName, renderStart, renderEnd) {
         }
     });
 }
+
+function searchScheduleList(searchStartTime, searchEndTime) {
+    let staffIdList = [];
+    CalendarList.forEach(function(calendar) {
+        staffIdList.push(Number(calendar.id));
+    });
+
+    $.ajax({
+        type: 'GET',
+        url: '/api/v1/schedule',
+        dataType: 'json',
+        contentType:'application/json;',
+        data: {
+            staffIdList: staffIdList,
+            searchStartTime: searchStartTime,
+            searchEndTime: searchEndTime
+        }
+    }).done(function(result) {
+        result.forEach(function(data) {
+            var schedule = new ScheduleInfo();
+            var calendar = findCalendar(schedule.calendarId);
+            schedule.id = String(data.scheduleId);
+            schedule.calendarId = String(data.staffId);
+            schedule.title = String(data.memberId);
+            schedule.start = new Date(data.startTime);
+            schedule.end = new Date(data.endTime);
+            schedule.color = calendar.color;
+            schedule.bgColor = calendar.bgColor;
+            ScheduleList.push(schedule);
+        });
+    }).fail(function (error) {
+        alert(JSON.stringify(error));
+    });
+}

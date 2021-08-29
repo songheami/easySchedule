@@ -16,7 +16,7 @@ public class GroupApiController {
 
     private final GroupService groupService;
 
-    @PostMapping("")
+    @PostMapping("/api/v1/group")
     public UserGroupResponseDto save(@LoginUser SessionUser user, @RequestBody GroupSaveRequestDto requestDto) {
         return groupService.save(user.getUserId(), requestDto);
     }

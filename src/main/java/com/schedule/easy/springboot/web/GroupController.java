@@ -2,24 +2,21 @@ package com.schedule.easy.springboot.web;
 
 import com.schedule.easy.springboot.config.auth.LoginUser;
 import com.schedule.easy.springboot.config.auth.dto.SessionUser;
-import com.schedule.easy.springboot.domain.userGroup.UserGroup;
-import com.schedule.easy.springboot.service.UserGroupService;
+import com.schedule.easy.springboot.service.GroupService;
+import com.schedule.easy.springboot.web.dto.GroupSaveRequestDto;
+import com.schedule.easy.springboot.web.dto.GroupsResponseDto;
+import com.schedule.easy.springboot.web.dto.UserGroupResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
 public class GroupController {
 
-    private final HttpSession httpSession;
-
-    private final UserGroupService userGroupService;
+    private final GroupService groupService;
 
     @GetMapping("/group")
     public String group() {

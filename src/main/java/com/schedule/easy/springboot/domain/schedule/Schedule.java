@@ -1,25 +1,22 @@
-package com.schedule.easy.springboot.domain.reserve;
+package com.schedule.easy.springboot.domain.schedule;
 
 import com.schedule.easy.springboot.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor
 @Entity
-public class Reserve extends BaseTimeEntity {
+@Table(name = "tb_schedule")
+public class Schedule extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "reserve_id", nullable = false)
-    private Long reserveId;
+    @Column(name = "schedule_id", nullable = false)
+    private Long scheduleId;
 
     @Column(name = "member_id", nullable = false)
     private Long memberId;
@@ -37,16 +34,16 @@ public class Reserve extends BaseTimeEntity {
     private String endTime;
 
     @Builder
-    public Reserve(Long reserveId,
-                   Long memberId,
-                   Long staffId,
-                   String statCode,
-                   String startTime,
-                   String endTime) {
-        this.reserveId = reserveId;
+    public Schedule(Long scheduleId,
+                    Long memberId,
+                    Long staffId,
+                    String statCode,
+                    String startTime,
+                    String endTime) {
+        this.scheduleId = scheduleId;
         this.memberId = memberId;
         this.staffId = staffId;
-        this.staffId = staffId;
+        this.statCode = statCode;
         this.startTime = startTime;
         this.endTime = endTime;
     }

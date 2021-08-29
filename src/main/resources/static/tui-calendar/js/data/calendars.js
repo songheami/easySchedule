@@ -51,6 +51,7 @@ function hexToRGBA(hex) {
 
 (function() {
     $("#calendarList").find(".lnb-calendars-item").each(function (index, item) {
+        if (index >= CalendarStyleList.length) return;
         let $this = $("#calendarList #"+item.id);
         var calendar = new CalendarInfo();
         calendar.id = item.id;
