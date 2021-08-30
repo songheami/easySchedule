@@ -308,7 +308,7 @@
 
     function dateToString(date) {
         let year = date.getFullYear();
-        let month = date.getMonth();
+        let month = date.getMonth()+1;
         let day = date.getDate();
         let hour = date.getHours();
         let min = date.getMinutes();
@@ -422,12 +422,42 @@
     }
 
     function setSchedules() {
-        cal.clear();
-        //generateSchedule(cal.getViewName(), cal.getDateRangeStart(), cal.getDateRangeEnd());
-        searchScheduleList(dateToString(cal.getDateRangeStart().toDate()), dateToString(cal.getDateRangeEnd().toDate()));
-        cal.createSchedules(ScheduleList);
+        let staffIdList = [];
+        CalendarList.forEach(function(calendar) {
+            staffIdList.push(Number(calendar.id));
+        });
 
-        refreshScheduleVisibility();
+        $.ajax({
+            type: 'GET',
+            url: '/api/v1/schedule',
+            dataType: 'json',
+            contentType:'application/json;',
+            data: {
+                staffIdList: staffIdList,
+                searchStartTime: dateToString(cal.getDateRangeStart().toDate()),
+                searchEndTime: dateToString(cal.getDateRangeEnd().toDate())
+            }
+        }).done(function(result) {
+            cal.clear();
+            ScheduleList=[];
+            result.forEach(function(data) {
+                var schedule = new ScheduleInfo();
+                var calendar = findCalendar(schedule.calendarId);
+                schedule.id = String(data.scheduleId);
+                schedule.calendarId = String(data.staffId);
+                schedule.title = String(data.memberId);
+                schedule.start = moment(data.startTime).toDate();
+                schedule.end = moment(data.endTime).toDate();
+                schedule.color = calendar.color;
+                schedule.bgColor = calendar.bgColor;
+                schedule.category = "time";
+                ScheduleList.push(schedule);
+            });
+            cal.createSchedules(ScheduleList);
+            refreshScheduleVisibility();
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
     }
 
     function onSaveSchedule() {
