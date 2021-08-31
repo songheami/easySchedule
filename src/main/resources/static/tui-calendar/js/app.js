@@ -36,6 +36,7 @@
         },
         'clickSchedule': function(e) {
             console.log('clickSchedule', e);
+            showSchedulePopUp("old", e);
         },
         'clickDayname': function(date) {
             console.log('clickDayname', date);
@@ -43,7 +44,7 @@
         'beforeCreateSchedule': function(e) {
             console.log('beforeCreateSchedule', e);
             //saveNewSchedule(e);
-            showNewSchedulePopUp(e);
+            showSchedulePopUp("new", e);
         },
         'beforeUpdateSchedule': function(e) {
             var schedule = e.schedule;
@@ -298,8 +299,12 @@
         refreshScheduleVisibility();
     }
 
-    function showNewSchedulePopUp(e) {
-        if (e) {
+    function showSchedulePopUp(psStatus, e) {
+        if (psStatus == 'old') {
+
+            $("#newScheduleModal #startTime").val(dateToString(e.schedule.start));
+            $("#newScheduleModal #endTime").val(dateToString(e.schedule.end));
+        } else {
             $("#newScheduleModal #startTime").val(dateToString(e.start.toDate()));
             $("#newScheduleModal #endTime").val(dateToString(e.end.toDate()));
         }
@@ -473,7 +478,7 @@
             contentType:'application/json;',
             data: JSON.stringify(data)
         }).done(function(result) {
-            console.log(result);
+            setSchedules();
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
