@@ -27,6 +27,9 @@ public class Schedule extends BaseTimeEntity {
     @Column(name = "stat_code", nullable = false)
     private String statCode;
 
+    @Column(name = "title", nullable = false)
+    private String title;
+
     @Column(name = "start_time", nullable = false)
     private String startTime;
 
@@ -38,12 +41,14 @@ public class Schedule extends BaseTimeEntity {
                     Long memberId,
                     Long staffId,
                     String statCode,
+                    String title,
                     String startTime,
                     String endTime) {
         this.scheduleId = scheduleId;
         this.memberId = memberId;
         this.staffId = staffId;
         this.statCode = statCode;
+        this.title = title;
         this.startTime = startTime;
         this.endTime = endTime;
     }

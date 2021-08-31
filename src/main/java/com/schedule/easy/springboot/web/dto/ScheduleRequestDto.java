@@ -15,6 +15,7 @@ public class ScheduleRequestDto {
     private Long memberId;
     private Long staffId;
     private String statCode;
+    private String title;
     private String startTime;
     private String endTime;
 

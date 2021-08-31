@@ -301,10 +301,13 @@
 
     function showSchedulePopUp(psStatus, e) {
         if (psStatus == 'old') {
-
+            $("#newScheduleModal #newScheduleModalTitle").text("변경");
+            $("#newScheduleModal #title").val("");
             $("#newScheduleModal #startTime").val(dateToString(e.schedule.start));
             $("#newScheduleModal #endTime").val(dateToString(e.schedule.end));
         } else {
+            $("#newScheduleModal #newScheduleModalTitle").text("신규");
+            $("#newScheduleModal #title").val("");
             $("#newScheduleModal #startTime").val(dateToString(e.start.toDate()));
             $("#newScheduleModal #endTime").val(dateToString(e.end.toDate()));
         }
@@ -468,6 +471,7 @@
     function onSaveSchedule() {
         var data = {
             staffId: CalendarList[0].id,
+            title: $("#newScheduleModal #title").val(),
             startTime: $("#newScheduleModal #startTime").val(),
             endTime: $("#newScheduleModal #endTime").val()
         };
