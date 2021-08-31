@@ -22,6 +22,7 @@ public class ScheduleResponseDto {
         this.memberId = entity.getMemberId();
         this.staffId = entity.getStaffId();
         this.statCode = entity.getStatCode();
+        this.title = entity.getTitle();
         this.startTime = entity.getStartTime();
         this.endTime = entity.getEndTime();
     }

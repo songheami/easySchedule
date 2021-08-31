@@ -300,9 +300,9 @@
     }
 
     function showSchedulePopUp(psStatus, e) {
-        if (psStatus == 'old') {
+        if (psStatus == "old") {
             $("#newScheduleModal #newScheduleModalTitle").text("변경");
-            $("#newScheduleModal #title").val("");
+            $("#newScheduleModal #title").val(e.schedule.title);
             $("#newScheduleModal #startTime").val(dateToString(e.schedule.start));
             $("#newScheduleModal #endTime").val(dateToString(e.schedule.end));
         } else {
@@ -453,7 +453,7 @@
                 var calendar = findCalendar(schedule.calendarId);
                 schedule.id = String(data.scheduleId);
                 schedule.calendarId = String(data.staffId);
-                schedule.title = String(data.memberId);
+                schedule.title = data.title;
                 schedule.start = moment(data.startTime).toDate();
                 schedule.end = moment(data.endTime).toDate();
                 schedule.color = calendar.color;
