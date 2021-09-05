@@ -13,6 +13,8 @@
 
     cal = new Calendar('#calendar', {
         defaultView: 'week',
+        taskView: false,
+        scheduleView: ['time'],
         useCreationPopup: useCreationPopup,
         useDetailPopup: useDetailPopup,
         calendars: CalendarList,
@@ -268,7 +270,7 @@
         }
     }
     function saveNewSchedule(scheduleData) {
-            var calendar = scheduleData.calendar || findCalendar(scheduleData.calendarId);
+        var calendar = scheduleData.calendar || findCalendar(scheduleData.calendarId);
         var schedule = {
             id: String(chance.guid()),
             title: scheduleData.title,
@@ -301,15 +303,20 @@
 
     function showSchedulePopUp(psStatus, e) {
         if (psStatus == "old") {
-            $("#newScheduleModal #newScheduleModalTitle").text("변경");
+            $("#newScheduleModal #newScheduleModalTitle").text("스케줄 변경하기");
             $("#newScheduleModal #title").val(e.schedule.title);
             $("#newScheduleModal #startTime").val(dateToString(e.schedule.start));
             $("#newScheduleModal #endTime").val(dateToString(e.schedule.end));
-        } else {
-            $("#newScheduleModal #newScheduleModalTitle").text("신규");
+        } else if (psStatus == "new") {
+            $("#newScheduleModal #newScheduleModalTitle").text("스케줄 새로 만들기");
             $("#newScheduleModal #title").val("");
             $("#newScheduleModal #startTime").val(dateToString(e.start.toDate()));
             $("#newScheduleModal #endTime").val(dateToString(e.end.toDate()));
+        } else {
+            $("#newScheduleModal #newScheduleModalTitle").text("스케줄 새로 만들기");
+            $("#newScheduleModal #title").val("");
+            $("#newScheduleModal #startTime").val("");
+            $("#newScheduleModal #endTime").val("");
         }
         $('#newScheduleModal').modal('show');
     }
@@ -401,7 +408,6 @@
         }
 
         calendarTypeName.innerHTML = type;
-        calendarTypeIcon.className = iconClassName;
     }
 
     function currentCalendarDate(format) {
@@ -482,6 +488,7 @@
             contentType:'application/json;',
             data: JSON.stringify(data)
         }).done(function(result) {
+            $('#newScheduleModal').modal('hide');
             setSchedules();
         }).fail(function (error) {
             alert(JSON.stringify(error));
@@ -494,7 +501,7 @@
         $('#lnb-calendars').on('change', onChangeCalendars);
 
         $('#btn-save-schedule').on('click', onNewSchedule);
-        $('#btn-new-schedule').on('click', createNewSchedule);
+        $('#btn-new-schedule').on('click', showSchedulePopUp);
 
         $('#dropdownMenu-calendars-list').on('click', onChangeNewScheduleCalendar);
 
@@ -517,6 +524,15 @@
     setRenderRangeText();
     setSchedules();
     setEventListener();
+
+    // 반응형 ui
+    window.onresize = function(event) {
+        if (screen.width >= 768) {
+            cal.changeView('week', true);
+        } else {
+            cal.changeView('day', true);
+        }
+    };
 })(window, tui.Calendar);
 
 // set calendars
@@ -531,5 +547,10 @@
             '</label></div>'
         );
     });
-    //calendarList.innerHTML = html.join('\n');
+
+    if (screen.width >= 768) {
+        cal.changeView('week', true);
+    } else {
+        cal.changeView('day', true);
+    }
 })();

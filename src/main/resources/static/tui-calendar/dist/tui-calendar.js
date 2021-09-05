@@ -18788,12 +18788,12 @@ var theme = {
     'common.creationGuide.border': '1px solid #515ce6',
 
     // month header 'dayname'
-    'month.dayname.height': '31px',
+    'month.dayname.height': '42px',
     'month.dayname.borderLeft': 'none',
     'month.dayname.paddingLeft': '10px',
     'month.dayname.paddingRight': '0',
     'month.dayname.backgroundColor': '#343a40',
-    'month.dayname.fontSize': '12px',
+    'month.dayname.fontSize': '1.5rem',
     'month.dayname.fontWeight': 'normal',
     'month.dayname.textAlign': 'left',
 
@@ -18801,7 +18801,7 @@ var theme = {
     'month.holidayExceptThisMonth.color': 'rgba(255, 64, 64, 0.4)',
     'month.dayExceptThisMonth.color': 'rgba(51, 51, 51, 0.4)',
     'month.weekend.backgroundColor': 'inherit',
-    'month.day.fontSize': '14px',
+    'month.day.fontSize': '1.5rem',
 
     // month schedule style
     'month.schedule.borderRadius': '2px',
@@ -18854,8 +18854,8 @@ var theme = {
     'week.timegridLeft.borderRight': '1px solid #e5e5e5',
     'week.timegridLeft.fontSize': '11px',
 
-    'week.timegridOneHour.height': '52px',
-    'week.timegridHalfHour.height': '26px',
+    'week.timegridOneHour.height': '78px',
+    'week.timegridHalfHour.height': '39px',
     'week.timegridHalfHour.borderBottom': 'none',
     'week.timegridHorizontalLine.borderBottom': '1px solid #e5e5e5',
 

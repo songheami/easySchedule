@@ -4,7 +4,6 @@ import com.schedule.easy.springboot.domain.group.Groups;
 import com.schedule.easy.springboot.domain.group.GroupsRepository;
 import com.schedule.easy.springboot.domain.userGroup.UserGroup;
 import com.schedule.easy.springboot.domain.userGroup.UserGroupRepository;
-import com.schedule.easy.springboot.web.dto.GroupOpertimeRequestDto;
 import com.schedule.easy.springboot.web.dto.GroupSaveRequestDto;
 import com.schedule.easy.springboot.web.dto.GroupsResponseDto;
 import com.schedule.easy.springboot.web.dto.UserGroupResponseDto;

@@ -28,12 +28,14 @@ public class ScheduleRequestDto {
                             , Long memberId
                             , Long staffId
                             , String statCode
+                            , String title
                             , String startTime
                             , String endTime) {
         this.scheduleId = scheduleId;
         this.memberId = memberId;
         this.staffId = staffId;
         this.statCode = statCode;
+        this.title = title;
         this.startTime = startTime;
         this.endTime = endTime;
     }
@@ -44,6 +46,7 @@ public class ScheduleRequestDto {
                 .memberId(memberId)
                 .staffId(staffId)
                 .statCode(statCode)
+                .title(title)
                 .startTime(startTime)
                 .endTime(endTime)
                 .build();

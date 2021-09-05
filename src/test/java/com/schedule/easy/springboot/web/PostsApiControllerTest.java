@@ -3,8 +3,6 @@ package com.schedule.easy.springboot.web;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.schedule.easy.springboot.domain.posts.Posts;
 import com.schedule.easy.springboot.domain.posts.PostsRepository;
-import com.schedule.easy.springboot.web.dto.PostsSaveRequestDto;
-import com.schedule.easy.springboot.web.dto.PostsUpdateRequestDto;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

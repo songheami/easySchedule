@@ -35,14 +35,10 @@ public class UserGroupService {
     }
 
     @Transactional(readOnly = true)
-    public UserGroupResponseDto save(Long userId, Long groupId) {
-        Groups groups = groupsRepository.findById(groupId)
-                .orElseThrow(() -> new IllegalArgumentException("선택한 그룹이 존재하지 않습니다. groupId=" + groupId));
-
-        UserGroupRequestDto requestDto = new UserGroupRequestDto(new UserGroup(userId, groupId, 2L, "Y"));
-        UserGroup userGroup = requestDto.toEntity();
-        userGroupRepository.save(userGroup);
-        return new UserGroupResponseDto(userGroup);
+    public void save(UserGroupRequestDto requestDto) {
+        Groups groups = groupsRepository.findById(requestDto.getGroupId())
+                .orElseThrow(() -> new IllegalArgumentException("선택한 그룹이 존재하지 않습니다. groupId=" + requestDto.getGroupId()));
+        userGroupRepository.save(requestDto.toEntity());
     }
 
     @Transactional(readOnly = true)

@@ -2,7 +2,6 @@ package com.schedule.easy.springboot.web;
 
 import com.schedule.easy.springboot.config.auth.LoginUser;
 import com.schedule.easy.springboot.config.auth.dto.SessionUser;
-import com.schedule.easy.springboot.service.GroupOpertimeService;
 import com.schedule.easy.springboot.service.GroupService;
 import com.schedule.easy.springboot.web.dto.*;
 import lombok.RequiredArgsConstructor;

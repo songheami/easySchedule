@@ -5,10 +5,7 @@ import com.schedule.easy.springboot.config.auth.dto.SessionUser;
 import com.schedule.easy.springboot.domain.userGroup.UserGroup;
 import com.schedule.easy.springboot.service.GroupService;
 import com.schedule.easy.springboot.service.UserGroupService;
-import com.schedule.easy.springboot.web.dto.GroupSaveRequestDto;
-import com.schedule.easy.springboot.web.dto.GroupsResponseDto;
-import com.schedule.easy.springboot.web.dto.UserGroupRequestDto;
-import com.schedule.easy.springboot.web.dto.UserGroupResponseDto;
+import com.schedule.easy.springboot.web.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,9 +17,8 @@ public class UserGroupApiController {
 
     private final UserGroupService userGroupService;
 
-    @PostMapping("/api/v1/userGroup/{groupId}")
-    public UserGroupResponseDto insertUserGroup(@LoginUser SessionUser user,
-                                                @PathVariable Long groupId) {
-        return userGroupService.save(user.getUserId(), groupId);
+    @PostMapping("/api/v1/userGroup")
+    public void insertUserGroup(@RequestBody UserGroupRequestDto requestDto) {
+        userGroupService.save(requestDto);
     }
 }

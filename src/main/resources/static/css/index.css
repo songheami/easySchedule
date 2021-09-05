@@ -8,7 +8,7 @@ body {
 }
 
 div.title {
-    font-size: 1.7em;
+    font-size: 2.5rem;
     text-align: center;
     padding-top: 10vh;
     padding-bottom: 5vh;
@@ -22,11 +22,38 @@ div.title:after {
 }
 
 div#index_wrapper {
-    margin: 3vh;
-    height: 100vh;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
+}
+
+div#index_wrapper .google-logo {
+    display: inline-block;
+    font-size: 4rem;
+    background: #DB4437;
+    width:100px;
+    height:100px;
+    border-radius:75px;
+    text-align: center;
+    vertical-align: middle;
+}
+div#index_wrapper .google-logo a {
+    color: #fff;
+    font-family: 'Times New Roman';
+}
+div#index_wrapper .naver-logo {
+    display: inline-block;
+    font-size: 4rem;
+    background: #0F9D58;
+    width:100px;
+    height:100px;
+    border-radius:75px;
+    text-align: center;
+    vertical-align: middle;
+    margin-left: 20px;
+}
+div#index_wrapper .naver-logo a {
+    color: #fff;
+    font-family: 'Arial Black';
 }
 
 div#home_wrapper {
@@ -34,119 +61,185 @@ div#home_wrapper {
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    margin: auto 10vh;
 }
-div#home_wrapper > div {
-    font-weight: bold;
-    font-size: 1em;
-    text-align: center;
+div#home_wrapper .box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    word-break:break-all;
+    width: 200px;
+    height: 200px;
     border: 1px solid #bbb;
-    border-radius: 10px;
-    width: 150px;
-    height: 150px;
-    line-height: 150px;
+    border-radius: 15px;
     margin: 5px;
+    padding: 5px;
+    text-align: center;
 }
-div#home_wrapper div a{
+div#home_wrapper .box a{
     color: #bbb;
 }
+div#home_wrapper .box b{
+    font-size: 2rem;
+}
+div#home_wrapper .box p{
+    font-size: 1.5rem;
+}
 
-div#groupJoin_wrapper {
+div#group_wrapper {
+    display: flex;
+    flex-direction: row;
+    margin: auto 10vh;
+}
+div#group_wrapper a{
+    display: inline-block;
+    width: 50%;
+    height: 95px;
+    line-height: 95px;
+    border-radius: 50px;
+    font-size: 2.5rem;
+    border: 1px solid #fff;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+}
+div#group_wrapper a+a{
+    margin-left: 10px;
+}
+
+div#group_create_wrapper {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 5px;
+    margin: auto 10vh;
+}
+div#group_create_wrapper input{
+    font-size: 2rem;
+    text-align: center;
+}
+div#group_create_wrapper .valid-feedback{
+    font-size: 1.5rem;
+}
+div#group_create_wrapper .invalid-feedback{
+    font-size: 1.5rem;
+}
+div.group_create_button {
+    float: right;
+    margin: 10vh 5vh;
+}
+div.group_create_button button{
+    width: 100px;
+    height: 60px;
+    font-size: 2rem;
+}
+
+div#group_join_wrapper {
+    display: flex;
+    flex-direction: row;
+    margin: auto 10vh;
+}
+div#group_join_wrapper a{
+    display: inline-block;
+    width: 50%;
+    height: 95px;
+    line-height: 95px;
+    border-radius: 50px;
+    font-size: 2.5rem;
+    border: 1px solid #fff;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+}
+div#group_join_wrapper a+a{
+    margin-left: 10px;
+}
+
+div#group_join_staff_wrapper {
+    display: flex;
+    flex-direction: column;
+    margin: auto 10vh;
+}
+div#group_join_staff_wrapper input{
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 10px;
+}
+div#group_join_staff_wrapper .invalid-feedback{
+    font-size: 1.5rem;
+}
+div#group_join_staff_wrapper .box{
+    display: grid;
+    grid-template-columns: 1fr 100px;
+    grid-gap: 10px;
+    font-size: 2rem;
+}
+
+div#group_join_member_wrapper {
+    display: flex;
+    flex-direction: column;
+    margin: auto 10vh;
+}
+div#group_join_member_wrapper input{
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 10px;
+}
+div#group_join_member_wrapper .invalid-feedback{
+    font-size: 1.5rem;
+}
+div#group_join_member_wrapper .box{
+    display: grid;
+    grid-template-columns: 1fr 100px;
+    grid-gap: 10px;
+    font-size: 2rem;
+}
+
+div#opertime_wrapper {
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    column-gap: 20px;
+    margin: auto 10vh;
+}
+div#opertime_wrapper .box:nth-child(2n-1) {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+div#opertime_wrapper .box:nth-child(2n) {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+div#opertime_wrapper .box:nth-child(2n) .input-box {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 5px;
     margin-right: 5px;
 }
-div#groupJoin_wrapper .btn{
-    border: solid 1px #bbb;
-    color: #bbb;
-}
-
-div#groupOpertime_wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-}
-div#groupOpertime_wrapper > div {
-    border: 1px solid #bbb;
-    border-radius: 10px;
-    width: 260px;
-    height: 260px;
-    line-height: 260px;
-    margin: 5px;
+div#opertime_wrapper .box:nth-child(2n) .input-box input:nth-child(1){
+    width: 120px;
+    height: 60px;
+    border-radius: 20px 0 0 20px;
+    font-size: 2.3rem;
     text-align: center;
-    vertical-align: middle;
 }
-div#groupOpertime_wrapper > div .input-group {
-    padding-top: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
+div#opertime_wrapper .box:nth-child(2n) .input-box input:nth-child(2){
+    width: 120px;
+    height: 60px;
+    border-radius: 0 20px 20px 0;
+    font-size: 2.3rem;
+    text-align: center;
 }
-div#groupOpertime_wrapper > div .input-group-text,
-div#groupOpertime_wrapper > div .form-control {
-    background-color: transparent;
-    border: none;
-    border: 1px solid #6c757d;
+div#opertime_wrapper .btn-add-opertime {
+    border-radius: 50px;
+    width: 80px;
+    height: 60px;
 }
-div#groupOpertime_wrapper > div .input-group-text,
-div#groupOpertime_wrapper > div .form-control:focus {
-    background-color: transparent;
-    border: none;
-    border: 1px solid #6c757d;
-}
-div#groupOpertime_wrapper > div .input-group-text,
-div#groupOpertime_wrapper > div .form-control:-internal-autofill-selected {
-    background-color: transparent;
-    border: none;
-    border: 1px solid #6c757d;
-}
-.groupOpertime_button {
+div.opertime_button {
     float: right;
     margin: 10vh 5vh;
 }
-
-div#userGroupOpertime_wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-}
-div#userGroupOpertime_wrapper > div {
-    border: 1px solid #bbb;
-    border-radius: 10px;
-    width: 260px;
-    height: 260px;
-    line-height: 260px;
-    margin: 5px;
-    text-align: center;
-    vertical-align: middle;
-}
-div#userGroupOpertime_wrapper > div .input-group {
-    padding-top: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
-}
-div#userGroupOpertime_wrapper > div .input-group-text,
-div#userGroupOpertime_wrapper > div .form-control {
-    background-color: transparent;
-    border: none;
-    border: 1px solid #6c757d;
-}
-div#userGroupOpertime_wrapper > div .input-group-text,
-div#userGroupOpertime_wrapper > div .form-control:focus {
-    background-color: transparent;
-    border: none;
-    border: 1px solid #6c757d;
-}
-div#userGroupOpertime_wrapper > div .input-group-text,
-div#userGroupOpertime_wrapper > div .form-control:-internal-autofill-selected {
-    background-color: transparent;
-    border: none;
-    border: 1px solid #6c757d;
-}
-.userGroupOpertime_button {
-    float: right;
-    margin: 10vh 5vh;
+div.opertime_button button {
+    width: 100px;
+    height: 60px;
+    font-size: 2rem;
 }

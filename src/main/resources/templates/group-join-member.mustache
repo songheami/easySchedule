@@ -1,11 +1,12 @@
 {{>layout/header}}
 
-<form id="form-join-member-group">
-    <div class="form-group">
-        <label for="name">그룹명</label>
-        <input type="text" class="form-control" id="name" placeholder="그룹명을 입력하세요.">
-    </div>
-    <div class="container">
+<div class="title">가입하려는 그룹을 검색해주세요</div>
+<form id="form-group-join-member">
+    <div id="group_join_member_wrapper">
+        <input type="text" class="form-control" id="name" placeholder="그룹 이름을 입력해주세요">
+        <div class="invalid-feedback">검색결과가 없어요</div>
+        <div class="box">
+        </div>
     </div>
 </form>
 

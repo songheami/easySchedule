@@ -1,13 +1,16 @@
 {{>layout/header}}
 
+<div class="title">새로운 그룹을 만들어보아요</div>
 <form id="form-create-group">
-    <div class="form-group">
-        <label for="name">그룹명</label>
-        <input type="text" class="form-control" id="name" placeholder="그룹명을 입력하세요." required>
-        <div class="valid-feedback">사용 가능합니다.</div>
-        <div class="invalid-feedback">이미 존재하는 그룹명입니다.</div>
+    <div id="group_create_wrapper">
+        <input type="text" class="form-control" id="name" placeholder="그룹 이름을 입력해주세요" required>
+        <div class="valid-feedback">사용 가능해요</div>
+        <div class="invalid-feedback">이미 존재하는 이름이에요</div>
     </div>
-    <button type="button" class="btn btn-outline-light" id="btn-create-group" disabled>등록</button>
+    </div>
 </form>
+<div class="group_create_button">
+    <button type="button" class="btn btn-outline-light" id="btn-group-create">등록</button>
+</div>
 
 {{>layout/footer}}

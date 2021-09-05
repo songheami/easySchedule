@@ -205,6 +205,7 @@
   text-overflow: ellipsis;
   padding-left: 3px;
   font-weight: bold;
+  font-size: 1.2rem;
 }
 .tui-full-calendar-weekday-schedule-title-focused {
   padding-left: 16px;
@@ -301,12 +302,11 @@
   position: relative;
   height: 100%;
 }
-. {
-  font-size: 26px;
+.tui-full-calendar-dayname-date {
+  font-size: 1.5rem;
 }
 .tui-full-calendar-dayname-name {
-  font-weight: bold;
-  font-size: 12px;
+  font-size: 1rem;
 }
 .tui-full-calendar-daygrid-layout {
   height: 100%;
@@ -352,6 +352,7 @@
   right: 5px;
   text-align: right;
   line-height: 25px;
+  font-size: 1.2rem;
 }
 .tui-full-calendar-timegrid-right {
   position: relative;
@@ -442,7 +443,7 @@
   border-right: none;
   margin: 0;
 }
-.tui-full-calendar-time-date:last-child .tui-full-calendar-time-schedule,
+.tui-full-calendar-time-date:last-child ,
 .tui-full-calendar-time-date:last-child .tui-full-calendar-time-guide-creation {
   left: 0px;
 }
@@ -476,7 +477,7 @@
   left: 1px;
   height: 100%;
   overflow: hidden;
-  font-size: 12px;
+  font-size: 1.5rem;
   font-weight: bold;
 }
 .tui-full-calendar-time-schedule-content {

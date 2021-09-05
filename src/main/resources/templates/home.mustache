@@ -1,11 +1,18 @@
 {{>layout/header}}
 
-<div class="title">내 그룹</div>
+<div class="title">그룹을 선택해주세요</div>
 <div id="home_wrapper">
 {{#groups}}
-    <div><a href="/schedule?groupId={{groupId}}&roleId={{roleId}}">{{groups.name}}<br>{{role.name}}</a></div>
+    <div class="box">
+        <a href="/schedule?groupId={{groupId}}&roleId={{roleId}}">
+            <b>{{groups.name}}</b>
+            <p>{{role.name}}</p>
+        </a>
+    </div>
 {{/groups}}
-    <div><a href="/group"><i class="fas fa-plus"></i></a></div>
+    <div class="box">
+        <a href="/group"><i class="fas fa-plus"></i></a>
+    </div>
 </div>
 
 {{>layout/footer}}
