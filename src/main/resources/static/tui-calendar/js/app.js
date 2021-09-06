@@ -184,6 +184,18 @@
         setSchedules();
     }
 
+    /**
+     * A listener for click the staff
+     * @param {Event} e - click event
+     */
+    function onClickStaff(e) {
+        var target = $(e.target).closest('a[role="staffItem"]')[0];
+        var action = getDataAction(target);
+        var $staffName = $("#staffName");
+        $staffName.val(action);
+        $staffName.text(e.target.text);
+    }
+
     function onClickNavi(e) {
         var action = getDataAction(e.target);
 
@@ -476,7 +488,7 @@
 
     function onSaveSchedule() {
         var data = {
-            staffId: CalendarList[0].id,
+            staffId: $("#newScheduleModal #staffName").val(),
             title: $("#newScheduleModal #title").val(),
             startTime: $("#newScheduleModal #startTime").val(),
             endTime: $("#newScheduleModal #endTime").val()
@@ -506,6 +518,7 @@
         $('#dropdownMenu-calendars-list').on('click', onChangeNewScheduleCalendar);
 
         $("#btn-insert-schedule").on('click', onSaveSchedule);
+        $('.dropdown-menu a[role="staffItem"]').on('click', onClickStaff);
 
         window.addEventListener('resize', resizeThrottled);
     }

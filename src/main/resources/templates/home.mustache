@@ -2,14 +2,14 @@
 
 <div class="title">그룹을 선택해주세요</div>
 <div id="home_wrapper">
-{{#groups}}
+{{#userGroups}}
     <div class="box">
         <a href="/schedule?groupId={{groupId}}&roleId={{roleId}}">
             <b>{{groups.name}}</b>
             <p>{{role.name}}</p>
         </a>
     </div>
-{{/groups}}
+{{/userGroups}}
     <div class="box">
         <a href="/group"><i class="fas fa-plus"></i></a>
     </div>

@@ -116,25 +116,26 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="input-group input-group-lg" >
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">제목</span>
-                            </div>
-                            <input class="form-control" type="text" id="title" name="title"/>
+                        <span class="dropdown">
+                            <button id="dropdownMenuStaff" class="btn btn-lg dropdown-toggle" type="button" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="true">
+                                <span id="staffName">스태프</span>
+                            </button>
+                            <ul class="dropdown-menu" role="staff "aria-labelledby="dropdownMenuStaff">
+                                {{#staffList}}
+                                <li role="presentation">
+                                    <a class="dropdown-menu-title" role="staffItem" data-action="{{user.userId}}">{{user.name}}</a>
+                                </li>
+                                {{/staffList}}
+                            </ul>
+                        </span>
+                        <div class="input-group input-group-lg">
+                            <input class="form-control" type="text" id="title" name="title" placeholder="제목을 입력해주세요"/>
                         </div>
                         <div class="input-group input-group-lg">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">시작</span>
-                            </div>
-                            <input class="form-control" type="text" id="startTime" name="startTime"
-                                   placeholder="0000-00-00 00:00"/>
-                        </div>
-                        <div class="input-group input-group-lg">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">종료</span>
-                            </div>
-                            <input class="form-control" type="text" id="endTime" name="endTime"
-                                   placeholder="0000-00-00 00:00"/>
+                            <input class="form-control" type="text" id="startTime" name="startTime" placeholder="0000-00-00 00:00"/>
+                            <p class="time-between">~</p>
+                            <input class="form-control" type="text" id="endTime" name="endTime" placeholder="0000-00-00 00:00"/>
                         </div>
                     </div>
                     <div class="modal-footer">

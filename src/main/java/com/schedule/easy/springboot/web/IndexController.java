@@ -21,7 +21,7 @@ public class IndexController {
     public String index(@LoginUser SessionUser user, Model model) {
         if (user != null) {
             List<UserGroupResponseDto> userGroupResponseDtoList = userGroupService.findByUserId(user.getUserId());
-            model.addAttribute("groups", userGroupResponseDtoList);
+            model.addAttribute("userGroups", userGroupResponseDtoList);
             return "home";
         }
         return "index";

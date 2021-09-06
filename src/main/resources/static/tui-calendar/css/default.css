@@ -270,9 +270,26 @@ body {
   font-size: 1.5rem;
 }
 
+#newScheduleModal .modal-body{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
 #newScheduleModal .btn-primary {
     background-color: #ff6618;
 }
-#newScheduleModal .dropdown-menu .dropdown-menu-title{
-  margin-left: 20px;
+#newScheduleModal .dropdown-menu {
+  background-color: #fff;
+  color: #333;
+  margin: 5px 0;
+  font-size: 1.2rem;
+}
+#newScheduleModal .dropdown-menu > li {
+  padding: 5px 0;
+}
+#newScheduleModal .time-between {
+  line-height: 48px;
+  padding: 5px;
+  color: #333;
+  font-size: 1rem;
 }
