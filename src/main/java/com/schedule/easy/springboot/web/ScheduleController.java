@@ -41,20 +41,10 @@ public class ScheduleController {
         boolean groupOwnerYn = userGroup.getRoleId().equals(1L);
         if (groupOwnerYn) {
             model.addAttribute("groupOwner", true);
-            List<UserGroupResponseDto> staffList = userGroupService.findStaffListWithGroupId(userGroup.getGroupId());
-            model.addAttribute("staffList", staffList);
-            List<OpertimeResponseDto> opertimeResponseDtoList = new ArrayList<>();
-            for (UserGroupResponseDto staff : staffList) {
-                List<OpertimeResponseDto> tmp = opertimeService.findListByKey(groupId, staff.getUserId());
-                tmp.forEach(opertimeResponseDto -> opertimeResponseDtoList.add(opertimeResponseDto));
-            }
-            model.addAttribute("opertimeList", opertimeResponseDtoList);
+            model.addAttribute("staffList", userGroupService.findStaffListWithGroupId(userGroup.getGroupId()));
         } else {
             model.addAttribute("groupOwner", false);
             model.addAttribute("staffList", userGroup);
-            List<OpertimeResponseDto> opertimeResponseDtoList = opertimeService.findListByKey(groupId, userGroup.getUserId());
-            opertimeResponseDtoList.forEach(opertimeResponseDto -> opertimeResponseDtoList.add(opertimeResponseDto));
-            model.addAttribute("opertimeList", opertimeResponseDtoList);
         }
 
         return "schedule";
