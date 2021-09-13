@@ -62,4 +62,10 @@ function hexToRGBA(hex) {
         $this.find("span:nth-child(2)").css('border-color',CalendarStyleList[index].bgColor);
         addCalendar(calendar);
     });
+    var calendar = new CalendarInfo();
+    calendar.id = String(-1);
+    calendar.color = "#bbb";
+    calendar.bgColor = "#bbb";
+    calendar.dragBgColor = "#bbb";
+    addCalendar(calendar);
 })();

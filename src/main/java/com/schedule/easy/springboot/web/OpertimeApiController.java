@@ -19,7 +19,8 @@ public class OpertimeApiController {
     private final OpertimeService opertimeService;
 
     @GetMapping("/api/v1/opertime")
-    public List<OpertimeResponseDto> findListByKey(@LoginUser SessionUser user, @RequestParam(value="staffIdList[]") List<Long> staffIdList) {
+    public List<OpertimeResponseDto> findListByKey(@LoginUser SessionUser user,
+                                                   @RequestParam(value="staffIdList[]") List<Long> staffIdList) {
         List<OpertimeResponseDto> opertimeResponseDtoList = new ArrayList<>();
         for (Long staffId : staffIdList) {
             opertimeResponseDtoList.addAll(opertimeService.findListByKey(staffId, user.getUserGroup().getGroupId()));

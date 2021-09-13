@@ -447,7 +447,22 @@
         renderRange.innerHTML = html.join('');
     }
 
+    function makeBlock(data) {
+        var schedule = new ScheduleInfo();
+        var calendar = findCalendar("-1");
+        schedule.id = String(data.opertimeId);
+        schedule.calendarId = String(data.userId);
+        schedule.start = moment(data.startTime).toDate();
+        schedule.end = moment(data.endTime).toDate();
+        schedule.color = calendar.color;
+        schedule.bgColor = calendar.bgColor;
+        schedule.category = "time";
+        ScheduleList.push(schedule);
+    }
+
     function setSchedules() {
+        cal.clear();
+
         let staffIdList = [];
         CalendarList.forEach(function(calendar) {
             staffIdList.push(Number(calendar.id));
@@ -457,14 +472,12 @@
             type: 'GET',
             url: '/api/v1/schedule',
             dataType: 'json',
-            contentType:'application/json;',
             data: {
-                staffIdList: staffIdList,
-                searchStartTime: dateToString(cal.getDateRangeStart().toDate()),
-                searchEndTime: dateToString(cal.getDateRangeEnd().toDate())
+                "staffIdList": staffIdList,
+                "searchStartTime": dateToString(cal.getDateRangeStart().toDate()),
+                "searchEndTime": dateToString(cal.getDateRangeEnd().toDate())
             }
         }).done(function(result) {
-            cal.clear();
             ScheduleList=[];
             result.forEach(function(data) {
                 var schedule = new ScheduleInfo();
@@ -480,10 +493,53 @@
                 ScheduleList.push(schedule);
             });
             cal.createSchedules(ScheduleList);
-            refreshScheduleVisibility();
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
+
+        $.ajax({
+            type: 'GET',
+            url: '/api/v1/opertime',
+            dataType: 'json',
+            data: {
+                "staffIdList": staffIdList
+            }
+        }).done(function(result) {
+            ScheduleList=[];
+            let date = new Date(cal.getDateRangeStart()._date);
+            switch (cal.getViewName()) {
+            case 'week':
+                result.forEach(function(data) {
+                    for (let i=0; i<7; i++) {
+                        date.setDate(date.getDate()+1);
+                        date.setHours(data.startTime.substr(0,2));
+                        date.setMinutes(data.startTime.substr(3,2));
+                        data.startTime = date;
+                        date.setHours(data.endTime.substr(0,2));
+                        date.setMinutes(data.endTime.substr(3,2));
+                        data.endTime = date;
+                        makeBlock(makeBlock);
+                    });
+                }
+                break;
+            case 'day':
+                result.forEach(function(data) {
+                    date.setHours(data.startTime.substr(0,2));
+                    date.setMinutes(data.startTime.substr(3,2));
+                    data.startTime = date;
+                    date.setHours(data.endTime.substr(0,2));
+                    date.setMinutes(data.endTime.substr(3,2));
+                    data.endTime = date;
+                    makeBlock(makeBlock);
+                });
+                break;
+            }
+            cal.createSchedules(ScheduleList);
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+
+        refreshScheduleVisibility();
     }
 
     function onSaveSchedule() {
