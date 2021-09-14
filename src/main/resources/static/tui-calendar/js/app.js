@@ -452,8 +452,8 @@
         var calendar = findCalendar("-1");
         schedule.id = String(data.opertimeId);
         schedule.calendarId = String(data.userId);
-        schedule.start = moment(data.startTime).toDate();
-        schedule.end = moment(data.endTime).toDate();
+        schedule.start = data.startDate;
+        schedule.end = data.endDate;
         schedule.color = calendar.color;
         schedule.bgColor = calendar.bgColor;
         schedule.category = "time";
@@ -506,31 +506,37 @@
             }
         }).done(function(result) {
             ScheduleList=[];
-            let date = new Date(cal.getDateRangeStart()._date);
             switch (cal.getViewName()) {
             case 'week':
                 result.forEach(function(data) {
+                    let date = new Date(cal.getDateRangeStart()._date);
                     for (let i=0; i<7; i++) {
-                        date.setDate(date.getDate()+1);
+                        date.setDate(date.getDate()+i);
+                        let dayCode = Number(data.dayCode)+1>6?0:Number(data.dayCode)+1;
+                        if (dayCode != i) continue;
                         date.setHours(data.startTime.substr(0,2));
                         date.setMinutes(data.startTime.substr(3,2));
-                        data.startTime = date;
+                        data.startDate = moment(date).toDate();
                         date.setHours(data.endTime.substr(0,2));
                         date.setMinutes(data.endTime.substr(3,2));
-                        data.endTime = date;
-                        makeBlock(makeBlock);
-                    });
-                }
+                        data.endDate = moment(date).toDate();
+                        makeBlock(data);
+                    }
+                });
                 break;
             case 'day':
                 result.forEach(function(data) {
-                    date.setHours(data.startTime.substr(0,2));
-                    date.setMinutes(data.startTime.substr(3,2));
-                    data.startTime = date;
-                    date.setHours(data.endTime.substr(0,2));
-                    date.setMinutes(data.endTime.substr(3,2));
-                    data.endTime = date;
-                    makeBlock(makeBlock);
+                    let dayCode = new Date(cal.getDateRangeStart()).getDay();
+                    if (dayCode == data.dayCode) {
+                        let date = new Date(cal.getDateRangeStart()._date);
+                        date.setHours(data.startTime.substr(0,2));
+                        date.setMinutes(data.startTime.substr(3,2));
+                        data.startDate = date;
+                        date.setHours(data.endTime.substr(0,2));
+                        date.setMinutes(data.endTime.substr(3,2));
+                        data.endDate = date;
+                        makeBlock(data);
+                    }
                 });
                 break;
             }
