@@ -447,13 +447,29 @@
         renderRange.innerHTML = html.join('');
     }
 
-    function makeBlock(data) {
+    function makeBlock(opTimeList, day) {
+        let date = new Date(cal.getDateRangeStart()._date);
+        if (day) date.setDate(date.getDate()+day);
+        let blockStartDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0);
+        let blockEndDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 23, 59);
+        for (let i=0; i<opTimeList.length; i++) {
+            let startTime = opTimeList[i].startTime;
+            let startDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(),
+                startTime.substr(0,2), startTime.substr(3,2)-1);
+            makeBlockSchedule(blockStartDate, startDate);
+            let endTime = opTimeList[i].endTime;
+            let endDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(),
+                endTime.substr(0,2), endTime.substr(3,2));
+            blockStartDate = endDate;
+        } makeBlockSchedule(blockStartDate, blockEndDate);
+    }
+
+    function makeBlockSchedule(startDate, endDate) {
         var schedule = new ScheduleInfo();
         var calendar = findCalendar("-1");
-        schedule.id = String(data.opertimeId);
-        schedule.calendarId = String(data.userId);
-        schedule.start = data.startDate;
-        schedule.end = data.endDate;
+        schedule.calendarId = calendar.id;
+        schedule.start = startDate;
+        schedule.end = endDate;
         schedule.color = calendar.color;
         schedule.bgColor = calendar.bgColor;
         schedule.category = "time";
@@ -508,36 +524,19 @@
             ScheduleList=[];
             switch (cal.getViewName()) {
             case 'week':
-                result.forEach(function(data) {
-                    let date = new Date(cal.getDateRangeStart()._date);
-                    for (let i=0; i<7; i++) {
-                        date.setDate(date.getDate()+i);
+                for (let i=0; i<7; i++) {
+                    let opTimeList = [];
+                    result.forEach(function(data) {
                         let dayCode = Number(data.dayCode)+1>6?0:Number(data.dayCode)+1;
-                        if (dayCode != i) continue;
-                        date.setHours(data.startTime.substr(0,2));
-                        date.setMinutes(data.startTime.substr(3,2));
-                        data.startDate = moment(date).toDate();
-                        date.setHours(data.endTime.substr(0,2));
-                        date.setMinutes(data.endTime.substr(3,2));
-                        data.endDate = moment(date).toDate();
-                        makeBlock(data);
-                    }
-                });
+                        if (dayCode == i) {
+                            opTimeList.push(data);
+                        }
+                    });
+                    makeBlock(opTimeList, i);
+                }
                 break;
             case 'day':
-                result.forEach(function(data) {
-                    let dayCode = new Date(cal.getDateRangeStart()).getDay();
-                    if (dayCode == data.dayCode) {
-                        let date = new Date(cal.getDateRangeStart()._date);
-                        date.setHours(data.startTime.substr(0,2));
-                        date.setMinutes(data.startTime.substr(3,2));
-                        data.startDate = date;
-                        date.setHours(data.endTime.substr(0,2));
-                        date.setMinutes(data.endTime.substr(3,2));
-                        data.endDate = date;
-                        makeBlock(data);
-                    }
-                });
+                makeBlock(result);
                 break;
             }
             cal.createSchedules(ScheduleList);

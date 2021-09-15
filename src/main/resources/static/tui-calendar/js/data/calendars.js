@@ -66,7 +66,7 @@ function hexToRGBA(hex) {
     calendar.id = String(-1);
     calendar.color = "#bbb";
     calendar.bgColor = "#bbb";
-    calendar.borderColor = "#bbb";
     calendar.dragBgColor = "#bbb";
+    calendar.borderColor = "#bbb";
     addCalendar(calendar);
 })();
