@@ -1,6 +1,7 @@
 package com.schedule.easy.springboot.domain.schedule;
 
 import com.schedule.easy.springboot.domain.BaseTimeEntity;
+import com.schedule.easy.springboot.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -51,5 +52,15 @@ public class Schedule extends BaseTimeEntity {
         this.title = title;
         this.startTime = startTime;
         this.endTime = endTime;
+    }
+
+    public Schedule update(String statCode, Long staffId, String title,
+                           String startTime, String endTime) {
+        this.statCode = statCode;
+        this.staffId = staffId;
+        this.title = title;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        return this;
     }
 }

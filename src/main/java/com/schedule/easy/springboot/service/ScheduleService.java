@@ -31,6 +31,10 @@ public class ScheduleService {
 
     @Transactional
     public Long save(@RequestBody ScheduleRequestDto requestDto) {
+        Schedule schedule = scheduleRepository.findById(requestDto.getScheduleId())
+                .map(entity -> entity.update(requestDto.getStatCode(), requestDto.getStaffId(), requestDto.getTitle(),
+                        requestDto.getStartTime(), requestDto.getEndTime()))
+                .orElse(requestDto.toEntity());
         return scheduleRepository.save(requestDto.toEntity()).getScheduleId();
     }
 }

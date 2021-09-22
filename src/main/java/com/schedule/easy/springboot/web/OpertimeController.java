@@ -33,25 +33,25 @@ public class OpertimeController {
         for (OpertimeResponseDto opertimeResponseDto : opertimeResponseDtoList) {
             switch (opertimeResponseDto.getDayCode().toString()) {
                 case "0":
-                    monOpertimeList.add(opertimeResponseDto);
+                    sunOpertimeList.add(opertimeResponseDto);
                     break;
                 case "1":
-                    tueOpertimeList.add(opertimeResponseDto);
+                    monOpertimeList.add(opertimeResponseDto);
                     break;
                 case "2":
-                    wedOpertimeList.add(opertimeResponseDto);
+                    tueOpertimeList.add(opertimeResponseDto);
                     break;
                 case "3":
-                    thuOpertimeList.add(opertimeResponseDto);
+                    wedOpertimeList.add(opertimeResponseDto);
                     break;
                 case "4":
-                    friOpertimeList.add(opertimeResponseDto);
+                    thuOpertimeList.add(opertimeResponseDto);
                     break;
                 case "5":
-                    satOpertimeList.add(opertimeResponseDto);
+                    friOpertimeList.add(opertimeResponseDto);
                     break;
                 case "6":
-                    sunOpertimeList.add(opertimeResponseDto);
+                    satOpertimeList.add(opertimeResponseDto);
                     break;
             }
         }

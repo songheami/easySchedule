@@ -1,0 +1,24 @@
+{{>layout/header}}
+
+<div class="title">내 정보를 확인해주세요.</div>
+{{#user}}
+<form id="form-mypage">
+    <div class="mb-3">
+        <label for="name" class="form-label">이름</label>
+        <input type="text" class="form-control" name="name" id="name" {{#name}}value="{{name}}"{{/name}}>
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">이메일</label>
+        <input type="email" class="form-control" name="email" id="email" {{#email}}value="{{email}}"{{/email}}>
+    </div>
+    <div class="mb-3">
+        <label for="phone" class="form-label">번호</label>
+        <input type="text" class="form-control" name="phone" id="phone" {{#phone}}value="{{phone}}"{{/phone}}>
+    </div>
+</form>
+<div class="mypage_button">
+    <button type="button" class="btn btn-outline-light" id="btn-update-mypage">저장</button>
+</div>
+{{/user}}
+
+{{>layout/footer}}

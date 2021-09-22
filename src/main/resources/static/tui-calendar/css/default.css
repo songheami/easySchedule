@@ -6,6 +6,9 @@ body {
   background-color: #343a40;
   color: #bbb;
 }
+.navbar {
+  font-size: 1.5rem;
+}
 
 /**  custom bootstrap - start */
 .btn {
@@ -270,24 +273,24 @@ body {
   font-size: 1.5rem;
 }
 
-#newScheduleModal .modal-body{
+#scheduleModal .modal-body{
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
-#newScheduleModal .btn-primary {
+#scheduleModal .btn-primary {
     background-color: #ff6618;
 }
-#newScheduleModal .dropdown-menu {
+#scheduleModal .dropdown-menu {
   background-color: #fff;
   color: #333;
   margin: 5px 0;
   font-size: 1.2rem;
 }
-#newScheduleModal .dropdown-menu > li {
+#scheduleModal .dropdown-menu > li {
   padding: 5px 0;
 }
-#newScheduleModal .time-between {
+#scheduleModal .time-between {
   line-height: 48px;
   padding: 5px;
   color: #333;

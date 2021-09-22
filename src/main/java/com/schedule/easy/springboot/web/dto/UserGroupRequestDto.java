@@ -1,10 +1,10 @@
 package com.schedule.easy.springboot.web.dto;
 
 import com.schedule.easy.springboot.domain.userGroup.UserGroup;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Getter
+@Data
 @NoArgsConstructor
 public class UserGroupRequestDto {
     private Long userId;

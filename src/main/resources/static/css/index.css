@@ -6,6 +6,9 @@ body {
     background-color: #343a40;
     color: #bbb;
 }
+.navbar {
+  font-size: 1.5rem;
+}
 
 div.title {
     font-size: 2.5rem;
@@ -54,6 +57,23 @@ div#index_wrapper .naver-logo {
 div#index_wrapper .naver-logo a {
     color: #fff;
     font-family: 'Arial Black';
+}
+
+#form-mypage {
+    margin: auto 10vh;
+    font-size: 2rem;
+}
+#form-mypage input{
+    font-size: 2rem;
+}
+div.mypage_button {
+    float: right;
+    margin: 10vh 5vh;
+}
+div.mypage_button button {
+    width: 100px;
+    height: 60px;
+    font-size: 2rem;
 }
 
 div#home_wrapper {
