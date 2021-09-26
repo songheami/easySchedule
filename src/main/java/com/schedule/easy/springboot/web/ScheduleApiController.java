@@ -28,7 +28,6 @@ public class ScheduleApiController {
     @PostMapping("/api/v1/schedule")
     public Long save(@LoginUser SessionUser user, @RequestBody ScheduleRequestDto requestDto) {
         requestDto.setMemberId(user.getUserId());
-        requestDto.setStatCode("EASY0011");
         return scheduleService.save(requestDto);
     }
 }

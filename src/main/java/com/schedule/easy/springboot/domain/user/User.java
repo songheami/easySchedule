@@ -33,6 +33,9 @@ public class User extends BaseTimeEntity implements Serializable  {
     private String email;
 
     @Column
+    private String phone;
+
+    @Column
     private String picture;
 
     @Enumerated(EnumType.STRING)
@@ -40,7 +43,7 @@ public class User extends BaseTimeEntity implements Serializable  {
     private Role role;
 
     @Builder
-    public User(String name, String email, String picture, Role role) {
+    public User(Long userId, String name, String email, String phone, String picture, Role role) {
         this.name = name;
         this.email = email;
         this.picture = picture;
@@ -50,7 +53,13 @@ public class User extends BaseTimeEntity implements Serializable  {
     public User update(String name, String picture) {
         this.name = name;
         this.picture = picture;
+        return this;
+    }
 
+    public User update(String name, String email, String phone) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
         return this;
     }
 

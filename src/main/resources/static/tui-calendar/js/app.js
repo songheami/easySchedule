@@ -10,6 +10,7 @@
     var useCreationPopup = false;
     var useDetailPopup = false;
     var datePicker, selectedCalendar;
+    var finalOpTimeList = [];
 
     cal = new Calendar('#calendar', {
         defaultView: 'week',
@@ -37,16 +38,20 @@
             console.log('clickMore', e);
         },
         'clickSchedule': function(e) {
-            console.log('clickSchedule', e);
+            // block time 선택 X
+            if (e.schedule.calendarId == -1) return;
+            // 스케줄 선택
             showSchedulePopUp("old", e);
         },
         'clickDayname': function(date) {
             console.log('clickDayname', date);
         },
         'beforeCreateSchedule': function(e) {
-            console.log('beforeCreateSchedule', e);
-            //saveNewSchedule(e);
-            showSchedulePopUp("new", e);
+            if (checkTimeValidity(e.start, e.end)) {
+                showSchedulePopUp("new", e);
+            } else {
+                alert("선택한 시간에 예약이 불가합니다.");
+            }
         },
         'beforeUpdateSchedule': function(e) {
             var schedule = e.schedule;
@@ -89,6 +94,23 @@
         }
     });
 
+    /** 운영 가능한 시간 확인 */
+    function checkTimeValidity (startDate, endDate) {
+        for (let i=0; i<finalOpTimeList.length; i++) {
+            if (finalOpTimeList[i].dayCode==startDate.getDay() && finalOpTimeList[i].dayCode==endDate.getDay()) {
+                let startTime = startDate.getHours()*100+startDate.getMinutes();
+                let endTime = endDate.getHours()*100+endDate.getMinutes();
+                let opStartTime = Number(finalOpTimeList[i].startTime.replace(":",""));
+                let opEndTime = Number(finalOpTimeList[i].endTime.replace(":",""));
+                if (opStartTime<=startTime&&startTime<opEndTime
+                    && opStartTime<=endTime&&endTime<opEndTime) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     /**
      * Get time template for time and all-day
      * @param {Schedule} schedule - schedule
@@ -130,8 +152,6 @@
         var options = cal.getOptions();
         var viewName = '';
 
-        console.log(target);
-        console.log(action);
         switch (action) {
             case 'toggle-daily':
                 viewName = 'day';
@@ -217,40 +237,6 @@
         setSchedules();
     }
 
-    function onNewSchedule() {
-        var title = $('#new-schedule-title').val();
-        var location = $('#new-schedule-location').val();
-        var isAllDay = document.getElementById('new-schedule-allday').checked;
-        var start = datePicker.getStartDate();
-        var end = datePicker.getEndDate();
-        var calendar = selectedCalendar ? selectedCalendar : CalendarList[0];
-
-        if (!title) {
-            return;
-        }
-
-        cal.createSchedules([{
-            id: String(chance.guid()),
-            calendarId: calendar.id,
-            title: title,
-            isAllDay: isAllDay,
-            start: start,
-            end: end,
-            category: isAllDay ? 'allday' : 'time',
-            dueDateClass: '',
-            color: calendar.color,
-            bgColor: calendar.bgColor,
-            dragBgColor: calendar.bgColor,
-            borderColor: calendar.borderColor,
-            raw: {
-                location: location
-            },
-            state: 'Busy'
-        }]);
-
-        $('#modal-new-schedule').modal('hide');
-    }
-
     function onChangeNewScheduleCalendar(e) {
         var target = $(e.target).closest('a[role="menuitem"]')[0];
         var calendarId = getDataAction(target);
@@ -315,22 +301,32 @@
 
     function showSchedulePopUp(psStatus, e) {
         if (psStatus == "old") {
-            $("#newScheduleModal #newScheduleModalTitle").text("스케줄 변경하기");
-            $("#newScheduleModal #title").val(e.schedule.title);
-            $("#newScheduleModal #startTime").val(dateToString(e.schedule.start));
-            $("#newScheduleModal #endTime").val(dateToString(e.schedule.end));
+            $("#scheduleModal #scheduleModalTitle").text("스케줄 변경하기");
+            $("#scheduleModal #scheduleId").val(e.schedule.id);
+            $("#scheduleModal #staffName").val(e.schedule.calendarId);
+            $("#scheduleModal #title").val(e.schedule.title);
+            $("#scheduleModal #startTime").val(dateToString(e.schedule.start));
+            $("#scheduleModal #endTime").val(dateToString(e.schedule.end));
+            $("#btn-cancel-schedule").show();
         } else if (psStatus == "new") {
-            $("#newScheduleModal #newScheduleModalTitle").text("스케줄 새로 만들기");
-            $("#newScheduleModal #title").val("");
-            $("#newScheduleModal #startTime").val(dateToString(e.start.toDate()));
-            $("#newScheduleModal #endTime").val(dateToString(e.end.toDate()));
+            $("#scheduleModal #scheduleModalTitle").text("스케줄 새로 만들기");
+            $("#scheduleModal #scheduleId").val("");
+            $("#scheduleModal #staffName").val("");
+            $("#scheduleModal #title").val("");
+            $("#scheduleModal #startTime").val(dateToString(e.start.toDate()));
+            $("#scheduleModal #endTime").val(dateToString(e.end.toDate()));
+            $("#btn-cancel-schedule").hide();
         } else {
-            $("#newScheduleModal #newScheduleModalTitle").text("스케줄 새로 만들기");
-            $("#newScheduleModal #title").val("");
-            $("#newScheduleModal #startTime").val("");
-            $("#newScheduleModal #endTime").val("");
+            $("#scheduleModal #scheduleModalTitle").text("스케줄 새로 만들기");
+            $("#scheduleModal #scheduleId").val("");
+            $("#scheduleModal #staffName").val("");
+            $("#scheduleModal #title").val("");
+            $("#scheduleModal #startTime").val("");
+            $("#scheduleModal #endTime").val("");
+            $("#btn-cancel-schedule").hide();
         }
-        $('#newScheduleModal').modal('show');
+
+        $('#scheduleModal').modal('show');
     }
 
     function dateToString(date) {
@@ -447,7 +443,39 @@
         renderRange.innerHTML = html.join('');
     }
 
+    function makeBlock(opTimeList, day) {
+        let date = new Date(cal.getDateRangeStart()._date);
+        if (day) date.setDate(date.getDate()+day);
+        let blockStartDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0);
+        let blockEndDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 23, 59);
+        for (let i=0; i<opTimeList.length; i++) {
+            let startTime = opTimeList[i].startTime;
+            let startDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(),
+                startTime.substr(0,2), startTime.substr(3,2)-1);
+            makeBlockSchedule(blockStartDate, startDate);
+            let endTime = opTimeList[i].endTime;
+            let endDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(),
+                endTime.substr(0,2), endTime.substr(3,2));
+            blockStartDate = endDate;
+        }
+        makeBlockSchedule(blockStartDate, blockEndDate);
+    }
+
+    function makeBlockSchedule(startDate, endDate) {
+        var schedule = new ScheduleInfo();
+        var calendar = findCalendar("-1");
+        schedule.calendarId = calendar.id;
+        schedule.start = startDate;
+        schedule.end = endDate;
+        schedule.color = calendar.color;
+        schedule.bgColor = calendar.bgColor;
+        schedule.category = "time";
+        ScheduleList.push(schedule);
+    }
+
     function setSchedules() {
+        cal.clear();
+
         let staffIdList = [];
         CalendarList.forEach(function(calendar) {
             staffIdList.push(Number(calendar.id));
@@ -457,14 +485,12 @@
             type: 'GET',
             url: '/api/v1/schedule',
             dataType: 'json',
-            contentType:'application/json;',
             data: {
-                staffIdList: staffIdList,
-                searchStartTime: dateToString(cal.getDateRangeStart().toDate()),
-                searchEndTime: dateToString(cal.getDateRangeEnd().toDate())
+                "staffIdList": staffIdList,
+                "searchStartTime": dateToString(cal.getDateRangeStart().toDate()),
+                "searchEndTime": dateToString(cal.getDateRangeEnd().toDate())
             }
         }).done(function(result) {
-            cal.clear();
             ScheduleList=[];
             result.forEach(function(data) {
                 var schedule = new ScheduleInfo();
@@ -480,19 +506,69 @@
                 ScheduleList.push(schedule);
             });
             cal.createSchedules(ScheduleList);
-            refreshScheduleVisibility();
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
+
+        $.ajax({
+            type: 'GET',
+            url: '/api/v1/opertime',
+            dataType: 'json',
+            data: {
+                "staffIdList": staffIdList
+            }
+        }).done(function(result) {
+            /* 현재 뷰에 따라 스케줄 불가한 시간 표시 */
+            ScheduleList=[]; finalOpTimeList=[];
+            let dayCodeList=[];
+            switch (cal.getViewName()) {
+            case 'week':
+                dayCodeList = [0,1,2,3,4,5,6];
+                break;
+            case 'day':
+                dayCodeList = [cal.getDateRangeStart().getDay()];
+                break;
+            }
+            for (let i=0; i<dayCodeList.length; i++) {
+                let opTimeList = [];
+                let beforeDayCode, beforeEndTime;
+                result.forEach(function(data, index) {
+                    if (beforeDayCode==data.dayCode && beforeEndTime==data.startTime) {
+                        finalOpTimeList[finalOpTimeList.length-1].endTime = data.endTime;
+                    } else {
+                        finalOpTimeList.push(data);
+                    }
+                    if (data.dayCode == i) {
+                        opTimeList.push(data);
+                    }
+                });
+                makeBlock(opTimeList, i);
+            }
+            cal.createSchedules(ScheduleList);
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+
+        refreshScheduleVisibility();
     }
 
-    function onSaveSchedule() {
+    function onSaveSchedule(psStatus) {
+        if (psStatus.target.id.indexOf("cancel")!==-1&&!confirm("정말 취소하시겠습니까?")) return;
+
+        if (!checkTimeValidity(new Date($("#scheduleModal #startTime").val()),
+            new Date($("#scheduleModal #endTime").val()))) {
+            alert("입력한 시간에 예약이 불가합니다.");
+            return;
+        }
         var data = {
-            staffId: $("#newScheduleModal #staffName").val(),
-            title: $("#newScheduleModal #title").val(),
-            startTime: $("#newScheduleModal #startTime").val(),
-            endTime: $("#newScheduleModal #endTime").val()
+            statCode: psStatus.target.id.indexOf("save")!==-1?"EASY00101":"EASY00103",
+            scheduleId: $("#scheduleModal #scheduleId").val(),
+            staffId: $("#scheduleModal #staffName").val(),
+            title: $("#scheduleModal #title").val(),
+            startTime: $("#scheduleModal #startTime").val(),
+            endTime: $("#scheduleModal #endTime").val()
         };
+
         $.ajax({
             type: 'POST',
             url: '/api/v1/schedule',
@@ -500,7 +576,7 @@
             contentType:'application/json;',
             data: JSON.stringify(data)
         }).done(function(result) {
-            $('#newScheduleModal').modal('hide');
+            $('#scheduleModal').modal('hide');
             setSchedules();
         }).fail(function (error) {
             alert(JSON.stringify(error));
@@ -512,12 +588,12 @@
         $('.dropdown-menu a[role="menuitem"]').on('click', onClickMenu);
         $('#lnb-calendars').on('change', onChangeCalendars);
 
-        $('#btn-save-schedule').on('click', onNewSchedule);
         $('#btn-new-schedule').on('click', showSchedulePopUp);
+        $("#btn-cancel-schedule").on('click', onSaveSchedule);
+        $("#btn-update-schedule").on('click', onSaveSchedule);
 
         $('#dropdownMenu-calendars-list').on('click', onChangeNewScheduleCalendar);
 
-        $("#btn-insert-schedule").on('click', onSaveSchedule);
         $('.dropdown-menu a[role="staffItem"]').on('click', onClickStaff);
 
         window.addEventListener('resize', resizeThrottled);
@@ -542,19 +618,39 @@
     window.onresize = function(event) {
         if (screen.width >= 768) {
             cal.changeView('week', true);
+            $("#calendarTypeName").text("Weekly");
         } else {
             cal.changeView('day', true);
+            $("#calendarTypeName").text("Daily");
         }
     };
+
+    // 시간 입력 포맷
+    $('#scheduleModal input[name$="Time"]').on('input', function(){
+        var thisVal = $(this).val().replace(/\s|\D/g, '');
+        thisVal = thisVal.substr(0,12);
+        if (thisVal.length<=4) {
+            thisVal = thisVal.replace(/(\d{4})/gi, '$1');
+        } else if (thisVal.length<=6) {
+            thisVal = thisVal.replace(/(\d{4})(\d{1})/gi, '$1-$2');
+        } else if (thisVal.length<=8) {
+            thisVal = thisVal.replace(/(\d{4})(\d{2})(\d{1})/gi, '$1-$2-$3');
+        } else if (thisVal.length<=10) {
+            thisVal = thisVal.replace(/(\d{4})(\d{2})(\d{2})(\d{1})/gi, '$1-$2-$3 $4');
+        } else {
+            thisVal = thisVal.replace(/(\d{4})(\d{2})(\d{2})(\d{2})(\d{1})/gi, '$1-$2-$3 $4:$5');
+        }
+        $(this).val(thisVal);
+    });
 })(window, tui.Calendar);
 
 // set calendars
 (function() {
     var calendarList = document.getElementById('calendarList');
     var html = [];
-    CalendarList.forEach(function(calendar) {
+    CalendarList.forEach(function(calendar, index) {
         html.push('<div class="lnb-calendars-item"><label>' +
-            '<input type="checkbox" class="tui-full-calendar-checkbox-round" value="' + calendar.id + '" checked>' +
+            '<input type="checkbox" class="tui-full-calendar-checkbox-round" value="' + calendar.id + '" ' + index<=10?'checked':'' + '>' +
             '<span style="border-color: ' + calendar.borderColor + '; background-color: ' + calendar.borderColor + ';"></span>' +
             '<span>' + calendar.name + '</span>' +
             '</label></div>'
@@ -563,7 +659,9 @@
 
     if (screen.width >= 768) {
         cal.changeView('week', true);
+        $("#calendarTypeName").text("Weekly");
     } else {
         cal.changeView('day', true);
+        $("#calendarTypeName").text("Daily");
     }
 })();

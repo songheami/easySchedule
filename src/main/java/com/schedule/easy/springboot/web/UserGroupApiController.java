@@ -18,7 +18,8 @@ public class UserGroupApiController {
     private final UserGroupService userGroupService;
 
     @PostMapping("/api/v1/userGroup")
-    public void insertUserGroup(@RequestBody UserGroupRequestDto requestDto) {
-        userGroupService.save(requestDto);
+    public UserGroupResponseDto insertUserGroup(@LoginUser SessionUser user, @RequestBody UserGroupRequestDto requestDto) {
+        requestDto.setUserId(user.getUserId());
+        return userGroupService.save(requestDto);
     }
 }
