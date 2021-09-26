@@ -553,15 +553,23 @@
     }
 
     function onSaveSchedule(psStatus) {
-        if (psStatus.target.id.indexOf("cancel")!==-1&&!confirm("정말 취소하시겠습니까?")) return;
+        let statCode;
 
-        if (!checkTimeValidity(new Date($("#scheduleModal #startTime").val()),
-            new Date($("#scheduleModal #endTime").val()))) {
-            alert("입력한 시간에 예약이 불가합니다.");
-            return;
+        if (psStatus.target.id.indexOf("cancel")!=-1) {
+            if (!confirm("정말 취소하시겠습니까?")) return;
+            statCode = "EASY00103";
+        } else {
+            // 예약 변경 유효성 검사
+            if (!checkTimeValidity(new Date($("#scheduleModal #startTime").val()),
+                new Date($("#scheduleModal #endTime").val()))) {
+                alert("입력한 시간에 예약이 불가합니다.");
+                return;
+            }
+            statCode = "EASY00101";
         }
+
         var data = {
-            statCode: psStatus.target.id.indexOf("save")!==-1?"EASY00101":"EASY00103",
+            statCode: statCode,
             scheduleId: $("#scheduleModal #scheduleId").val(),
             staffId: $("#scheduleModal #staffName").val(),
             title: $("#scheduleModal #title").val(),
@@ -613,17 +621,6 @@
     setRenderRangeText();
     setSchedules();
     setEventListener();
-
-    // 반응형 ui
-    window.onresize = function(event) {
-        if (screen.width >= 768) {
-            cal.changeView('week', true);
-            $("#calendarTypeName").text("Weekly");
-        } else {
-            cal.changeView('day', true);
-            $("#calendarTypeName").text("Daily");
-        }
-    };
 
     // 시간 입력 포맷
     $('#scheduleModal input[name$="Time"]').on('input', function(){
