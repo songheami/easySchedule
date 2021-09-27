@@ -6,18 +6,18 @@ import lombok.Getter;
 @Getter
 public class OpertimeResponseDto {
 
-    private Long opertimeId;
-    private Long userId;
-    private Long groupId;
+    private Long seq;
+    private Long userSeq;
+    private Long groupSeq;
     private String dayCode;
     private String startTime;
     private String endTime;
     private String useYn;
 
     public OpertimeResponseDto(Opertime entity) {
-        this.opertimeId = entity.getOpertimeId();
-        this.userId = entity.getUserId();
-        this.groupId = entity.getGroupId();
+        this.seq = entity.getSeq();
+        this.userSeq = entity.getUserSeq();
+        this.groupSeq = entity.getGroupSeq();
         this.dayCode = entity.getDayCode();
         this.startTime = entity.getStartTime();
         this.endTime = entity.getEndTime();

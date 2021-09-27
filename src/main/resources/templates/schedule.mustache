@@ -47,9 +47,9 @@
             <div id="calendarList" class="lnb-calendars-d1">
                 {{#staffList}}
                     {{#user}}
-                    <div class="lnb-calendars-item" id="{{userId}}">
+                    <div class="lnb-calendars-item" id="{{userSeq}}">
                         <label>
-                            <input type="checkbox" class="tui-full-calendar-checkbox-round" value="{{userId}}" checked>
+                            <input type="checkbox" class="tui-full-calendar-checkbox-round" value="{{userSeq}}" checked>
                             <span></span>
                             <span>{{name}}</span>
                         </label>
@@ -130,7 +130,7 @@
                                 {{#staffList}}
                                     {{#user}}
                                     <li role="presentation">
-                                        <a class="dropdown-menu-title" role="staffItem" data-action="{{userId}}">{{name}}</a>
+                                        <a class="dropdown-menu-title" role="staffItem" data-action="{{userSeq}}">{{name}}</a>
                                     </li>
                                     {{/user}}
                                 {{/staffList}}

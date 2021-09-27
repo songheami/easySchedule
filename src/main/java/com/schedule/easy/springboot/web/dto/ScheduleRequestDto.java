@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ScheduleRequestDto {
 
-    private Long scheduleId;
-    private Long memberId;
-    private Long staffId;
+    private Long seq;
+    private Long membSeq;
+    private Long staffSeq;
     private String statCode;
     private String title;
     private String startTime;
@@ -24,16 +24,16 @@ public class ScheduleRequestDto {
     private String searchEndTime;
 
     @Builder
-    public ScheduleRequestDto(Long scheduleId
-                            , Long memberId
-                            , Long staffId
+    public ScheduleRequestDto(Long seq
+                            , Long membSeq
+                            , Long staffSeq
                             , String statCode
                             , String title
                             , String startTime
                             , String endTime) {
-        this.scheduleId = scheduleId;
-        this.memberId = memberId;
-        this.staffId = staffId;
+        this.seq = seq;
+        this.membSeq = membSeq;
+        this.staffSeq = staffSeq;
         this.statCode = statCode;
         this.title = title;
         this.startTime = startTime;
@@ -42,9 +42,9 @@ public class ScheduleRequestDto {
 
     public Schedule toEntity() {
         return Schedule.builder()
-                .scheduleId(scheduleId)
-                .memberId(memberId)
-                .staffId(staffId)
+                .seq(seq)
+                .membSeq(membSeq)
+                .staffSeq(staffSeq)
                 .statCode(statCode)
                 .title(title)
                 .startTime(startTime)

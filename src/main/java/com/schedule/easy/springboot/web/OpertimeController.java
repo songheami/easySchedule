@@ -21,7 +21,7 @@ public class OpertimeController {
     @GetMapping("/opertime")
     public String findListByKey(@LoginUser SessionUser user, Model model) {
         // 근무시간 조회
-        List<OpertimeResponseDto> opertimeResponseDtoList = opertimeService.findListByKey(user.getUserGroup().getUserId(), user.getUserGroup().getGroupId());
+        List<OpertimeResponseDto> opertimeResponseDtoList = opertimeService.findListByKey(user.getUserGroup().getUserSeq(), user.getUserGroup().getGroupSeq());
         List<OpertimeResponseDto> monOpertimeList = new ArrayList<OpertimeResponseDto>();
         List<OpertimeResponseDto> tueOpertimeList = new ArrayList<OpertimeResponseDto>();
         List<OpertimeResponseDto> wedOpertimeList = new ArrayList<OpertimeResponseDto>();

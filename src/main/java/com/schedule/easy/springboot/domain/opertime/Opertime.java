@@ -14,15 +14,15 @@ import javax.persistence.*;
 public class Opertime extends BaseTimeEntity {
 
     @Id
-    @Column(name = "opertime_id")
+    @Column(name = "seq")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long opertimeId;
+    private Long seq;
 
-    @Column(name = "user_id", length = 11, nullable = false)
-    private Long userId;
+    @Column(name = "user_seq", length = 11, nullable = false)
+    private Long userSeq;
 
-    @Column(name = "group_id", length = 11, nullable = false)
-    private Long groupId;
+    @Column(name = "group_seq", length = 11, nullable = false)
+    private Long groupSeq;
 
     @Column(name = "day_code", length = 50, nullable = false)
     private String dayCode;
@@ -37,16 +37,16 @@ public class Opertime extends BaseTimeEntity {
     private String useYn;
 
     @Builder
-    public Opertime(Long opertimeId
-                  , Long groupId
-                  , Long userId
+    public Opertime(Long seq
+                  , Long userSeq
+                  , Long groupSeq
                   , String dayCode
                   , String startTime
                   , String endTime
                   , String useYn) {
-        this.opertimeId = opertimeId;
-        this.groupId = groupId;
-        this.userId = userId;
+        this.seq = seq;
+        this.userSeq = userSeq;
+        this.groupSeq = groupSeq;
         this.dayCode = dayCode;
         this.startTime = startTime;
         this.endTime = endTime;

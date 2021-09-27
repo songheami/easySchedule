@@ -16,14 +16,14 @@ public class Schedule extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "schedule_id", nullable = false)
-    private Long scheduleId;
+    @Column(name = "seq", nullable = false)
+    private Long seq;
 
-    @Column(name = "member_id", nullable = false)
-    private Long memberId;
+    @Column(name = "memb_seq", nullable = false)
+    private Long membSeq;
 
-    @Column(name = "staff_id", nullable = false)
-    private Long staffId;
+    @Column(name = "staff_seq", nullable = false)
+    private Long staffSeq;
 
     @Column(name = "stat_code", nullable = false)
     private String statCode;
@@ -38,26 +38,26 @@ public class Schedule extends BaseTimeEntity {
     private String endTime;
 
     @Builder
-    public Schedule(Long scheduleId,
-                    Long memberId,
-                    Long staffId,
+    public Schedule(Long seq,
+                    Long membSeq,
+                    Long staffSeq,
                     String statCode,
                     String title,
                     String startTime,
                     String endTime) {
-        this.scheduleId = scheduleId;
-        this.memberId = memberId;
-        this.staffId = staffId;
+        this.seq = seq;
+        this.membSeq = membSeq;
+        this.staffSeq = staffSeq;
         this.statCode = statCode;
         this.title = title;
         this.startTime = startTime;
         this.endTime = endTime;
     }
 
-    public Schedule update(String statCode, Long staffId, String title,
+    public Schedule update(String statCode, Long staffSeq, String title,
                            String startTime, String endTime) {
         this.statCode = statCode;
-        this.staffId = staffId;
+        this.staffSeq = staffSeq;
         this.title = title;
         this.startTime = startTime;
         this.endTime = endTime;

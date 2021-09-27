@@ -85,7 +85,7 @@ var main = {
             data: JSON.stringify(param)
         }).done(function(result) {
             alert('그룹이 등록되었습니다.');
-            window.location.href = '/schedule?groupId='+result.groupId+'&roleId='+result.roleId;
+            window.location.href = '/schedule?groupSeq='+result.groupSeq+'&roleSeq='+result.roleSeq;
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
@@ -129,7 +129,7 @@ var main = {
                       + "</div>"
                       + "<button type='button' class='btn btn-outline-light' onclick='joinGroup("
                       + "2, "
-                      + result[key].groupId
+                      + result[key].groupSeq
                       + ")'>가입</button>";
             }
             $box.append(html);
@@ -162,7 +162,7 @@ var main = {
                       + "</div>"
                       + "<button type='button' class='btn btn-outline-light' onclick='joinGroup("
                       + "3, "
-                      + result[key].groupId
+                      + result[key].groupSeq
                       + ")'>가입</button>";
             }
             $box.append(html);
@@ -224,12 +224,12 @@ var main = {
 
 main.init();
 
-function joinGroup(roleId, groupId) {
+function joinGroup(roleSeq, groupSeq) {
     if (!confirm("정말 가입하시겠습니까?")) return;
 
     let param = {
-        roleId: roleId,
-        groupId: groupId,
+        roleSeq: roleSeq,
+        groupSeq: groupSeq,
         useYn : "Y"
     };
     $.ajax({
@@ -239,7 +239,7 @@ function joinGroup(roleId, groupId) {
         data: JSON.stringify(param)
     }).done(function(result) {
         alert("그룹 가입이 완료되었습니다");
-        window.location.href = '/schedule?groupId='+result.groupId+'&roleId='+result.roleId;
+        window.location.href = '/schedule?groupSeq='+result.groupSeq+'&roleSeq='+result.roleSeq;
     }).fail(function (error) {
         alert(JSON.stringify(error));
     });

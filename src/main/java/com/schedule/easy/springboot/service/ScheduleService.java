@@ -1,11 +1,7 @@
 package com.schedule.easy.springboot.service;
 
-import com.schedule.easy.springboot.domain.group.Groups;
-import com.schedule.easy.springboot.domain.group.GroupsRepository;
 import com.schedule.easy.springboot.domain.schedule.Schedule;
 import com.schedule.easy.springboot.domain.schedule.ScheduleRepository;
-import com.schedule.easy.springboot.domain.userGroup.UserGroup;
-import com.schedule.easy.springboot.domain.userGroup.UserGroupRepository;
 import com.schedule.easy.springboot.web.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,8 +18,8 @@ public class ScheduleService {
     private final ScheduleRepository scheduleRepository;
 
     @Transactional(readOnly = true)
-    public List<ScheduleResponseDto> findListBySearchTime(List<Long> staffIdList, String searchStartTime, String searchEndTime) {
-        List<Schedule> scheduleList = scheduleRepository.findListBySearchTime(staffIdList, searchStartTime, searchEndTime);
+    public List<ScheduleResponseDto> findListBySearchTime(List<Long> staffSeqList, String searchStartTime, String searchEndTime) {
+        List<Schedule> scheduleList = scheduleRepository.findListBySearchTime(staffSeqList, searchStartTime, searchEndTime);
         List<ScheduleResponseDto> scheduleResponseDtoList = new ArrayList<ScheduleResponseDto>();
         for(Schedule schedule : scheduleList) { scheduleResponseDtoList.add(new ScheduleResponseDto(schedule)); }
         return scheduleResponseDtoList;
@@ -31,10 +27,10 @@ public class ScheduleService {
 
     @Transactional
     public Long save(@RequestBody ScheduleRequestDto requestDto) {
-        Schedule schedule = scheduleRepository.findById(requestDto.getScheduleId())
-                .map(entity -> entity.update(requestDto.getStatCode(), requestDto.getStaffId(), requestDto.getTitle(),
+        Schedule schedule = scheduleRepository.findById(requestDto.getSeq())
+                .map(entity -> entity.update(requestDto.getStatCode(), requestDto.getStaffSeq(), requestDto.getTitle(),
                         requestDto.getStartTime(), requestDto.getEndTime()))
                 .orElse(requestDto.toEntity());
-        return scheduleRepository.save(requestDto.toEntity()).getScheduleId();
+        return scheduleRepository.save(requestDto.toEntity()).getSeq();
     }
 }

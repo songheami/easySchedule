@@ -476,9 +476,9 @@
     function setSchedules() {
         cal.clear();
 
-        let staffIdList = [];
+        let staffSeqList = [];
         CalendarList.forEach(function(calendar) {
-            staffIdList.push(Number(calendar.id));
+            staffSeqList.push(Number(calendar.id));
         });
 
         $.ajax({
@@ -486,7 +486,7 @@
             url: '/api/v1/schedule',
             dataType: 'json',
             data: {
-                "staffIdList": staffIdList,
+                "staffSeqList": staffSeqList,
                 "searchStartTime": dateToString(cal.getDateRangeStart().toDate()),
                 "searchEndTime": dateToString(cal.getDateRangeEnd().toDate())
             }
@@ -515,7 +515,7 @@
             url: '/api/v1/opertime',
             dataType: 'json',
             data: {
-                "staffIdList": staffIdList
+                "staffSeqList": staffSeqList
             }
         }).done(function(result) {
             /* 현재 뷰에 따라 스케줄 불가한 시간 표시 */

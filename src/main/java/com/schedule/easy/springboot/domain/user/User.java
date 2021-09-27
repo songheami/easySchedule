@@ -22,9 +22,9 @@ public class User extends BaseTimeEntity implements Serializable  {
     private static final long serialVersionUID = 3639462513677548064L;
 
     @Id
-    @Column(name = "user_id")
+    @Column(name = "seq")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    private Long seq;
 
     @Column(nullable = false)
     private String name;
@@ -43,7 +43,8 @@ public class User extends BaseTimeEntity implements Serializable  {
     private Role role;
 
     @Builder
-    public User(Long userId, String name, String email, String phone, String picture, Role role) {
+    public User(Long seq, String name, String email, String phone, String picture, Role role) {
+        this.seq = seq;
         this.name = name;
         this.email = email;
         this.picture = picture;

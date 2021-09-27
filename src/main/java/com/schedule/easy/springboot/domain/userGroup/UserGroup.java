@@ -1,7 +1,7 @@
 package com.schedule.easy.springboot.domain.userGroup;
 
 import com.schedule.easy.springboot.domain.BaseTimeEntity;
-import com.schedule.easy.springboot.domain.group.Groups;
+import com.schedule.easy.springboot.domain.group.Group;
 import com.schedule.easy.springboot.domain.role.Role;
 import com.schedule.easy.springboot.domain.user.User;
 import lombok.Builder;
@@ -21,37 +21,37 @@ public class UserGroup extends BaseTimeEntity implements Serializable {
     private static final long serialVersionUID = 2551178015035045050L;
 
     @Id
-    @Column(name = "user_id")
-    private Long userId;
+    @Column(name = "user_seq")
+    private Long userSeq;
 
     @Id
-    @Column(name = "group_id")
-    private Long groupId;
+    @Column(name = "group_seq")
+    private Long groupSeq;
 
     @Id
-    @Column(name = "role_id")
-    private Long roleId;
+    @Column(name = "role_seq")
+    private Long roleSeq;
 
     @Column(name = "use_yn", length = 1, nullable = false)
     private String useYn;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", columnDefinition="LONG", insertable=false, updatable=false)
+    @JoinColumn(name = "user_seq", columnDefinition="LONG", insertable=false, updatable=false)
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "group_id", columnDefinition="LONG", insertable=false, updatable=false)
-    private Groups groups;
+    @JoinColumn(name = "group_seq", columnDefinition="LONG", insertable=false, updatable=false)
+    private Group group;
 
     @ManyToOne
-    @JoinColumn(name = "role_id", columnDefinition="LONG", insertable=false, updatable=false)
+    @JoinColumn(name = "role_seq", columnDefinition="LONG", insertable=false, updatable=false)
     private Role role;
 
     @Builder
-    public UserGroup (Long userId, Long groupId, Long roleId, String useYn) {
-        this.userId = userId;
-        this.groupId = groupId;
-        this.roleId = roleId;
+    public UserGroup (Long userSeq, Long groupSeq, Long roleSeq, String useYn) {
+        this.userSeq = userSeq;
+        this.groupSeq = groupSeq;
+        this.roleSeq = roleSeq;
         this.useYn = useYn;
     }
 

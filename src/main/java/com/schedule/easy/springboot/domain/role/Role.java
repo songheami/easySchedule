@@ -16,23 +16,23 @@ public class Role implements Serializable {
     private static final long serialVersionUID = 825785831811652295L;
 
     @Id
-    @Column(name = "role_id")
+    @Column(name = "seq")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long roleId;
+    private Long seq;
 
     @Column(length = 100, nullable = false, unique = true)
     private String name;
 
-    @Column(name = "root_role_id")
-    private Long rootRoleId;
+    @Column(name = "root_seq")
+    private Long rootSeq;
 
     @Column(name = "use_yn", length = 1, nullable = false)
     private String useYn;
 
     @Builder
-    public Role(Long roleId, String name, Long rootRoleId, String useYn) {
-        this.roleId = roleId;
-        this.rootRoleId = rootRoleId;
+    public Role(Long seq, String name, Long rootSeq, String useYn) {
+        this.seq = seq;
+        this.rootSeq = rootSeq;
         this.name = name;
         this.useYn = useYn;
     }
