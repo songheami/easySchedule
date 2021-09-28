@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "user_group")
+@Table(name = "tb_user_group")
 @IdClass(UserGroupPK.class)
 public class UserGroup extends BaseTimeEntity implements Serializable {
 

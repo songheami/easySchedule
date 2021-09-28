@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "role")
+@Table(name = "tb_role")
 public class Role implements Serializable {
 
     private static final long serialVersionUID = 825785831811652295L;

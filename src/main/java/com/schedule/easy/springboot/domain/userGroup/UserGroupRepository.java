@@ -15,7 +15,8 @@ public interface UserGroupRepository extends JpaRepository<UserGroup, Long> {
 
     @Query("SELECT ug, g, r FROM UserGroup ug " +
             "INNER JOIN Group g ON ug.groupSeq = g.seq " +
-            "INNER JOIN Role r ON ug.roleSeq = r.seq WHERE ug.userSeq = :userSeq")
+            "INNER JOIN Role r ON ug.roleSeq = r.seq " +
+            "WHERE ug.userSeq = :userSeq")
     public List<UserGroup> findListByUserSeq(@Param("userSeq") Long userSeq);
 
     @Query("SELECT ug, g FROM UserGroup ug INNER JOIN Group g ON ug.groupSeq = g.seq " +

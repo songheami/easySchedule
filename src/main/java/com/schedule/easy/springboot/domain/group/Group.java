@@ -13,7 +13,7 @@ import java.util.Collection;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "group")
+@Table(name = "tb_group")
 public class Group implements Serializable {
 
     private static final long serialVersionUID = 2561430858992520080L;
