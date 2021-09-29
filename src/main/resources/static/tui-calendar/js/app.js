@@ -302,7 +302,7 @@
     function showSchedulePopUp(psStatus, e) {
         if (psStatus == "old") {
             $("#scheduleModal #scheduleModalTitle").text("스케줄 변경하기");
-            $("#scheduleModal #scheduleId").val(e.schedule.id);
+            $("#scheduleModal #seq").val(e.schedule.id);
             $("#scheduleModal #staffName").val(e.schedule.calendarId);
             $("#scheduleModal #title").val(e.schedule.title);
             $("#scheduleModal #startTime").val(dateToString(e.schedule.start));
@@ -310,7 +310,7 @@
             $("#btn-cancel-schedule").show();
         } else if (psStatus == "new") {
             $("#scheduleModal #scheduleModalTitle").text("스케줄 새로 만들기");
-            $("#scheduleModal #scheduleId").val("");
+            $("#scheduleModal #seq").val("");
             $("#scheduleModal #staffName").val("");
             $("#scheduleModal #title").val("");
             $("#scheduleModal #startTime").val(dateToString(e.start.toDate()));
@@ -318,7 +318,7 @@
             $("#btn-cancel-schedule").hide();
         } else {
             $("#scheduleModal #scheduleModalTitle").text("스케줄 새로 만들기");
-            $("#scheduleModal #scheduleId").val("");
+            $("#scheduleModal #seq").val("");
             $("#scheduleModal #staffName").val("");
             $("#scheduleModal #title").val("");
             $("#scheduleModal #startTime").val("");
@@ -495,8 +495,8 @@
             result.forEach(function(data) {
                 var schedule = new ScheduleInfo();
                 var calendar = findCalendar(schedule.calendarId);
-                schedule.id = String(data.scheduleId);
-                schedule.calendarId = String(data.staffId);
+                schedule.id = String(data.seq);
+                schedule.calendarId = String(data.staffSeq);
                 schedule.title = data.title;
                 schedule.start = moment(data.startTime).toDate();
                 schedule.end = moment(data.endTime).toDate();
@@ -568,10 +568,11 @@
             statCode = "EASY00101";
         }
 
+        let seq = $("#scheduleModal #seq").val();
         var data = {
             statCode: statCode,
-            scheduleId: $("#scheduleModal #scheduleId").val(),
-            staffId: $("#scheduleModal #staffName").val(),
+            seq: Boolean(seq)?seq:-1,
+            staffSeq: $("#scheduleModal #staffName").val(),
             title: $("#scheduleModal #title").val(),
             startTime: $("#scheduleModal #startTime").val(),
             endTime: $("#scheduleModal #endTime").val()

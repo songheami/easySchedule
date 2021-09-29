@@ -22,8 +22,8 @@ public class OpertimeApiController {
     public List<OpertimeResponseDto> findListByKey(@LoginUser SessionUser user,
                                                    @RequestParam(value="staffSeqList[]") List<Long> staffSeqList) {
         List<OpertimeResponseDto> opertimeResponseDtoList = new ArrayList<>();
-        for (Long staffId : staffSeqList) {
-            opertimeResponseDtoList.addAll(opertimeService.findListByKey(staffId, user.getUserGroup().getGroupSeq()));
+        for (Long staffSeq : staffSeqList) {
+            opertimeResponseDtoList.addAll(opertimeService.findListByKey(staffSeq, user.getUserGroup().getGroupSeq()));
         }
         return opertimeResponseDtoList;
     }
