@@ -28,20 +28,20 @@ public class ScheduleController {
 
     @GetMapping("/schedule")
     public String schedule(@LoginUser SessionUser user,
-                             @RequestParam(value="groupId") Long groupId,
-                             @RequestParam(value="roleId") Long roleId,
+                             @RequestParam(value="groupSeq") Long groupSeq,
+                             @RequestParam(value="roleSeq") Long roleSeq,
                              Model model) {
-        UserGroup userGroup = userGroupService.findByKey(user.getUserId(), groupId, roleId);
+        UserGroup userGroup = userGroupService.findByKey(user.getSeq(), groupSeq, roleSeq);
         if (userGroup == null) return "index";
 
         // 현재 사용자의 그룹 권한 변경
         user.sessionUserGroup(userGroup);
         httpSession.setAttribute("user", user);
 
-        boolean groupOwnerYn = userGroup.getRoleId().equals(1L);
+        boolean groupOwnerYn = userGroup.getRoleSeq().equals(1L);
         if (groupOwnerYn) {
             model.addAttribute("groupOwner", true);
-            model.addAttribute("staffList", userGroupService.findStaffListWithGroupId(userGroup.getGroupId()));
+            model.addAttribute("staffList", userGroupService.findStaffListWithGroupSeq(userGroup.getGroupSeq()));
         } else {
             model.addAttribute("groupOwner", false);
             model.addAttribute("staffList", userGroup);

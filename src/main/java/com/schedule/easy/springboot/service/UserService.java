@@ -15,15 +15,15 @@ public class UserService {
     private final UserRepository userRepository;
 
     @Transactional(readOnly = true)
-    public UserResponseDto findById(Long userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("현재 로그인된 계정 정보가 없습니다." + userId));
+    public UserResponseDto findById(Long userSeq) {
+        User user = userRepository.findById(userSeq)
+                .orElseThrow(() -> new IllegalArgumentException("현재 로그인된 계정 정보가 없습니다." + userSeq));
         return new UserResponseDto(user);
     }
 
     @Transactional(readOnly = true)
     public UserResponseDto save(UserRequestDto requestDto) {
-        User user = userRepository.findById(requestDto.getUserId())
+        User user = userRepository.findById(requestDto.getSeq())
                 .map(entity -> entity.update(requestDto.getName(), requestDto.getEmail(), requestDto.getPhone()))
                 .orElse(requestDto.toEntity());
         return new UserResponseDto(user);

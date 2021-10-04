@@ -6,14 +6,14 @@ import lombok.Getter;
 @Getter
 public class UserResponseDto {
 
-    private Long userId;
+    private Long seq;
     private String name;
     private String email;
     private String phone;
     private String picture;
 
     public UserResponseDto(User entity) {
-        this.userId = entity.getUserId();
+        this.seq = entity.getSeq();
         this.name = entity.getName();
         this.email = entity.getEmail();
         this.phone = entity.getPhone();

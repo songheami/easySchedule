@@ -9,25 +9,25 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class OpertimeRequestDto {
 
-    private Long opertimeId;
-    private Long userId;
-    private Long groupId;
+    private Long seq;
+    private Long userSeq;
+    private Long groupSeq;
     private String dayCode;
     private String startTime;
     private String endTime;
     private String useYn;
 
     @Builder
-    public OpertimeRequestDto(Long opertimeId
-                            , Long groupId
-                            , Long userId
+    public OpertimeRequestDto(Long seq
+                            , Long groupSeq
+                            , Long userSeq
                             , String dayCode
                             , String startTime
                             , String endTime
                             , String useYn) {
-        this.opertimeId = opertimeId;
-        this.groupId = groupId;
-        this.userId = userId;
+        this.seq = seq;
+        this.groupSeq = groupSeq;
+        this.userSeq = userSeq;
         this.dayCode = dayCode;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -36,9 +36,9 @@ public class OpertimeRequestDto {
 
     public Opertime toEntity() {
         return Opertime.builder()
-                .opertimeId(opertimeId)
-                .userId(userId)
-                .groupId(groupId)
+                .seq(seq)
+                .userSeq(userSeq)
+                .groupSeq(groupSeq)
                 .dayCode(dayCode)
                 .startTime(startTime)
                 .endTime(endTime)

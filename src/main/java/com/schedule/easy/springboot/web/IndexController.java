@@ -23,7 +23,7 @@ public class IndexController {
     @GetMapping("/")
     public String index(@LoginUser SessionUser user, Model model) {
         if (user != null) {
-            model.addAttribute("userGroups", userGroupService.findByUserId(user.getUserId()));
+            model.addAttribute("userGroups", userGroupService.findListByUserSeq(user.getSeq()));
             return "home";
         }
         return "index";
@@ -32,7 +32,7 @@ public class IndexController {
     @GetMapping("/mypage")
     public String mypage(@LoginUser SessionUser user, Model model) {
         if (user != null) {
-            model.addAttribute("user", userService.findById(user.getUserId()));
+            model.addAttribute("user", userService.findById(user.getSeq()));
             return "mypage";
         }
         return "index";

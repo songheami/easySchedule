@@ -13,15 +13,15 @@ import java.util.Collection;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "groups")
-public class Groups implements Serializable {
+@Table(name = "tb_group")
+public class Group implements Serializable {
 
     private static final long serialVersionUID = 2561430858992520080L;
 
     @Id
-    @Column(name = "group_id")
+    @Column(name = "seq")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long groupId;
+    private Long seq;
 
     @Column(length = 100, nullable = false, unique = true)
     private String name;
@@ -30,12 +30,12 @@ public class Groups implements Serializable {
     private String useYn;
 
     @OneToMany
-    @JoinColumn(name="group_id")
+    @JoinColumn(name="group_seq")
     private Collection<UserGroup> userGroup;
 
     @Builder
-    public Groups(Long groupId, String name, String useYn) {
-        this.groupId = groupId;
+    public Group(Long seq, String name, String useYn) {
+        this.seq = seq;
         this.name = name;
         this.useYn = useYn;
     }

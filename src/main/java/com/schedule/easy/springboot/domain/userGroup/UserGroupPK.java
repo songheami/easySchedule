@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 @Data
 public class UserGroupPK implements Serializable {
-    private Long userId;
-    private Long groupId;
-    private Long roleId;
+    private Long userSeq;
+    private Long groupSeq;
+    private Long roleSeq;
 }

@@ -19,7 +19,7 @@ public class UserApiController {
 
     @PostMapping("/api/v1/user")
     public UserResponseDto update(@LoginUser SessionUser user, @RequestBody UserRequestDto requestDto) {
-        requestDto.setUserId(user.getUserId());
+        requestDto.setSeq(user.getSeq());
         return userService.save(requestDto);
     }
 }

@@ -19,15 +19,15 @@ public class ScheduleApiController {
     private final ScheduleService scheduleService;
 
     @GetMapping("/api/v1/schedule")
-    public List<ScheduleResponseDto> findList(@RequestParam(value="staffIdList[]") List<Long> staffIdList,
+    public List<ScheduleResponseDto> findList(@RequestParam(value="staffSeqList[]") List<Long> staffSeqList,
                                               @RequestParam(value="searchStartTime") String searchStartTime,
                                               @RequestParam(value="searchEndTime") String searchEndTime) {
-        return scheduleService.findListBySearchTime(staffIdList, searchStartTime, searchEndTime);
+        return scheduleService.findListBySearchTime(staffSeqList, searchStartTime, searchEndTime);
     }
 
     @PostMapping("/api/v1/schedule")
     public Long save(@LoginUser SessionUser user, @RequestBody ScheduleRequestDto requestDto) {
-        requestDto.setMemberId(user.getUserId());
+        requestDto.setMembSeq(user.getSeq());
         return scheduleService.save(requestDto);
     }
 }

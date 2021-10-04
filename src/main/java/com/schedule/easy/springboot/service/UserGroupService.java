@@ -1,7 +1,7 @@
 package com.schedule.easy.springboot.service;
 
-import com.schedule.easy.springboot.domain.group.Groups;
-import com.schedule.easy.springboot.domain.group.GroupsRepository;
+import com.schedule.easy.springboot.domain.group.Group;
+import com.schedule.easy.springboot.domain.group.GroupRepository;
 import com.schedule.easy.springboot.domain.userGroup.UserGroup;
 import com.schedule.easy.springboot.domain.userGroup.UserGroupRepository;
 import com.schedule.easy.springboot.web.dto.UserGroupRequestDto;
@@ -17,11 +17,11 @@ import java.util.List;
 @Service
 public class UserGroupService {
     private final UserGroupRepository userGroupRepository;
-    private final GroupsRepository groupsRepository;
+    private final GroupRepository groupsRepository;
 
     @Transactional(readOnly = true)
-    public List<UserGroupResponseDto> findByUserId(Long userId) {
-        List<UserGroup> userGroupList =  userGroupRepository.findListByUserId(userId);
+    public List<UserGroupResponseDto> findListByUserSeq(Long userSeq) {
+        List<UserGroup> userGroupList =  userGroupRepository.findListByUserSeq(userSeq);
         List<UserGroupResponseDto> userGroupResponseDtoList = new ArrayList<>();
         for (UserGroup userGroup : userGroupList) {
             userGroupResponseDtoList.add(new UserGroupResponseDto(userGroup));
@@ -30,20 +30,20 @@ public class UserGroupService {
     }
 
     @Transactional(readOnly = true)
-    public UserGroup findByKey(Long userId, Long groupId, Long roleId) {
-        return userGroupRepository.findOneByKey(userId, groupId, roleId);
+    public UserGroup findByKey(Long userSeq, Long groupSeq, Long roleSeq) {
+        return userGroupRepository.findOneByKey(userSeq, groupSeq, roleSeq);
     }
 
     @Transactional(readOnly = true)
     public UserGroupResponseDto save(UserGroupRequestDto requestDto) {
-        Groups groups = groupsRepository.findById(requestDto.getGroupId())
-                .orElseThrow(() -> new IllegalArgumentException("선택한 그룹이 존재하지 않습니다. groupId=" + requestDto.getGroupId()));
+        Group group = groupsRepository.findById(requestDto.getGroupSeq())
+                .orElseThrow(() -> new IllegalArgumentException("선택한 그룹이 존재하지 않습니다. groupSeq=" + requestDto.getGroupSeq()));
         return new UserGroupResponseDto(userGroupRepository.save(requestDto.toEntity()));
     }
 
     @Transactional(readOnly = true)
-    public List<UserGroupResponseDto> findStaffListWithGroupId(Long groupId) {
-        List<UserGroup> userGroupList = userGroupRepository.findStaffListWithGroupId(groupId);
+    public List<UserGroupResponseDto> findStaffListWithGroupSeq(Long groupSeq) {
+        List<UserGroup> userGroupList = userGroupRepository.findStaffListWithGroupSeq(groupSeq);
         List<UserGroupResponseDto> userGroupResponseDtoList = new ArrayList<UserGroupResponseDto>();
         for (UserGroup userGroup : userGroupList) {
             userGroupResponseDtoList.add(new UserGroupResponseDto(userGroup));

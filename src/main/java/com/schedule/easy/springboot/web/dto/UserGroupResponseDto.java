@@ -1,6 +1,6 @@
 package com.schedule.easy.springboot.web.dto;
 
-import com.schedule.easy.springboot.domain.group.Groups;
+import com.schedule.easy.springboot.domain.group.Group;
 import com.schedule.easy.springboot.domain.role.Role;
 import com.schedule.easy.springboot.domain.user.User;
 import com.schedule.easy.springboot.domain.userGroup.UserGroup;
@@ -9,21 +9,21 @@ import lombok.Getter;
 @Getter
 public class UserGroupResponseDto {
 
-    private Long userId;
-    private Long groupId;
-    private Long roleId;
+    private Long userSeq;
+    private Long groupSeq;
+    private Long roleSeq;
     private String useYn;
     private User user;
-    private Groups groups;
+    private Group group;
     private Role role;
 
     public UserGroupResponseDto(UserGroup entity) {
-        this.userId = entity.getUserId();
-        this.groupId = entity.getGroupId();
-        this.roleId = entity.getRoleId();
+        this.userSeq = entity.getUserSeq();
+        this.groupSeq = entity.getGroupSeq();
+        this.roleSeq = entity.getRoleSeq();
         this.useYn = entity.getUseYn();
         this.user = entity.getUser();
-        this.groups = entity.getGroups();
+        this.group = entity.getGroup();
         this.role = entity.getRole();
     }
 }

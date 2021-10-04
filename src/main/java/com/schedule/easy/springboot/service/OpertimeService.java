@@ -18,8 +18,8 @@ public class OpertimeService {
     private final OpertimeRepository opertimeRepository;
 
     @Transactional(readOnly = true)
-    public List<OpertimeResponseDto> findListByKey(Long userId, Long groupId) {
-        List<Opertime> opertimeList = opertimeRepository.findListByKey(userId, groupId);
+    public List<OpertimeResponseDto> findListByKey(Long userSeq, Long groupSeq) {
+        List<Opertime> opertimeList = opertimeRepository.findListByKey(userSeq, groupSeq);
         List<OpertimeResponseDto> opertimeResponseDtoList = new ArrayList<OpertimeResponseDto>();
         for(Opertime opertime : opertimeList) { opertimeResponseDtoList.add(new OpertimeResponseDto(opertime)); }
         return opertimeResponseDtoList;
@@ -27,6 +27,6 @@ public class OpertimeService {
 
     @Transactional
     public Long save(OpertimeRequestDto requestDto) {
-        return opertimeRepository.save(requestDto.toEntity()).getOpertimeId();
+        return opertimeRepository.save(requestDto.toEntity()).getSeq();
     }
 }

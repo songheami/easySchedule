@@ -7,23 +7,23 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class UserGroupRequestDto {
-    private Long userId;
-    private Long groupId;
-    private Long roleId;
+    private Long userSeq;
+    private Long groupSeq;
+    private Long roleSeq;
     private String useYn;
 
     public UserGroupRequestDto(UserGroup entity) {
-        this.userId = entity.getUserId();
-        this.groupId = entity.getGroupId();
-        this.roleId = entity.getRoleId();
+        this.userSeq = entity.getUserSeq();
+        this.groupSeq = entity.getGroupSeq();
+        this.roleSeq = entity.getRoleSeq();
         this.useYn = entity.getUseYn();
     }
 
     public UserGroup toEntity() {
         return UserGroup.builder()
-                .userId(userId)
-                .groupId(groupId)
-                .roleId(roleId)
+                .userSeq(userSeq)
+                .groupSeq(groupSeq)
+                .roleSeq(roleSeq)
                 .useYn(useYn)
                 .build();
     }

@@ -1,7 +1,7 @@
 package com.schedule.easy.springboot.service;
 
-import com.schedule.easy.springboot.domain.group.Groups;
-import com.schedule.easy.springboot.domain.group.GroupsRepository;
+import com.schedule.easy.springboot.domain.group.Group;
+import com.schedule.easy.springboot.domain.group.GroupRepository;
 import com.schedule.easy.springboot.domain.userGroup.UserGroup;
 import com.schedule.easy.springboot.domain.userGroup.UserGroupRepository;
 import com.schedule.easy.springboot.web.dto.GroupSaveRequestDto;
@@ -17,22 +17,22 @@ import java.util.List;
 @RequiredArgsConstructor
 @Service
 public class GroupService {
-    private final GroupsRepository groupRepository;
+    private final GroupRepository groupRepository;
 
     private final UserGroupRepository userGroupRepository;
 
     @Transactional(readOnly = true)
-    public List<GroupsResponseDto> findListByUserId(Long userId) {
-        List<Groups> groupsList = groupRepository.findListByUserId(userId);
+    public List<GroupsResponseDto> findListByUserSeq(Long userSeq) {
+        List<Group> groupList = groupRepository.findListByUserSeq(userSeq);
         List<GroupsResponseDto> groupsResponseDtoList = new ArrayList<GroupsResponseDto>();
-        for(Groups group : groupsList) { groupsResponseDtoList.add(new GroupsResponseDto(group)); }
+        for(Group group : groupList) { groupsResponseDtoList.add(new GroupsResponseDto(group)); }
         return groupsResponseDtoList;
     }
 
     @Transactional
-    public UserGroupResponseDto save(Long userId, GroupSaveRequestDto requestDto) {
-        Long groupId = groupRepository.save(requestDto.toEntity()).getGroupId();
-        UserGroup userGroup = new UserGroup(userId, groupId, 1L, "Y");
+    public UserGroupResponseDto save(Long userSeq, GroupSaveRequestDto requestDto) {
+        Long groupSeq = groupRepository.save(requestDto.toEntity()).getSeq();
+        UserGroup userGroup = new UserGroup(userSeq, groupSeq, 1L, "Y");
         userGroupRepository.save(userGroup);
         return new UserGroupResponseDto(userGroup);
     }
@@ -43,10 +43,10 @@ public class GroupService {
     }
 
     @Transactional
-    public List<GroupsResponseDto> findListByName(String name, Long roleId, Long userId) {
-        List<Groups> groupsList = groupRepository.findListByName(name, roleId, userId);
+    public List<GroupsResponseDto> findListByName(String name, Long roleSeq, Long userSeq) {
+        List<Group> groupList = groupRepository.findListByName(name, roleSeq, userSeq);
         List<GroupsResponseDto> groupsResponseDtoList = new ArrayList<GroupsResponseDto>();
-        for(Groups group : groupsList) { groupsResponseDtoList.add(new GroupsResponseDto(group)); }
+        for(Group group : groupList) { groupsResponseDtoList.add(new GroupsResponseDto(group)); }
         return groupsResponseDtoList;
     }
 }

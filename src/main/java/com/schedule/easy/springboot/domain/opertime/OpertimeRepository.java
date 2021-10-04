@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface OpertimeRepository extends JpaRepository<Opertime, Long> {
 
-    @Query("select op from Opertime op where op.userId = :userId and op.groupId = :groupId order by dayCode, startTime")
-    List<Opertime> findListByKey(@Param("userId") Long userId, @Param("groupId") Long groupId);
+    @Query("select op from Opertime op where op.userSeq = :userSeq and op.groupSeq = :groupSeq order by dayCode, startTime")
+    List<Opertime> findListByKey(@Param("userSeq") Long userSeq, @Param("groupSeq") Long groupSeq);
 }

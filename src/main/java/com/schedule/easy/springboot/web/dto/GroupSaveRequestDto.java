@@ -1,6 +1,6 @@
 package com.schedule.easy.springboot.web.dto;
 
-import com.schedule.easy.springboot.domain.group.Groups;
+import com.schedule.easy.springboot.domain.group.Group;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,20 +8,20 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class GroupSaveRequestDto {
-    private Long groupId;
+    private Long seq;
     private String name;
     private String useYn;
 
     @Builder
-    public GroupSaveRequestDto(Long groupId, String name, String useYn) {
-        this.groupId = groupId;
+    public GroupSaveRequestDto(Long seq, String name, String useYn) {
+        this.seq = seq;
         this.name = name;
         this.useYn = useYn;
     }
 
-    public Groups toEntity() {
-        return Groups.builder()
-                .groupId(groupId)
+    public Group toEntity() {
+        return Group.builder()
+                .seq(seq)
                 .name(name)
                 .useYn(useYn)
                 .build();

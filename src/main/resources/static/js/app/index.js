@@ -31,9 +31,24 @@ var main = {
             $("#"+this.id).before('<div class="input-box">'
                                  +'<input type="text" name="startTime" placeholder="00:00">'
                                  +'<input type="text" name="endTime" placeholder="00:00">'
-                                 +'<input type="hidden" name="opertimeId" value="">'
+                                 +'<input type="hidden" name="seq" value="">'
                                  +'<input type="hidden" name="dayCode" value="'+this.id.charAt(this.id.length-1)+'">'
                                  +'</div>');
+
+
+            // 시간 입력 포맷
+            $('#opertime_wrapper input[name$="Time"]').on('input', function(){
+                var thisVal = $(this).val().replace(/\s|\D/g, '');
+                thisVal = thisVal.substr(0,4);
+                if (Number(thisVal.substr(2,2)) >= 60) {
+                    thisVal = thisVal.substr(0,2) + '59';
+                }
+                if (Number(thisVal)>2400) {
+                    thisVal = '2400';
+                }
+                thisVal = thisVal.replace(/(\d{2})/, '$1:');
+                $(this).val(thisVal);
+            });
         });
 
         // 시간 입력 포맷
@@ -85,7 +100,7 @@ var main = {
             data: JSON.stringify(param)
         }).done(function(result) {
             alert('그룹이 등록되었습니다.');
-            window.location.href = '/schedule?groupId='+result.groupId+'&roleId='+result.roleId;
+            window.location.href = '/schedule?groupSeq='+result.groupSeq+'&roleSeq='+result.roleSeq;
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
@@ -129,7 +144,7 @@ var main = {
                       + "</div>"
                       + "<button type='button' class='btn btn-outline-light' onclick='joinGroup("
                       + "2, "
-                      + result[key].groupId
+                      + result[key].groupSeq
                       + ")'>가입</button>";
             }
             $box.append(html);
@@ -162,7 +177,7 @@ var main = {
                       + "</div>"
                       + "<button type='button' class='btn btn-outline-light' onclick='joinGroup("
                       + "3, "
-                      + result[key].groupId
+                      + result[key].groupSeq
                       + ")'>가입</button>";
             }
             $box.append(html);
@@ -224,12 +239,12 @@ var main = {
 
 main.init();
 
-function joinGroup(roleId, groupId) {
+function joinGroup(roleSeq, groupSeq) {
     if (!confirm("정말 가입하시겠습니까?")) return;
 
     let param = {
-        roleId: roleId,
-        groupId: groupId,
+        roleSeq: roleSeq,
+        groupSeq: groupSeq,
         useYn : "Y"
     };
     $.ajax({
@@ -239,7 +254,7 @@ function joinGroup(roleId, groupId) {
         data: JSON.stringify(param)
     }).done(function(result) {
         alert("그룹 가입이 완료되었습니다");
-        window.location.href = '/schedule?groupId='+result.groupId+'&roleId='+result.roleId;
+        window.location.href = '/schedule?groupSeq='+result.groupSeq+'&roleSeq='+result.roleSeq;
     }).fail(function (error) {
         alert(JSON.stringify(error));
     });

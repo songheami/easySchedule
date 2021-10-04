@@ -47,9 +47,9 @@
             <div id="calendarList" class="lnb-calendars-d1">
                 {{#staffList}}
                     {{#user}}
-                    <div class="lnb-calendars-item" id="{{userId}}">
+                    <div class="lnb-calendars-item" id="{{userSeq}}">
                         <label>
-                            <input type="checkbox" class="tui-full-calendar-checkbox-round" value="{{userId}}" checked>
+                            <input type="checkbox" class="tui-full-calendar-checkbox-round" value="{{userSeq}}" checked>
                             <span></span>
                             <span>{{name}}</span>
                         </label>
@@ -111,7 +111,7 @@
     <!-- Modal 시작 -->
     <div class="form-group">
         <div class="modal fade" id="scheduleModal" tabindex="-1" role="dialog" aria-labelledby="scheduleModalTitle" aria-hidden="true">
-            <input type="hidden" id="scheduleId" name="scheduleId"/>
+            <input type="hidden" id="seq" name="seq"/>
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -130,7 +130,7 @@
                                 {{#staffList}}
                                     {{#user}}
                                     <li role="presentation">
-                                        <a class="dropdown-menu-title" role="staffItem" data-action="{{userId}}">{{name}}</a>
+                                        <a class="dropdown-menu-title" role="staffItem" data-action="{{userSeq}}">{{name}}</a>
                                     </li>
                                     {{/user}}
                                 {{/staffList}}
