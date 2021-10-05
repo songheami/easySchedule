@@ -31,9 +31,24 @@ var main = {
             $("#"+this.id).before('<div class="input-box">'
                                  +'<input type="text" name="startTime" placeholder="00:00">'
                                  +'<input type="text" name="endTime" placeholder="00:00">'
-                                 +'<input type="hidden" name="opertimeId" value="">'
+                                 +'<input type="hidden" name="seq" value="">'
                                  +'<input type="hidden" name="dayCode" value="'+this.id.charAt(this.id.length-1)+'">'
                                  +'</div>');
+
+
+            // 시간 입력 포맷
+            $('#opertime_wrapper input[name$="Time"]').on('input', function(){
+                var thisVal = $(this).val().replace(/\s|\D/g, '');
+                thisVal = thisVal.substr(0,4);
+                if (Number(thisVal.substr(2,2)) >= 60) {
+                    thisVal = thisVal.substr(0,2) + '59';
+                }
+                if (Number(thisVal)>2400) {
+                    thisVal = '2400';
+                }
+                thisVal = thisVal.replace(/(\d{2})/, '$1:');
+                $(this).val(thisVal);
+            });
         });
 
         // 시간 입력 포맷

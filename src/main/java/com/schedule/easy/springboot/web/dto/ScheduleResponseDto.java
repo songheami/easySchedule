@@ -1,10 +1,7 @@
 package com.schedule.easy.springboot.web.dto;
 
-import com.schedule.easy.springboot.domain.posts.Posts;
 import com.schedule.easy.springboot.domain.schedule.Schedule;
 import lombok.Getter;
-
-import java.time.LocalDateTime;
 
 @Getter
 public class ScheduleResponseDto {
