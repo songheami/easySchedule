@@ -11,6 +11,7 @@
     var useDetailPopup = false;
     var datePicker, selectedCalendar;
     var finalOpTimeList = [];
+    var staffOpTimeList;
 
     cal = new Calendar('#calendar', {
         defaultView: 'week',
@@ -95,13 +96,23 @@
     });
 
     /** 운영 가능한 시간 확인 */
-    function checkTimeValidity (startDate, endDate) {
-        for (let i=0; i<finalOpTimeList.length; i++) {
-            if (finalOpTimeList[i].dayCode==startDate.getDay() && finalOpTimeList[i].dayCode==endDate.getDay()) {
+    function checkTimeValidity (startDate, endDate, staffSeq) {
+        let _opTimeList = [];
+        if (staffSeq == null) {
+            _opTimeList = finalOpTimeList;
+        } else {
+            for (let i=0; i<staffOpTimeList.length; i++) {
+                if (staffSeq == staffOpTimeList[i].userSeq) {
+                    _opTimeList.push(staffOpTimeList[i]);
+                }
+            }
+        }
+        for (let i=0; i<_opTimeList.length; i++) {
+            if (_opTimeList[i].dayCode==startDate.getDay() && _opTimeList[i].dayCode==endDate.getDay()) {
                 let startTime = startDate.getHours()*100+startDate.getMinutes();
                 let endTime = endDate.getHours()*100+endDate.getMinutes();
-                let opStartTime = Number(finalOpTimeList[i].startTime.replace(":",""));
-                let opEndTime = Number(finalOpTimeList[i].endTime.replace(":",""));
+                let opStartTime = Number(_opTimeList[i].startTime.replace(":",""));
+                let opEndTime = Number(_opTimeList[i].endTime.replace(":",""));
                 if (opStartTime<=startTime&&startTime<opEndTime
                     && opStartTime<=endTime&&endTime<opEndTime) {
                     return true;
@@ -520,6 +531,7 @@
         }).done(function(result) {
             /* 현재 뷰에 따라 스케줄 불가한 시간 표시 */
             ScheduleList=[]; finalOpTimeList=[];
+            staffOpTimeList = result;
             let dayCodeList=[];
             switch (cal.getViewName()) {
             case 'week':
@@ -553,6 +565,9 @@
     }
 
     function onSaveSchedule(psStatus) {
+        let staffSeq = $("#scheduleModal #staffName").val();
+        let startTime = $("#scheduleModal #startTime").val();
+        let endTime = $("#scheduleModal #endTime").val();
         let statCode;
 
         if (psStatus.target.id.indexOf("cancel")!=-1) {
@@ -560,8 +575,7 @@
             statCode = "EASY00103";
         } else {
             // 예약 변경 유효성 검사
-            if (!checkTimeValidity(new Date($("#scheduleModal #startTime").val()),
-                new Date($("#scheduleModal #endTime").val()))) {
+            if (!checkTimeValidity(new Date(startTime), new Date(endTime), staffSeq)) {
                 alert("입력한 시간에 예약이 불가합니다.");
                 return;
             }
@@ -572,10 +586,10 @@
         var data = {
             statCode: statCode,
             seq: Boolean(seq)?seq:-1,
-            staffSeq: $("#scheduleModal #staffName").val(),
+            staffSeq: staffSeq,
             title: $("#scheduleModal #title").val(),
-            startTime: $("#scheduleModal #startTime").val(),
-            endTime: $("#scheduleModal #endTime").val()
+            startTime: startTime,
+            endTime: endTime
         };
 
         $.ajax({

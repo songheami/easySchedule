@@ -21,7 +21,6 @@ public class OpertimeController {
     @GetMapping("/opertime")
     public String findListByKey(@LoginUser SessionUser user, Model model) {
         // 근무시간 조회
-        List<OpertimeResponseDto> opertimeResponseDtoList = opertimeService.findListByKey(user.getUserGroup().getUserSeq(), user.getUserGroup().getGroupSeq());
         List<OpertimeResponseDto> monOpertimeList = new ArrayList<OpertimeResponseDto>();
         List<OpertimeResponseDto> tueOpertimeList = new ArrayList<OpertimeResponseDto>();
         List<OpertimeResponseDto> wedOpertimeList = new ArrayList<OpertimeResponseDto>();
@@ -30,7 +29,7 @@ public class OpertimeController {
         List<OpertimeResponseDto> satOpertimeList = new ArrayList<OpertimeResponseDto>();
         List<OpertimeResponseDto> sunOpertimeList = new ArrayList<OpertimeResponseDto>();
         // 요일별 구분
-        for (OpertimeResponseDto opertimeResponseDto : opertimeResponseDtoList) {
+        opertimeService.findListByKey(user.getUserGroup().getUserSeq(), user.getUserGroup().getGroupSeq()).forEach(opertimeResponseDto -> {
             switch (opertimeResponseDto.getDayCode().toString()) {
                 case "0":
                     sunOpertimeList.add(opertimeResponseDto);
@@ -54,7 +53,7 @@ public class OpertimeController {
                     satOpertimeList.add(opertimeResponseDto);
                     break;
             }
-        }
+        });
         model.addAttribute("monOpertimeList", monOpertimeList);
         model.addAttribute("tueOpertimeList", tueOpertimeList);
         model.addAttribute("wedOpertimeList", wedOpertimeList);
