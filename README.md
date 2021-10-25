@@ -15,4 +15,4 @@ http://ec2-52-78-19-113.ap-northeast-2.compute.amazonaws.com/
 * Spring Boot 2.1.x
 
 # 배포환경
-![배포환경](https://user-images.githubusercontent.com/85942145/135796556-88ae6066-3934-4ddb-b558-f9ff2e7633a5.PNG)
+![배포환경](https://user-images.githubusercontent.com/85942145/138624097-555cc951-3602-477c-9ea1-e379bb8aca8c.png)
