@@ -7,11 +7,11 @@ body {
     color: #bbb;
 }
 .navbar {
-  font-size: 1.5rem;
+  font-size: 15px;
 }
 
 div.title {
-    font-size: 2.5rem;
+    font-size: 20px;
     text-align: center;
     padding-top: 10vh;
     padding-bottom: 5vh;
@@ -31,11 +31,11 @@ div#index_wrapper {
 
 div#index_wrapper .google-logo {
     display: inline-block;
-    font-size: 4rem;
+    font-size: 35px;
     background: #DB4437;
-    width:100px;
-    height:100px;
-    border-radius:75px;
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
     text-align: center;
     vertical-align: middle;
 }
@@ -45,11 +45,11 @@ div#index_wrapper .google-logo a {
 }
 div#index_wrapper .naver-logo {
     display: inline-block;
-    font-size: 4rem;
+    font-size: 35px;
     background: #0F9D58;
-    width:100px;
-    height:100px;
-    border-radius:75px;
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
     text-align: center;
     vertical-align: middle;
     margin-left: 20px;
@@ -61,19 +61,18 @@ div#index_wrapper .naver-logo a {
 
 #form-mypage {
     margin: auto 10vh;
-    font-size: 2rem;
+    font-size: 18px;
 }
 #form-mypage input{
-    font-size: 2rem;
+    font-size: 18px;
 }
 div.mypage_button {
     float: right;
     margin: 10vh 5vh;
 }
 div.mypage_button button {
-    width: 100px;
-    height: 60px;
-    font-size: 2rem;
+    width: 80px;
+    font-size: 18px;
 }
 
 div#home_wrapper {
@@ -88,8 +87,8 @@ div#home_wrapper .box {
     align-items: center;
     justify-content: center;
     word-break:break-all;
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     border: 1px solid #bbb;
     border-radius: 15px;
     margin: 5px;
@@ -100,10 +99,10 @@ div#home_wrapper .box a{
     color: #bbb;
 }
 div#home_wrapper .box b{
-    font-size: 2rem;
+    font-size: 18px;
 }
 div#home_wrapper .box p{
-    font-size: 1.5rem;
+    font-size: 15px;
 }
 
 div#group_wrapper {
@@ -114,10 +113,10 @@ div#group_wrapper {
 div#group_wrapper a{
     display: inline-block;
     width: 50%;
-    height: 95px;
-    line-height: 95px;
+    height: 40px;
+    line-height: 40px;
     border-radius: 50px;
-    font-size: 2.5rem;
+    font-size: 15px;
     border: 1px solid #fff;
     color: #fff;
     text-align: center;
@@ -133,23 +132,22 @@ div#group_create_wrapper {
     margin: auto 10vh;
 }
 div#group_create_wrapper input{
-    font-size: 2rem;
+    font-size: 18px;
     text-align: center;
 }
 div#group_create_wrapper .valid-feedback{
-    font-size: 1.5rem;
+    font-size: 15px;
 }
 div#group_create_wrapper .invalid-feedback{
-    font-size: 1.5rem;
+    font-size: 15px;
 }
 div.group_create_button {
     float: right;
     margin: 10vh 5vh;
 }
 div.group_create_button button{
-    width: 100px;
-    height: 60px;
-    font-size: 2rem;
+    width: 80px;
+    font-size: 18px;
 }
 
 div#group_join_wrapper {
@@ -160,10 +158,10 @@ div#group_join_wrapper {
 div#group_join_wrapper a{
     display: inline-block;
     width: 50%;
-    height: 95px;
-    line-height: 95px;
+    height: 40px;
+    line-height: 40px;
     border-radius: 50px;
-    font-size: 2.5rem;
+    font-size: 15px;
     border: 1px solid #fff;
     color: #fff;
     text-align: center;
@@ -179,18 +177,18 @@ div#group_join_staff_wrapper {
     margin: auto 10vh;
 }
 div#group_join_staff_wrapper input{
-    font-size: 2rem;
+    font-size: 18px;
     text-align: center;
     margin-bottom: 10px;
 }
 div#group_join_staff_wrapper .invalid-feedback{
-    font-size: 1.5rem;
+    font-size: 15px;
 }
 div#group_join_staff_wrapper .box{
     display: grid;
     grid-template-columns: 1fr 100px;
     grid-gap: 10px;
-    font-size: 2rem;
+    font-size: 18px;
 }
 
 div#group_join_member_wrapper {
@@ -199,18 +197,18 @@ div#group_join_member_wrapper {
     margin: auto 10vh;
 }
 div#group_join_member_wrapper input{
-    font-size: 2rem;
+    font-size: 18px;
     text-align: center;
     margin-bottom: 10px;
 }
 div#group_join_member_wrapper .invalid-feedback{
-    font-size: 1.5rem;
+    font-size: 15px;
 }
 div#group_join_member_wrapper .box{
     display: grid;
     grid-template-columns: 1fr 100px;
     grid-gap: 10px;
-    font-size: 2rem;
+    font-size: 18px;
 }
 
 div#opertime_wrapper {
@@ -220,7 +218,7 @@ div#opertime_wrapper {
     margin: auto 10vh;
 }
 div#opertime_wrapper .box:nth-child(2n-1) {
-    font-size: 2.5rem;
+    font-size: 20px;
     font-weight: bold;
 }
 div#opertime_wrapper .box:nth-child(2n) {
@@ -259,7 +257,6 @@ div.opertime_button {
     margin: 10vh 5vh;
 }
 div.opertime_button button {
-    width: 100px;
-    height: 60px;
-    font-size: 2rem;
+    width: 80px;
+    font-size: 18px;
 }
