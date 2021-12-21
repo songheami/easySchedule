@@ -22,19 +22,17 @@ public class OpertimeApiController {
     public List<OpertimeResponseDto> findListByKey(@LoginUser SessionUser user,
                                                    @RequestParam(value="staffSeqList[]") List<Long> staffSeqList) {
         List<OpertimeResponseDto> opertimeResponseDtoList = new ArrayList<>();
-        for (Long staffSeq : staffSeqList) {
-            opertimeResponseDtoList.addAll(opertimeService.findListByKey(staffSeq, user.getUserGroup().getGroupSeq()));
-        }
+        staffSeqList.forEach(staffSeq -> opertimeResponseDtoList.addAll(opertimeService.findListByKey(staffSeq, user.getUserGroup().getGroupSeq())));
         return opertimeResponseDtoList;
     }
 
     @PostMapping("/api/v1/opertime")
     public void save(@LoginUser SessionUser user, @RequestBody List<OpertimeRequestDto> requestDto) {
-        for (OpertimeRequestDto opertimeRequestDto : requestDto) {
+        requestDto.forEach(opertimeRequestDto -> {
             opertimeRequestDto.setUserSeq(user.getUserGroup().getUserSeq());
             opertimeRequestDto.setGroupSeq(user.getUserGroup().getGroupSeq());
             opertimeRequestDto.setUseYn("Y");
             opertimeService.save(opertimeRequestDto);
-        }
+        });
     }
 }

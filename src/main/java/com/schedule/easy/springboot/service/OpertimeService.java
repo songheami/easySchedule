@@ -19,9 +19,8 @@ public class OpertimeService {
 
     @Transactional(readOnly = true)
     public List<OpertimeResponseDto> findListByKey(Long userSeq, Long groupSeq) {
-        List<Opertime> opertimeList = opertimeRepository.findListByKey(userSeq, groupSeq);
         List<OpertimeResponseDto> opertimeResponseDtoList = new ArrayList<OpertimeResponseDto>();
-        for(Opertime opertime : opertimeList) { opertimeResponseDtoList.add(new OpertimeResponseDto(opertime)); }
+        opertimeRepository.findListByKey(userSeq, groupSeq).forEach(opertime -> opertimeResponseDtoList.add(new OpertimeResponseDto(opertime)));
         return opertimeResponseDtoList;
     }
 

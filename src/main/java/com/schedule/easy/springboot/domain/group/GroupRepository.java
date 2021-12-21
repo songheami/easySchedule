@@ -14,8 +14,11 @@ public interface GroupRepository extends JpaRepository<Group, Long> {
     @Query("select count(g) from Group g where name = :name")
     int existsByName(@Param("name") String name);
 
-    @Query("select g from Group g left join UserGroup ug " +
-            "on g.seq = ug.groupSeq where g.name like concat('%',:name,'%')" +
-            "and (ug.roleSeq != :roleSeq or ug.userSeq != :userSeq)")
+    @Query("select g from Group g " +
+            "left join UserGroup ug " +
+            "on g.seq = ug.groupSeq " +
+            "where g.name like concat('%',:name,'%') " +
+            "and not (ug.roleSeq = :roleSeq and ug.userSeq = :userSeq) " +
+            "group by g.seq")
     List<Group> findListByName(@Param("name") String name, @Param("roleSeq") Long roleSeq, @Param("userSeq") Long userSeq);
 }
